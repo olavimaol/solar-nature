@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Сервис — Solar Nature</title>
+  <meta name="description" content="Сервисные услуги Solar Nature для солнечных электростанций.">
+  <meta name="theme-color" content="#0a0d0b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- SVG icon sprite (Lucide, stroke 1.75) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M7 7h10v10"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-trending" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 40 40"><g fill="currentColor" stroke="none"><path d="M20 1.5 28.5 10 20 18.5 11.5 10Z"/><path d="M30 11.5 38.5 20 30 28.5 21.5 20Z"/><path d="M20 21.5 28.5 30 20 38.5 11.5 30Z"/><path d="M10 11.5 18.5 20 10 28.5 1.5 20Z"/></g></symbol>
+    <symbol id="i-caret" viewBox="0 0 10 6"><path d="M0 0h10L5 6Z" fill="currentColor" stroke="none"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+
+<!-- ================= HEADER ================= -->
+<header class="header" id="header">
+  <div class="container container--wide header__inner">
+    <a class="logo" href="index.html" aria-label="Solar Nature — на главную">
+      <svg class="logo__mark" aria-hidden="true"><use href="#i-logo"/></svg>
+      <span class="logo__text">Solar Nature</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Основная навигация">
+      <ul class="nav__list">
+        <li class="nav__item nav__item--drop">
+          <a class="nav__link nav__link--split" href="products.html">Продукты</a>
+          <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="drop-products" aria-label="Разделы продуктов"><svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
+          <ul class="drop" id="drop-products">
+            <li><a href="products.html?cat=panels">Солнечные панели</a></li>
+            <li><a href="products.html?cat=inverters">Солнечные инверторы</a></li>
+            <li><a href="products.html?cat=batteries">Аккумуляторная батарея</a></li>
+            <li><a href="products.html?cat=metal">Оцинкованный металл</a></li>
+          </ul>
+        </li>
+        <li class="nav__item nav__item--drop">
+          <button class="nav__link" type="button" aria-expanded="false">Решения <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
+          <ul class="drop drop--wide">
+            <li><a href="solution.html?s=legal">Для юридических лиц</a></li>
+            <li><a href="solution.html?s=individual">Для физических лиц</a></li>
+            <li><a href="solution.html?s=rooftop">Крышные солнечные станции</a></li>
+            <li><a href="solution.html?s=ground">Наземные солнечные станции</a></li>
+            <li><a href="solution.html?s=bess">Системы накопления энергии BESS</a></li>
+            <li><a href="solution.html?s=ppa">PPA-решения для BESS</a></li>
+            <li><a href="solution.html?s=diesel">Контроллеры дизель-генераторов</a></li>
+            <li><a href="solution.html?s=lightning">Молниезащита</a></li>
+            <li><a href="solution.html?s=feasibility">Оценка реализуемости проекта</a></li>
+          </ul>
+        </li>
+        <li class="nav__item nav__item--drop">
+          <button class="nav__link" type="button" aria-expanded="false">Сервис <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
+          <ul class="drop drop--wide">
+            <li><a href="service.html?s=operation">Эксплуатация и техническое обслуживание</a></li>
+            <li><a href="service.html?s=assets">Управление энергетическими активами</a></li>
+            <li><a href="service.html?s=audit">Энергоаудит</a></li>
+            <li><a href="service.html?s=training">Обучение и тренинги</a></li>
+            <li><a href="service.html?s=monitoring">Мониторинг</a></li>
+            <li><a href="service.html?s=scada">SCADA-системы</a></li>
+            <li><a href="service.html?s=digital">Цифровизация энергетики</a></li>
+            <li><a href="service.html?s=design">Проектирование солнечных электростанций</a></li>
+            <li><a href="service.html?s=grid">Документация для подключения к электросети</a></li>
+          </ul>
+        </li>
+        <li class="nav__item"><a class="nav__link" href="index.html#invest">Для инвесторов</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
+        <li class="nav__item nav__item--drop">
+          <button class="nav__link" type="button" aria-expanded="false" aria-label="Язык сайта: русский">RU <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
+          <ul class="drop drop--sm">
+            <li><a href="#" aria-current="true">Русский</a></li>
+            <li><a href="#">O‘zbekcha</a></li>
+            <li><a href="#">English</a></li>
+          </ul>
+        </li>
+      </ul>
+      <a class="nav__phone nav__phone--mobile" href="tel:+998781136500">+998 78 113-65-00</a>
+    </nav>
+
+    <div class="header__actions">
+      <div class="header__contact">
+        <a class="header__phone" href="tel:+998781136500">+998 78 113-65-00</a>
+        <a class="header__mail" href="mailto:info@solarnature.uz">info@solarnature.uz</a>
+      </div>
+      <a class="header__cta" href="#contacts" data-modal="lead">Обсудить проект</a>
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-controls="nav" aria-expanded="false">
+        <svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ================= SERVICE HERO ================= -->
+<section class="shero shero--center" id="service" aria-labelledby="srv-title">
+  <!-- Фон: assets/img/services/<сервис>-hero.jpg (рекомендуемо 2400×1240) -->
+  <img class="shero__bg" src="" alt="" data-srv-img="hero" onerror="this.remove()">
+  <div class="shero__inner">
+    <p class="shero__eyebrow" data-srv="heroEyebrow">Сервисное обслуживание</p>
+    <h1 class="shero__title" id="srv-title" data-srv-html="heroTitle">Эксплуатация и <br>техническое обслуживание <br>солнечных электростанций</h1>
+    <p class="shero__lead" data-srv="heroLead">Обеспечиваем стабильную и эффективную работу солнечных электростанций благодаря регулярному техническому обслуживанию, диагностике и оперативному устранению неисправностей.</p>
+    <div class="shero__actions">
+      <a class="pbtn pbtn--white shero__btn" href="#contacts" data-modal="lead">Получить консультацию</a>
+      <a class="pbtn pbtn--line shero__btn" href="index.html#projects">Наши проекты</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICE ABOUT ================= -->
+<section class="srvabout" aria-labelledby="srvabout-title">
+  <p class="srvabout__mark" aria-hidden="true">SOLAR</p>
+  <div class="srvabout__wrap">
+    <p class="who__eyebrow reveal" data-srv="aboutEyebrow">Профессиональное обслуживание солнечных электростанций</p>
+    <h2 class="srvabout__title reveal" id="srvabout-title" data-srv-html="aboutTitle">Обеспечиваем максимальную <br>эффективность работы <br>оборудования</h2>
+    <div class="srvabout__grid">
+      <div class="srvabout__media">
+        <figure class="sabout__img ph reveal"><img src="" alt="" data-srv-img="about-1" loading="lazy" onerror="this.remove()"></figure>
+        <figure class="sabout__img ph reveal" style="--d:.08s"><img src="" alt="" data-srv-img="about-2" loading="lazy" onerror="this.remove()"></figure>
+      </div>
+      <div class="srvabout__body">
+        <div class="srvabout__text reveal">
+          <p>Даже самая современная солнечная электростанция требует регулярного технического обслуживания для сохранения высокой производительности и надежной работы на протяжении всего срока эксплуатации. Специалисты Solar Nature проводят комплексное обслуживание объектов любой мощности, своевременно выявляя потенциальные неисправности и предотвращая возникновение аварийных ситуаций.</p>
+          <p>В состав сервисного обслуживания входят диагностика оборудования, проверка инверторов, коммутационной аппаратуры, кабельных линий, систем защиты, мониторинг производительности, контроль параметров генерации и техническое обслуживание всех элементов станции. Регулярные проверки позволяют поддерживать оборудование в оптимальном состоянии и обеспечивать максимальную выработку электроэнергии.</p>
+          <p>Благодаря профессиональному сопровождению заказчик получает стабильную работу станции, снижение эксплуатационных рисков и уверенность в надежности энергетической системы на протяжении многих лет.</p>
+        </div>
+        <div class="sabout__actions reveal">
+          <a class="abtn abtn--dark" href="#contacts" data-modal="lead">Оставить заявку</a>
+          <a class="abtn abtn--line" href="about.html">Подробнее о нас <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RELIABLE ================= -->
+<section class="reliable" aria-labelledby="reliable-title">
+  <div class="sabout__wrap">
+    <p class="who__eyebrow reveal">Комплексное сервисное сопровождение</p>
+    <h2 class="srvabout__title reveal" id="reliable-title">Надежная работа станции на <br>протяжении всего срока эксплуатации</h2>
+    <div class="benefits__grid reliable__grid">
+      <article class="bcard bcard--light reveal">
+        <span class="bcard__num" aria-hidden="true">I</span>
+        <h3 class="bcard__title">Регулярная диагностика</h3>
+        <p class="bcard__text">Проводим плановые проверки оборудования и своевременно выявляем возможные неисправности.</p>
+      </article>
+      <article class="bcard bcard--light reveal" style="--d:0.06s">
+        <span class="bcard__num" aria-hidden="true">II</span>
+        <h3 class="bcard__title">Профилактическое обслуживание</h3>
+        <p class="bcard__text">Выполняем техническое обслуживание оборудования для предотвращения аварий и снижения износа.</p>
+      </article>
+      <article class="bcard bcard--light reveal" style="--d:0.12s">
+        <span class="bcard__num" aria-hidden="true">III</span>
+        <h3 class="bcard__title">Мониторинг производительности</h3>
+        <p class="bcard__text">Контролируем эффективность работы станции и анализируем показатели генерации энергии.</p>
+      </article>
+      <article class="bcard bcard--light reveal" style="--d:0.18s">
+        <span class="bcard__num" aria-hidden="true">IV</span>
+        <h3 class="bcard__title">Оперативное устранение неисправностей</h3>
+        <p class="bcard__text">Быстро реагируем на любые отклонения и восстанавливаем работоспособность оборудования.</p>
+      </article>
+    </div>
+    <!-- Фото: assets/img/services/<сервис>-wide.jpg (рекомендуемо 3200×790) -->
+    <figure class="reliable__img ph reveal"><img src="" alt="" data-srv-img="wide" loading="lazy" onerror="this.remove()"></figure>
+  </div>
+</section>
+
+<!-- ================= SERVICE WHY ================= -->
+<section class="srvwhy" aria-labelledby="srvwhy-title">
+  <!-- Фон: assets/img/services/why-bg.jpg -->
+  <img class="srvwhy__bg" src="assets/img/services/why-bg.jpg" alt="" loading="lazy" onerror="this.remove()">
+  <div class="sabout__wrap">
+    <div class="srvwhy__head">
+      <div>
+        <p class="benefits__eyebrow reveal">Профессиональное сервисное сопровождение</p>
+        <h2 class="benefits__title reveal" id="srvwhy-title">Почему наши клиенты <br>выбирают Solar Nature</h2>
+      </div>
+      <p class="srvwhy__lead reveal">Специалисты Solar Nature сопровождают проекты на протяжении всего жизненного цикла станции, обеспечивая стабильную работу оборудования, высокую эффективность генерации и минимизацию эксплуатационных рисков.</p>
+    </div>
+    <ul class="srvwhy__grid">
+        <li class="wcard reveal">
+          <h3 class="wcard__title">Инженерная экспертиза</h3>
+          <p class="wcard__text">Обслуживание выполняют специалисты с опытом работы в сфере солнечной энергетики.</p>
+        </li>
+        <li class="wcard reveal">
+          <h3 class="wcard__title">Оперативное реагирование</h3>
+          <p class="wcard__text">Быстро устраняем неисправности и минимизируем время простоя оборудования.</p>
+        </li>
+        <li class="wcard reveal">
+          <h3 class="wcard__title">Индивидуальный подход</h3>
+          <p class="wcard__text">Программы обслуживания формируются с учетом особенностей каждого объекта.</p>
+        </li>
+        <li class="wcard reveal">
+          <h3 class="wcard__title">Контроль эффективности</h3>
+          <p class="wcard__text">Анализируем производительность станции и рекомендуем способы повышения эффективности.</p>
+        </li>
+        <li class="wcard reveal">
+          <h3 class="wcard__title">Современная диагностика</h3>
+          <p class="wcard__text">Используем профессиональное оборудование и инструменты контроля состояния станции.</p>
+        </li>
+        <li class="wcard reveal">
+          <h3 class="wcard__title">Комплексное сопровождение</h3>
+          <p class="wcard__text">Берем на себя полный цикл сервисного обслуживания объекта.</p>
+        </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= PARTNERS ================= -->
+<section class="clients" aria-labelledby="partners-title">
+  <div class="clients__wrap">
+    <p class="clients__eyebrow reveal">Наши клиенты</p>
+    <h2 class="clients__title reveal" id="partners-title">Нам доверяют ведущие <br><span>компании рынка</span></h2>
+  </div>
+  <!-- Логотипы: assets/img/clients/<ключ>.png (цветные, на прозрачном фоне) -->
+  <div class="marquee" data-marquee>
+    <ul class="marquee__track" id="partners-1"></ul>
+  </div>
+  <div class="marquee marquee--reverse" data-marquee>
+    <ul class="marquee__track" id="partners-2"></ul>
+  </div>
+</section>
+
+<!-- ================= CONSULT ================= -->
+<section class="consult consult--standalone" aria-labelledby="consult-title">
+  <div class="consult__wrap">
+    <div class="consult__box reveal">
+      <!-- Фон: assets/img/consult-bg.jpg (рекомендуемо 2900×810) -->
+      <img class="consult__bg" src="assets/img/consult-bg.jpg" alt="" loading="lazy" onerror="this.remove()">
+
+      <span class="consult__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 24"><path d="M1 2.2V22a1.5 1.5 0 0 0 1.5 1.5h27A1.5 1.5 0 0 0 31 22V2.2L16 13.4Z"/><path d="M2.2.5h27.6L16 10.8Z"/></svg>
+      </span>
+
+      <p class="consult__eyebrow">Свяжитесь с нами</p>
+      <h2 class="consult__title" id="consult-title">Получите бесплатную <br>консультацию эксперта</h2>
+
+      <form class="consult__form js-form" novalidate>
+        <div class="field cfield">
+          <label class="sr-only" for="c-name">Ваше имя</label>
+          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield">
+          <label class="sr-only" for="c-phone">Номер телефона</label>
+          <input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Номер телефона" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield">
+          <label class="sr-only" for="c-comment">Комментарий</label>
+          <input id="c-comment" name="comment" type="text" placeholder="Комментарий">
+          <span class="field__error" role="alert"></span>
+        </div>
+        <button class="consult__submit" type="submit"><span class="btn__label">Отправить</span></button>
+        <p class="form-status consult__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ================= NEWS ================= -->
+<section class="news" id="news" aria-labelledby="news-title">
+  <div class="news__wrap">
+    <div class="news__head">
+      <div>
+        <p class="news__eyebrow reveal">Новости</p>
+        <h2 class="news__title reveal" id="news-title">Актуальные новости <br><span>и события компании</span></h2>
+      </div>
+      <div class="news__arrows reveal">
+        <button class="news__arrow" type="button" data-news="prev" aria-label="Предыдущие новости"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+        <button class="news__arrow" type="button" data-news="next" aria-label="Следующие новости"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+      </div>
+    </div>
+
+    <!-- Фото новостей: assets/img/news/news-1.jpg … (рекомендуемо 1030×636) -->
+    <div class="news__viewport reveal">
+      <div class="news__track" id="news-track"></div>
+    </div>
+
+    <a class="news__all reveal" href="news.html">Смотреть все публикации <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+  </div>
+</section>
+
+<!-- ================= CONTACTS ================= -->
+<section class="contact" id="contacts" aria-labelledby="contact-title">
+  <div class="contact__wrap">
+    <div class="contact__info reveal">
+      <p class="contact__eyebrow">Контакты</p>
+      <h2 class="contact__title" id="contact-title">Свяжитесь с нами <br><span>для обсуждения проекта</span></h2>
+
+      <dl class="cinfo">
+        <div class="cinfo__row">
+          <div class="cinfo__item">
+            <dt>Номер телефона</dt>
+            <dd><a href="tel:+998781136500">+998 78 113-65-00</a></dd>
+          </div>
+          <div class="cinfo__item">
+            <dt>Электронная почта</dt>
+            <dd><a href="mailto:info@solarnature.uz">info@solarnature.uz</a></dd>
+          </div>
+        </div>
+        <div class="cinfo__item">
+          <dt>Адрес</dt>
+          <dd>10069, Карасарай 268а, Ташкент</dd>
+        </div>
+        <div class="cinfo__item">
+          <dt>Время работы</dt>
+          <dd>Пн - Сб | 9:00 - 18:00</dd>
+        </div>
+        <div class="cinfo__item">
+          <dt>Соц. сети</dt>
+          <dd>
+            <ul class="socials">
+              <li><a class="social" href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.6 5.2 3.9 11.3c-.9.4-.9 1.4 0 1.7l3.9 1.2 1.5 4.6c.2.6.9.8 1.4.3l2.2-2 4.2 3.1c.6.4 1.3.1 1.5-.6L21.3 6.6c.2-1-.7-1.8-1.7-1.4Zm-2.7 3.3-6.8 6.1-.3 2.6-1-3.4 7.7-5.1c.3-.2.6.2.4.4Z"/></svg></a></li>
+              <li><a class="social" href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5h7A3.5 3.5 0 0 1 19 8.5v7a3.5 3.5 0 0 1-3.5 3.5h-7A3.5 3.5 0 0 1 5 15.5v-7A3.5 3.5 0 0 1 8.5 5Zm0 1.6a1.9 1.9 0 0 0-1.9 1.9v7c0 1 .9 1.9 1.9 1.9h7c1 0 1.9-.9 1.9-1.9v-7c0-1-.9-1.9-1.9-1.9Zm3.5 2a3.4 3.4 0 1 1 0 6.8 3.4 3.4 0 0 1 0-6.8Zm0 1.6a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Zm3.6-2.6a.8.8 0 1 1 0 1.6.8.8 0 0 1 0-1.6Z"/></svg></a></li>
+              <li><a class="social" href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.3 19v-6.2h2.1l.3-2.5h-2.4V8.8c0-.7.2-1.2 1.2-1.2h1.3V5.4c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3v1.8H8.6v2.5h2.1V19Z"/></svg></a></li>
+            </ul>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="contact__form reveal" style="--d:.08s">
+      <!-- Фон формы: assets/img/contact-bg.jpg (рекомендуемо 1600×1560) -->
+      <img class="contact__bg" src="assets/img/contact-bg.jpg" alt="" loading="lazy" onerror="this.remove()">
+      <p class="contact__form-title">Форма обратной связи</p>
+      <span class="logo contact__logo" aria-hidden="true"><svg class="logo__mark"><use href="#i-logo"/></svg><span class="logo__text">Solar Nature</span></span>
+      <form class="contact__fields js-form" novalidate>
+          <div class="field cfield">
+            <label class="sr-only" for="f-name">Ваше имя</label>
+            <input id="f-name" name="name" type="text" placeholder="Ваше имя" autocomplete="name" required>
+            <span class="field__error" role="alert"></span>
+          </div>
+          <div class="field cfield">
+            <label class="sr-only" for="f-phone">Номер телефона</label>
+            <input id="f-phone" name="phone" type="tel" placeholder="Номер телефона" inputmode="tel" autocomplete="tel" required>
+            <span class="field__error" role="alert"></span>
+          </div>
+          <div class="field cfield">
+            <label class="sr-only" for="f-msg">Комментарий</label>
+            <textarea id="f-msg" name="message" placeholder="Комментарий"></textarea>
+            <span class="field__error" role="alert"></span>
+          </div>
+          <button class="consult__submit contact__submit" type="submit"><span class="btn__label">Отправить</span></button>
+          <p class="form-status contact__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <svg class="footer__deco" viewBox="0 0 40 40" aria-hidden="true"><use href="#i-logo"/></svg>
+
+  <div class="footer__wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <p class="footer__eyebrow">Энергия будущего</p>
+        <h2 class="footer__title">Разработка и реализация <br>энергетических проектов</h2>
+        <p class="footer__text">Комплексная реализация энергетических проектов с учетом технических и финансовых параметров. Мы обеспечиваем стабильную генерацию и эффективную работу системы.</p>
+        <svg class="footer__mark" viewBox="0 0 40 40" aria-hidden="true"><use href="#i-logo"/></svg>
+        <div class="footer__actions">
+          <a class="pbtn pbtn--white" href="#contacts" data-modal="lead">Обсудить проект</a>
+          <a class="pbtn pbtn--line" href="#contacts">Локация офиса <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+        </div>
+      </div>
+
+      <nav class="footer__cols" aria-label="Карта сайта">
+        <div class="fcol">
+          <h3 class="fcol__title">Навигация</h3>
+          <ul>
+            <li><a href="about.html">О компании</a></li>
+            <li><a href="catalog.html">Каталог</a></li>
+            <li><a href="index.html#invest">Для инвесторов</a></li>
+            <li><a href="index.html#projects">Наши проекты</a></li>
+            <li><a href="index.html#partners-title">Партнеры</a></li>
+            <li><a href="#contacts">Калькулятор</a></li>
+            <li><a href="news.html">Новости</a></li>
+            <li><a href="#contacts">Карьера</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h3 class="fcol__title">Решения</h3>
+          <ul>
+            <li><a href="solution.html?s=legal">Для юридических лиц</a></li>
+            <li><a href="solution.html?s=individual">Для физических лиц</a></li>
+            <li><a href="solution.html?s=rooftop">Крышные солнечные станции</a></li>
+            <li><a href="solution.html?s=ground">Наземные солнечные станции</a></li>
+            <li><a href="solution.html?s=bess">Системы накопления энергии BESS</a></li>
+            <li><a href="solution.html?s=ppa">PPA-решения для BESS</a></li>
+            <li><a href="solution.html?s=diesel">Контроллеры дизель-генераторов</a></li>
+            <li><a href="solution.html?s=lightning">Молниезащита</a></li>
+            <li><a href="solution.html?s=feasibility">Оценка реализуемости проекта</a></li>
+          </ul>
+        </div>
+        <div class="fcol">
+          <h3 class="fcol__title">Сервис</h3>
+          <ul>
+            <li><a href="service.html?s=operation">Эксплуатация и техническое обслуживание</a></li>
+            <li><a href="service.html?s=assets">Управление энергетическими активами</a></li>
+            <li><a href="service.html?s=audit">Энергоаудит</a></li>
+            <li><a href="service.html?s=training">Обучение и тренинги</a></li>
+            <li><a href="service.html?s=monitoring">Мониторинг</a></li>
+            <li><a href="service.html?s=scada">SCADA-системы</a></li>
+            <li><a href="service.html?s=digital">Цифровизация энергетики</a></li>
+            <li><a href="service.html?s=design">Проектирование солнечных электростанций</a></li>
+            <li><a href="service.html?s=grid">Документация для подключения к электросети</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <p class="footer__word" aria-hidden="true">SOLAR NATURE</p>
+
+    <div class="footer__bottom">
+      <div>
+        <p class="footer__copy">© 2023-<span id="year">2026</span> SOLAR NATURE. Все права сайта защищены.</p>
+        <a class="footer__policy" href="#">Политика конфиденциальности</a>
+      </div>
+      <p class="footer__dev">Разработано NEX GROUP</p>
+    </div>
+  </div>
+</footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="Наверх"><svg class="ic ic--sm" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+
+<!-- ================= LEAD MODAL ================= -->
+<dialog class="lead-modal" id="lead-modal" aria-labelledby="lead-modal-title">
+  <!-- Фон окна: assets/img/modal-bg.jpg (рекомендуемо 1620×1050) -->
+  <img class="lead-modal__bg" src="assets/img/modal-bg.jpg" alt="" loading="lazy" onerror="this.remove()">
+  <button class="lead-modal__close" type="button" data-modal-close aria-label="Закрыть окно">
+    <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M2 2 26 26M26 2 2 26"/></svg>
+  </button>
+  <h2 class="lead-modal__title" id="lead-modal-title">Оставить заявку</h2>
+  <p class="lead-modal__subject" id="lead-modal-subject">Тема: обсуждение проекта</p>
+  <form class="lead-modal__form js-form" novalidate>
+    <input type="hidden" name="subject" value="Тема: обсуждение проекта">
+    <div class="field cfield">
+      <label class="sr-only" for="m-name">Ваше имя</label>
+      <input id="m-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя" required>
+      <span class="field__error" role="alert"></span>
+    </div>
+    <div class="field cfield">
+      <label class="sr-only" for="m-phone">Номер телефона</label>
+      <input id="m-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Номер телефона" required>
+      <span class="field__error" role="alert"></span>
+    </div>
+    <button class="consult__submit lead-modal__submit" type="submit"><span class="btn__label">Отправить</span></button>
+    <p class="form-status lead-modal__status" role="status" aria-live="polite"></p>
+  </form>
+</dialog>
+
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
