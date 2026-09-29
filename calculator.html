@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Контакты — Solar Nature</title>
-  <meta name="description" content="Контакты Solar Nature: телефон +998 78 113-65-00, info@solarnature.uz, адрес в Ташкенте и форма обратной связи.">
+  <title>Калькулятор солнечной станции — Solar Nature</title>
+  <meta name="description" content="Калькулятор Solar Nature: по потреблению, тарифу и площади рассчитайте мощность солнечной станции, выработку за год и срок окупаемости.">
   <meta name="theme-color" content="#0a0d0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +94,7 @@
           </ul>
         </li>
         <li class="nav__item"><a class="nav__link" href="index.html#invest">Для инвесторов</a></li>
-        <li class="nav__item"><a class="nav__link" href="contacts.html" aria-current="page">Контакты</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
         <li class="nav__item nav__item--drop">
           <button class="nav__link" type="button" aria-expanded="false" aria-label="Язык сайта: русский">RU <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
           <ul class="drop drop--sm">
@@ -123,16 +123,193 @@
 <main id="main">
 
 <!-- ================= PAGE HERO ================= -->
-<section class="phero phero--black" aria-labelledby="page-title">
+<section class="phero phero--compact phero--calc" aria-labelledby="page-title">
   <div class="phero__inner">
     <nav class="crumbs" aria-label="Хлебные крошки">
       <ol>
         <li><a href="index.html">Главная</a></li>
-        <li><span aria-current="page">Контакты</span></li>
+        <li><span aria-current="page">Калькулятор</span></li>
       </ol>
     </nav>
-    <p class="phero__eyebrow">Свяжитесь с нами</p>
-    <h1 class="phero__title" id="page-title">Наши контакты</h1>
+    <div class="phero__row">
+      <div>
+        <p class="phero__eyebrow">Предварительный расчёт</p>
+        <h1 class="phero__title" id="page-title">Калькулятор солнечной станции</h1>
+      </div>
+      <p class="phero__lead">Укажите потребление, тариф и площадь. Станция на чертеже соберётся по вашим цифрам и покажет мощность, выработку за год и срок окупаемости.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CALCULATOR ================= -->
+<!-- Коэффициенты формул, диапазоны полей и готовые наборы. Этот блок заполняет админ-панель;
+     сами формулы — в assets/js/main.js, блок «Calculator page».
+     kArea — коэффициент размещения панелей (P = S × kArea), insolation — средняя инсоляция H, часов в день (E = P × H × 365),
+     costPerKw — стоимость станции за 1 кВт (вложения = P × costPerKw), lifetime — срок службы станции, лет,
+     panelWatt — мощность одной панели, Вт. -->
+<script type="application/json" id="calc-config">
+{
+  "kArea": 0.2,
+  "insolation": 4.5,
+  "costPerKw": 8500000,
+  "lifetime": 25,
+  "panelWatt": 550,
+  "currency": "сум",
+  "fields": {
+    "consumption": { "min": 100, "max": 200000, "value": 12000 },
+    "tariff": { "min": 100, "max": 3000, "step": 10, "value": 1000 },
+    "area": { "min": 10, "max": 10000, "value": 400 }
+  },
+  "presets": {
+    "home": { "consumption": 800, "area": 30 },
+    "business": { "consumption": 12000, "area": 400 },
+    "industry": { "consumption": 90000, "area": 3000 }
+  }
+}
+</script>
+
+<section class="calc" id="calculator" aria-label="Расчёт станции" data-calc>
+  <div class="calc__wrap">
+
+    <form class="calc__panel" novalidate>
+      <div class="calc__presets" role="group" aria-label="Тип объекта">
+        <button class="calc__preset" type="button" data-preset="home" aria-pressed="false">Дом</button>
+        <button class="calc__preset" type="button" data-preset="business" aria-pressed="true">Бизнес</button>
+        <button class="calc__preset" type="button" data-preset="industry" aria-pressed="false">Производство</button>
+      </div>
+
+      <div class="calc__field" data-field="consumption">
+        <label class="calc__label" for="calc-consumption">Потребление в месяц</label>
+        <div class="calc__value">
+          <input class="calc__num" id="calc-consumption" name="consumption" type="text" inputmode="numeric" autocomplete="off" value="12 000" aria-describedby="calc-consumption-hint">
+          <span class="calc__unit">кВт·ч</span>
+        </div>
+        <input class="calc__range" type="range" min="0" max="1000" step="1" value="630" aria-label="Потребление в месяц, ползунок">
+        <p class="calc__hint" id="calc-consumption-hint"><span>от 100</span><span>до 200 000 кВт·ч</span></p>
+      </div>
+
+      <div class="calc__field" data-field="tariff">
+        <label class="calc__label" for="calc-tariff">Тариф на электроэнергию</label>
+        <div class="calc__value">
+          <input class="calc__num" id="calc-tariff" name="tariff" type="text" inputmode="numeric" autocomplete="off" value="1 000" aria-describedby="calc-tariff-hint">
+          <span class="calc__unit">сум за кВт·ч</span>
+        </div>
+        <input class="calc__range" type="range" min="0" max="1000" step="1" value="310" aria-label="Тариф на электроэнергию, ползунок">
+        <p class="calc__hint" id="calc-tariff-hint"><span>от 100</span><span>до 3 000 сум</span></p>
+      </div>
+
+      <div class="calc__field" data-field="area">
+        <label class="calc__label" for="calc-area">Площадь под панели</label>
+        <div class="calc__value">
+          <input class="calc__num" id="calc-area" name="area" type="text" inputmode="numeric" autocomplete="off" value="400" aria-describedby="calc-area-hint">
+          <span class="calc__unit">м²</span>
+        </div>
+        <input class="calc__range" type="range" min="0" max="1000" step="1" value="534" aria-label="Площадь под панели, ползунок">
+        <p class="calc__hint" id="calc-area-hint"><span>от 10</span><span>до 10 000 м²</span></p>
+        <p class="calc__fit" data-fit hidden>Станция вырабатывает больше, чем вы потребляете. <button type="button">Подобрать площадь: <span data-out="fit">88 м²</span></button></p>
+      </div>
+    </form>
+
+    <div class="calc__view">
+      <!-- Чертёж станции рисует скрипт (assets/js/main.js, блоки «Line art» и «Calculator page») -->
+      <div class="calc__scene" data-scene aria-hidden="true"></div>
+
+      <dl class="calc__results">
+        <div class="calc__res">
+          <dt>Мощность станции</dt>
+          <dd class="calc__res-value"><span data-out="power">80</span><small data-out="power-unit">кВт</small></dd>
+          <dd class="calc__res-formula" data-out="power-formula">P = 400 м² × 0,2</dd>
+          <dd class="calc__res-note" data-out="power-note">≈ 146 панелей по 550 Вт</dd>
+        </div>
+        <div class="calc__res">
+          <dt>Выработка за год</dt>
+          <dd class="calc__res-value"><span data-out="energy">131,4</span><small data-out="energy-unit">МВт·ч</small></dd>
+          <dd class="calc__res-formula" data-out="energy-formula">E = 80 кВт × 4,5 ч × 365 дней</dd>
+          <dd class="calc__res-note" data-out="energy-note">91% вашего потребления</dd>
+        </div>
+        <div class="calc__res calc__res--key">
+          <dt>Срок окупаемости</dt>
+          <dd class="calc__res-value"><span data-out="payback">5,2</span><small data-out="payback-unit">года</small></dd>
+          <dd class="calc__res-formula" data-out="payback-formula">680 млн ÷ 131 млн сум в год</dd>
+          <dd class="calc__res-note">вложения ÷ экономия за год</dd>
+        </div>
+      </dl>
+      <p class="sr-only" role="status" aria-live="polite" data-out="summary"></p>
+      <noscript><p class="calc__noscript">Калькулятор работает со включённым JavaScript. Чтобы получить расчёт без него, оставьте заявку — мы посчитаем станцию сами.</p></noscript>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================= PAYBACK ================= -->
+<section class="payback" id="payback" aria-labelledby="payback-title">
+  <div class="payback__wrap">
+    <div class="payback__head">
+      <div>
+        <p class="payback__eyebrow reveal">Окупаемость</p>
+        <h2 class="payback__title reveal" id="payback-title"><span data-out="pb-title">Станция окупится за 5,2 года</span> <br><span class="payback__sub" data-out="pb-sub">и ещё 19,8 года работает в плюс</span></h2>
+      </div>
+      <p class="payback__lead reveal">Стоимость станции делим на годовую экономию. Экономия — это энергия станции, которую вы используете сами, по вашему тарифу. <span data-out="pb-hint" hidden>Сейчас станция вырабатывает больше, чем вы потребляете: излишки в экономию не входят.</span></p>
+    </div>
+
+    <!-- График рисует скрипт: линия баланса пересекает горизонт в год окупаемости -->
+    <div class="pchart" data-chart role="img" aria-label="График окупаемости станции"></div>
+
+    <div class="payback__foot">
+      <dl class="payback__facts">
+        <div class="pfact pfact--debt">
+          <dt>Вложения</dt>
+          <dd data-out="invest">680 млн сум</dd>
+        </div>
+        <div class="pfact pfact--year">
+          <dt>Экономия в год</dt>
+          <dd data-out="saving">131 млн сум</dd>
+        </div>
+        <div class="pfact pfact--gain">
+          <dt><span>Выгода за <span data-out="lifetime">25 лет</span></span></dt>
+          <dd data-out="profit">2,6 млрд сум</dd>
+        </div>
+      </dl>
+      <a class="abtn abtn--dark payback__cta" href="#contacts" data-modal="lead" data-modal-subject="Тема: расчёт солнечной станции" data-calc-cta>Получить точный расчёт <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+    </div>
+    <p class="payback__note">Расчёт предварительный. Точная мощность и срок окупаемости зависят от ориентации и затенения площадки, выбранного оборудования и режима потребления — их учитывает инженер при проектировании.</p>
+  </div>
+</section>
+
+<!-- ================= CONSULT ================= -->
+<section class="consult" aria-labelledby="consult-title">
+  <div class="consult__wrap">
+    <div class="consult__box reveal">
+      <!-- Фон: assets/img/consult-bg.webp (2000×557) -->
+      <img class="consult__bg" src="assets/img/consult-bg.webp" alt="" loading="lazy" onerror="this.remove()">
+
+      <span class="consult__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 24"><path d="M1 2.2V22a1.5 1.5 0 0 0 1.5 1.5h27A1.5 1.5 0 0 0 31 22V2.2L16 13.4Z"/><path d="M2.2.5h27.6L16 10.8Z"/></svg>
+      </span>
+
+      <p class="consult__eyebrow">Свяжитесь с нами</p>
+      <h2 class="consult__title" id="consult-title">Получите бесплатную <br>консультацию эксперта</h2>
+
+      <form class="consult__form js-form" novalidate>
+        <div class="field cfield">
+          <label class="sr-only" for="c-name">Ваше имя</label>
+          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield">
+          <label class="sr-only" for="c-phone">Номер телефона</label>
+          <input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Номер телефона" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield">
+          <label class="sr-only" for="c-comment">Комментарий</label>
+          <input id="c-comment" name="comment" type="text" placeholder="Комментарий">
+          <span class="field__error" role="alert"></span>
+        </div>
+        <button class="consult__submit" type="submit"><span class="btn__label">Отправить</span></button>
+        <p class="form-status consult__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -231,7 +408,7 @@
             <li><a href="index.html#invest">Для инвесторов</a></li>
             <li><a href="index.html#projects">Наши проекты</a></li>
             <li><a href="index.html#partners-title">Партнеры</a></li>
-            <li><a href="calculator.html">Калькулятор</a></li>
+            <li><a href="calculator.html" aria-current="page">Калькулятор</a></li>
             <li><a href="news.html">Новости</a></li>
             <li><a href="#contacts">Карьера</a></li>
             <li><a href="contacts.html">Контакты</a></li>

@@ -84,15 +84,19 @@
      Technical drawings of the four catalog sections and of the house they power. They make up the station
      scheme on the catalog page and stand in for product photos until those are added.
      All drawings share a scale and stand on the same ground line (y = 270); depth runs up and to the right. */
+  // The panel field of the calculator: modules are counted by columns, each `step` wide
+  const FIELD = { cols: 10, rows: 4, step: 32 };
   const ART = (() => {
     const line = (d, cls, p) => `<path class="${cls || 'l1'}" d="${d}" pathLength="1" style="--p:${p}"/>`;
     const dot = (x, y, o, r = 3.2) => `<circle class="art__on art__dot" cx="${x}" cy="${y}" r="${r}" style="--o:${o}"/>`;
     const hit = (part, d) => `<path class="art__hit" data-part="${part}" d="${d}"/>`;
     // parts: [name, lines, markup drawn over the lines, markup drawn under them]
-    const make = (name, w, cardPad, parts) => ({ h = 288, pad = cardPad } = {}) => {
+    // bare: the drawing without its frame and ground line — a part of a bigger scene
+    const make = (name, w, cardPad, parts) => ({ h = 288, pad = cardPad, bare = false } = {}) => {
       let p = 0;
       const body = parts.map(([part, lines, over = '', under = '']) =>
         `<g class="art__g art__g--${part}">${under}${lines.map(([d, cls]) => line(d, cls, p++)).join('')}${over}</g>`).join('');
+      if (bare) return body;
       const ground = `<g class="art__g art__g--base">${line(`M${-pad} 270H${w + pad}`, 'l3', 0)}</g>`;
       return `<svg class="art art--${name} lit__obj" viewBox="${-pad} 0 ${w + pad * 2} ${h}" aria-hidden="true" focusable="false">${ground}${body}</svg>`;
     };
@@ -102,7 +106,35 @@
     const joints = [0, 130, 260].flatMap((r, i) => [[110, 232], [136.7, 182], [163.3, 132], [190, 82]]
       .map(([x, y], k) => dot(x + r, y, (i * 4 + k) * 45))).join('');
 
+    // The field of the calculator: the same tilted table, but every module of it switches on by itself
+    const fp = (c, r) => `${+(110 + c * FIELD.step + r * 20).toFixed(1)} ${+(232 - r * 37.5).toFixed(1)}`;
+    const fieldW = FIELD.cols * FIELD.step;
+    const fieldCells = Array.from({ length: FIELD.cols * FIELD.rows }, (_, i) => {
+      const c = Math.floor(i / FIELD.rows);
+      const r = i % FIELD.rows;
+      return `<path class="art__cell" d="M${fp(c + .07, r + .06)}L${fp(c + .93, r + .06)}L${fp(c + .93, r + .94)}L${fp(c + .07, r + .94)}Z" pathLength="1"/>`;
+    }).join('');
+    const fieldGrid = (n, from, to) => Array.from({ length: n - 1 }, (_, i) => `M${fp(...from(i + 1))}L${fp(...to(i + 1))}`).join('');
+
     return {
+      field: make('field', 110 + fieldW + 110, 0, [
+        ['metal', [
+          ['M110 238V270'], [`M${110 + fieldW / 2} 238V270`], [`M${110 + fieldW} 238V270`], [`M${190 + fieldW} 88V230`],
+          ['M110 270L174 238'], [`M${110 + fieldW} 270L${190 + fieldW} 230`], [`M${190 + fieldW} 230L${150 + fieldW} 163`],
+        ], dot(110, 270, 0) + dot(110 + fieldW / 2, 270, 70) + dot(110 + fieldW, 270, 140) + dot(190 + fieldW, 230, 210) + dot(150 + fieldW, 163, 280)],
+        ['panels', [
+          [`M110 232H${110 + fieldW}L${190 + fieldW} 82H190Z`, 'l2'],
+          [`M110 232v6H${110 + fieldW}v-6`], [`M${110 + fieldW} 238L${190 + fieldW} 88v-6`],
+          [fieldGrid(FIELD.cols, (c) => [c, 0], (c) => [c, FIELD.rows]), 'l3'],
+          [fieldGrid(FIELD.rows, (r) => [0, r], (r) => [FIELD.cols, r]), 'l3'],
+          ['M42 58a20 20 0 1 0 40 0a20 20 0 1 0-40 0'],
+        ],
+        `<g class="art__cells">${fieldCells}</g>`
+          + '<g class="art__rays"><path class="l1" d="M92 58h10M83.2 79.2l7.1 7.1M62 88v10M40.8 79.2l-7.1 7.1M32 58H22M40.8 36.8l-7.1-7.1M62 28V18M83.2 36.8l7.1-7.1" pathLength="1" style="--p:8"/></g>'
+          + '<path class="art__on art__beam" d="M104 66L208 126M96 84L191 139M84 100L162 145" style="--o:0"/>'
+          + '<path class="art__glare" d="M110 232h36l80-150h-36z"/>'],
+      ]),
+
       panels: make('panels', 480, 0, [
         ['metal', [
           ['M110 238V270'], ['M370 238V270'], ['M450 88V230'],
@@ -681,12 +713,42 @@
     const solutions = {
       legal: { name: 'Для юридических лиц', heroEyebrow: 'Решения для бизнеса', heroTitle: 'Солнечные станции <br>для бизнеса', heroLead: 'Сократите операционные расходы на электроэнергию и обеспечьте стабильное энергоснабжение предприятия.', aboutEyebrow: 'Энергия солнца для вашего бизнеса', aboutTitle1: 'Снижайте затраты на энергию', aboutTitle2: 'и повышайте устойчивость бизнеса', benEyebrow: 'Почему компании выбирают Solar Nature' },
       individual: { name: 'Для физических лиц', heroEyebrow: 'Решения для дома', heroTitle: 'Солнечные панели <br>для вашего дома', heroLead: 'Снижайте расходы на электроэнергию, обеспечьте независимость от перебоев в сети и используйте энергию солнца для комфортной жизни.', aboutEyebrow: 'Энергия солнца для вашего дома', aboutTitle1: 'Экономьте на электроэнергии', aboutTitle2: 'и повышайте комфорт жизни', benEyebrow: 'Почему владельцы домов выбирают Solar Nature' },
-      rooftop: { name: 'Крышные солнечные станции', heroEyebrow: 'Крышные станции', heroTitle: 'Солнечные станции <br>на крыше', heroLead: 'Используйте площадь кровли для выработки собственной электроэнергии без занятия свободной земли.', aboutEyebrow: 'Энергия солнца на вашей кровле', aboutTitle1: 'Превратите крышу', aboutTitle2: 'в источник энергии', benEyebrow: 'Почему клиенты выбирают Solar Nature' },
-      ground: { name: 'Наземные солнечные станции', heroEyebrow: 'Наземные станции', heroTitle: 'Наземные солнечные <br>электростанции', heroLead: 'Промышленная генерация на свободных участках земли с максимальной выработкой и удобным обслуживанием.', aboutEyebrow: 'Энергия солнца в промышленном масштабе', aboutTitle1: 'Масштабируйте генерацию', aboutTitle2: 'под задачи объекта', benEyebrow: 'Почему клиенты выбирают Solar Nature' },
-      bess: { name: 'Системы накопления энергии BESS', heroEyebrow: 'Системы накопления', heroTitle: 'Системы накопления <br>энергии BESS', heroLead: 'Храните излишки солнечной энергии и используйте их в пиковые часы и при отключениях сети.', aboutEyebrow: 'Энергия солнца в любое время суток', aboutTitle1: 'Накапливайте энергию', aboutTitle2: 'и используйте ее, когда нужно', benEyebrow: 'Почему клиенты выбирают Solar Nature' },
-      ppa: { name: 'PPA-решения для BESS', heroEyebrow: 'PPA-решения', heroTitle: 'PPA-решения <br>для BESS', heroLead: 'Получите систему накопления энергии без капитальных вложений и оплачивайте только полученную энергию.', aboutEyebrow: 'Энергия без капитальных затрат', aboutTitle1: 'Запускайте проекты', aboutTitle2: 'без стартовых инвестиций', benEyebrow: 'Почему клиенты выбирают Solar Nature' },
+      rooftop: {
+        name: 'Крышные солнечные станции', heroEyebrow: 'Солнечные решения', heroTitle: 'Крышные солнечные <br>станции', heroLead: 'Проектируем и устанавливаем крышные солнечные электростанции для предприятий, коммерческих объектов и частных домов, помогая снизить расходы на электроэнергию и повысить энергоэффективность.',
+        aboutEyebrow: 'Крышные солнечные станции', aboutTitle1: 'Эффективное использование', aboutTitle2: 'площади вашей кровли', benEyebrow: 'Почему клиенты выбирают Solar Nature',
+        aboutText: '<p>Solar Nature проектирует и устанавливает крышные солнечные электростанции для объектов различного назначения. Такие системы позволяют использовать свободную площадь кровли для генерации собственной электроэнергии без необходимости выделения дополнительного земельного участка.</p>'
+          + '<p>Мы разрабатываем индивидуальные решения с учетом типа кровли, конструктивных особенностей здания, уровня энергопотребления и будущих задач заказчика. Все проекты проходят инженерный расчет и соответствуют современным требованиям безопасности и надежности.</p>'
+          + '<p class="sabout__gap">Компания обеспечивает полный цикл реализации проекта: аудит объекта, проектирование, подбор оборудования, монтаж, подключение и дальнейшее сервисное сопровождение. Благодаря комплексному подходу заказчик получает готовую систему, рассчитанную на долгие годы эффективной эксплуатации.</p>',
+      },
+      ground: {
+        name: 'Наземные солнечные станции', heroEyebrow: 'Солнечные решения', heroTitle: 'Наземные солнечные <br>станции', heroLead: 'Проектируем и строим наземные солнечные электростанции для промышленных предприятий, инвесторов и объектов с высоким энергопотреблением.',
+        aboutEyebrow: 'Наземные солнечные станции', aboutTitle1: 'Эффективная генерация энергии', aboutTitle2: 'для объектов любого масштаба', benEyebrow: 'Почему клиенты выбирают Solar Nature',
+        aboutText: '<p>Наземные солнечные станции являются оптимальным решением для объектов с высоким уровнем энергопотребления и доступными земельными участками. Такие станции позволяют вырабатывать значительные объемы электроэнергии, снижать зависимость от внешних поставщиков и оптимизировать эксплуатационные расходы.</p>'
+          + '<p>Solar Nature реализует проекты наземных солнечных электростанций любой сложности — от предварительного технико-экономического анализа до ввода объекта в промышленную эксплуатацию. Каждое решение разрабатывается индивидуально с учетом особенностей участка, климатических условий и потребностей заказчика.</p>'
+          + '<p class="sabout__gap">Мы выполняем полный комплекс работ: инженерные изыскания, проектирование, поставку оборудования, строительство, монтаж, подключение, пусконаладочные работы, мониторинг и дальнейшее сервисное сопровождение. Это позволяет обеспечить максимальную эффективность станции и ее надежную работу на протяжении десятилетий.</p>',
+      },
+      bess: {
+        name: 'Системы накопления энергии BESS', heroEyebrow: 'Решения для бизнеса', heroTitle: 'Системы накопления <br>энергии BESS', heroLead: 'Интеллектуальные системы хранения электроэнергии для повышения надежности энергоснабжения, снижения затрат и эффективного управления потреблением энергии.',
+        aboutEyebrow: 'Системы накопления энергии', aboutTitle1: 'Максимальная эффективность', aboutTitle2: 'использования электроэнергии', benEyebrow: 'Почему клиенты выбирают Solar Nature',
+        aboutText: '<p>Системы накопления энергии BESS (Battery Energy Storage System) позволяют аккумулировать электроэнергию и использовать ее именно тогда, когда это наиболее выгодно или необходимо. Это эффективное решение для предприятий, стремящихся повысить надежность энергоснабжения, снизить эксплуатационные расходы и обеспечить бесперебойную работу оборудования.</p>'
+          + '<p>Solar Nature проектирует и внедряет современные системы хранения энергии, интегрируя их с солнечными электростанциями, дизельными генераторами и существующей электрической инфраструктурой предприятия. Каждое решение разрабатывается индивидуально с учетом режима энергопотребления, мощности объекта и целей заказчика.</p>'
+          + '<p class="sabout__gap">Мы обеспечиваем полный цикл реализации проекта — от технического обследования и проектирования до поставки оборудования, монтажа, настройки системы управления и последующего сервисного сопровождения. Это позволяет получить надежную и масштабируемую систему хранения энергии, рассчитанную на долгосрочную эксплуатацию.</p>',
+      },
+      ppa: {
+        name: 'PPA-решения для BESS', heroEyebrow: 'Энергетические решения', heroTitle: 'PPA-решения <br>для BESS', heroLead: 'Получите современную систему накопления энергии без капитальных вложений. Мы инвестируем в оборудование, а вы оплачиваете только фактически используемую электроэнергию или услугу хранения энергии.',
+        aboutEyebrow: 'PPA для систем накопления энергии', aboutTitle1: 'Энергетическая инфраструктура', aboutTitle2: 'без капитальных затрат', benEyebrow: 'Почему клиенты выбирают Solar Nature',
+        aboutText: '<p>PPA (Power Purchase Agreement) для BESS — это современная модель сотрудничества, при которой заказчик получает готовую систему накопления энергии без необходимости инвестировать в приобретение оборудования. Все капитальные вложения, поставку и внедрение системы берет на себя Solar Nature или инвестиционный партнер.</p>'
+          + '<p>Заказчик оплачивает только использование системы или фактически потребленную электроэнергию в соответствии с условиями долгосрочного соглашения. Такой подход позволяет внедрить современные технологии хранения энергии без значительной финансовой нагрузки на бизнес.</p>'
+          + '<p class="sabout__gap">Solar Nature обеспечивает полный цикл реализации проекта: техническое обследование объекта, проектирование, поставку оборудования, монтаж, интеграцию с существующей энергетической инфраструктурой, мониторинг и сервисное обслуживание. Это позволяет предприятиям сосредоточиться на развитии бизнеса, не отвлекая ресурсы на управление энергетическими активами.</p>',
+      },
       diesel: { name: 'Контроллеры дизель-генераторов', heroEyebrow: 'Гибридные системы', heroTitle: 'Контроллеры <br>дизель-генераторов', heroLead: 'Объедините солнечную станцию и дизель-генератор, чтобы сократить расход топлива и затраты на обслуживание.', aboutEyebrow: 'Солнце и дизель в одной системе', aboutTitle1: 'Сокращайте расход топлива', aboutTitle2: 'без потери надежности', benEyebrow: 'Почему клиенты выбирают Solar Nature' },
-      lightning: { name: 'Молниезащита', heroEyebrow: 'Безопасность', heroTitle: 'Молниезащита <br>солнечных станций', heroLead: 'Защитите оборудование и объект от ударов молнии и импульсных перенапряжений.', aboutEyebrow: 'Надежная защита станции', aboutTitle1: 'Защищайте оборудование', aboutTitle2: 'и продлевайте срок службы', benEyebrow: 'Почему клиенты выбирают Solar Nature' },
+      lightning: {
+        name: 'Молниезащита', heroEyebrow: 'Инженерные системы безопасности', heroTitle: 'Молниезащита <br>объектов', heroLead: 'Проектируем и устанавливаем комплексные системы молниезащиты и заземления для промышленных, коммерческих, энергетических и жилых объектов.',
+        aboutEyebrow: 'Комплексная молниезащита', aboutTitle1: 'Надежная защита людей,', aboutTitle2: 'зданий и оборудования', benEyebrow: 'Почему клиенты выбирают Solar Nature',
+        aboutText: '<p>Система молниезащиты предназначена для безопасного отвода электрического разряда и снижения риска повреждения здания, оборудования и инженерных коммуникаций. Грамотно спроектированная система помогает предотвратить пожары, выход из строя электроники, остановку производственных процессов и другие последствия атмосферных перенапряжений.</p>'
+          + '<p>Solar Nature разрабатывает решения с учетом назначения объекта, его конструктивных особенностей, высоты, расположения и категории молниезащиты. В состав системы могут входить молниеприемники, токоотводы, контур заземления, устройства защиты от импульсных перенапряжений и элементы уравнивания потенциалов.</p>'
+          + '<p class="sabout__gap">Мы выполняем полный комплекс работ: обследование объекта, расчет рисков, проектирование, подбор оборудования, монтаж, измерения и проверку эффективности системы. Все элементы подбираются как единый комплекс, чтобы обеспечить надежную защиту внешней и внутренней электрической инфраструктуры.</p>',
+      },
       feasibility: { name: 'Оценка реализуемости проекта', heroEyebrow: 'Консалтинг', heroTitle: 'Оценка реализуемости <br>проекта', heroLead: 'Проверим техническую и экономическую целесообразность станции до начала инвестиций.', aboutEyebrow: 'Решения на основе расчетов', aboutTitle1: 'Принимайте решения', aboutTitle2: 'на основе точных данных', benEyebrow: 'Почему клиенты выбирают Solar Nature' },
     };
     const key = solutions[new URLSearchParams(location.search).get('s')] ? new URLSearchParams(location.search).get('s') : 'individual';
@@ -694,6 +756,9 @@
     $$('[data-sol]').forEach((el) => { if (sol[el.dataset.sol]) el.textContent = sol[el.dataset.sol]; });
     $$('[data-sol-html]').forEach((el) => { if (sol[el.dataset.solHtml]) el.innerHTML = sol[el.dataset.solHtml]; });
     $$('[data-sol-img]').forEach((img) => { img.src = `assets/img/solutions/${key}-${img.dataset.solImg}.jpg`; });
+    // Фон блока преимуществ: у юрлиц — панели на фоне неба, у остальных решений — станция в горах
+    const benefitsBg = $('[data-sol-benefits]');
+    if (benefitsBg) benefitsBg.src = `assets/img/solutions/${key === 'legal' ? 'benefits-bg-legal.jpg' : 'benefits-bg-mountains.webp'}`;
     document.title = `${sol.name} — Solar Nature`;
     $$(`.drop a[href="solution.html?s=${key}"]`).forEach((a) => a.setAttribute('aria-current', 'page'));
   }
@@ -813,6 +878,353 @@
       const k = (n + i) % items.length;
       return productCard({ ...items[k], cat, n: k + 1 }, i);
     }).join('');
+  }
+
+  /* ---------- Calculator page ---------- */
+  const calc = $('[data-calc]');
+  if (calc) {
+    // Коэффициенты формул, диапазоны полей и готовые наборы. На странице их задаёт блок <script id="calc-config">,
+    // который заполняет админ-панель; значения ниже работают, пока блока нет.
+    const cfg = {
+      kArea: 0.2,           // коэффициент размещения панелей: P = S × kArea
+      insolation: 4.5,      // средняя инсоляция H, часов в день: E = P × H × 365
+      costPerKw: 8500000,   // стоимость станции за 1 кВт: вложения = P × costPerKw
+      lifetime: 25,         // срок службы станции, лет
+      panelWatt: 550,       // мощность одной панели, Вт
+      currency: 'сум',
+      fields: {
+        consumption: { min: 100, max: 200000, value: 12000 },
+        tariff: { min: 100, max: 3000, step: 10, value: 1000 },
+        area: { min: 10, max: 10000, value: 400 },
+      },
+      presets: {
+        home: { consumption: 800, area: 30 },
+        business: { consumption: 12000, area: 400 },
+        industry: { consumption: 90000, area: 3000 },
+      },
+    };
+    try {
+      const own = JSON.parse($('#calc-config').textContent);
+      Object.assign(cfg, own, { fields: { ...cfg.fields, ...own.fields }, presets: { ...cfg.presets, ...own.presets } });
+    } catch (e) { /* no block or a broken one: the defaults stay */ }
+
+    const nf = (n, digits = 0) => n.toLocaleString('ru-RU', { maximumFractionDigits: digits });
+    const power = (kw) => (kw >= 1000 ? [nf(kw / 1000, 2), 'МВт'] : [nf(kw, kw < 100 ? 1 : 0), 'кВт']);
+    const energy = (kwh) => (kwh >= 1e6 ? [nf(kwh / 1e6, 2), 'ГВт·ч'] : kwh >= 1e5 ? [nf(kwh / 1e3, 1), 'МВт·ч'] : [nf(kwh), 'кВт·ч']);
+    const money = (v) => {
+      const a = Math.abs(v);
+      const sign = v < 0 ? '−' : '';
+      if (a >= 1e9) return `${sign}${nf(a / 1e9, a < 1e10 ? 2 : 1)} млрд`;
+      if (a >= 1e6) return `${sign}${nf(a / 1e6, a < 1e8 ? 1 : 0)} млн`;
+      return `${sign}${a >= 1e4 ? `${nf(a / 1e3)} тыс.` : nf(a)}`;
+    };
+    // «5,2 года», «5 лет»: a fraction takes the genitive singular
+    const years = (y) => {
+      const r = Math.round(y * 10) / 10;
+      return [nf(r, 1), Number.isInteger(r) ? plural(r, ['год', 'года', 'лет']) : 'года'];
+    };
+    const out = (name) => $(`[data-out="${name}"]`);
+    const setText = (name, text) => { const el = out(name); if (el && el.textContent !== text) el.textContent = text; };
+
+    // Numbers follow the fields smoothly; where frames are not drawn (a hidden tab) they are set at once
+    const tweens = new Map();
+    const tween = (key, to, draw, ms = 420) => {
+      const prev = tweens.get(key);
+      if (prev) { cancelAnimationFrame(prev.raf); clearTimeout(prev.timer); }
+      const from = prev ? prev.now : to;
+      const item = { now: to };
+      tweens.set(key, item);
+      if (!prev || from === to || reduceMotion.matches || document.hidden) { draw(to); return; }
+      item.now = from;
+      const t0 = performance.now();
+      const step = (t) => {
+        const p = Math.min(Math.max((t - t0) / ms, 0), 1);
+        item.now = p < 1 ? from + (to - from) * (1 - Math.pow(1 - p, 3)) : to;
+        draw(item.now);
+        if (p < 1) item.raf = requestAnimationFrame(step);
+      };
+      item.raf = requestAnimationFrame(step);
+      item.timer = setTimeout(() => { if (item.now !== to) { cancelAnimationFrame(item.raf); item.now = to; draw(to); } }, ms + 120);
+    };
+
+    /* Scene: the field, the inverter and the house in one drawing */
+    const narrow = window.matchMedia('(max-width: 640px)');
+    const scene = $('[data-scene]', calc);
+    const SCENES = {
+      wide: { w: 1040, h: 330, inverter: [500, 0], home: [720, 0], ground: ['M0 270H1040'], wires: ['M430 270V306H610V270', 'M650 270V306H830V270'] },
+      // Two floors for a narrow screen: the cable goes down to the inverter along the left edge
+      tall: { w: 540, h: 650, inverter: [0, 320], home: [220, 320], ground: ['M0 270H540', 'M0 590H540'], wires: ['M430 270V300H22V626H110V590', 'M150 590V626H330V590'] },
+    };
+    let view = null;
+    const drawScene = () => {
+      const s = narrow.matches ? SCENES.tall : SCENES.wide;
+      const wire = (d, i) => `<g class="flow__wire flow__wire--${i + 1}"><path class="flow__wire-base" d="${d}" pathLength="1"/><path class="flow__wire-charge" d="${d}" pathLength="1"/><path class="flow__pulse" d="${d}" pathLength="1"/></g>`;
+      scene.innerHTML = `<svg class="art calc__art" viewBox="0 0 ${s.w} ${s.h}" focusable="false">`
+        + `<g class="art__g art__g--base">${s.ground.map((d) => `<path class="l3" d="${d}" pathLength="1" style="--p:0"/>`).join('')}</g>`
+        + ART.field({ bare: true })
+        + '<g class="calc__dim"><path d="M190 78V52"/><path class="calc__dim-line" d="M190 60h1"/><path d="M186 64l8-8"/>'
+        + '<g class="calc__dim-end"><path d="M190 78V52"/><path d="M186 64l8-8"/></g></g>'
+        + `<g transform="translate(${s.inverter})">${ART.inverters({ bare: true })}</g>`
+        + `<g transform="translate(${s.home})">${ART.home({ bare: true })}</g>`
+        + s.wires.map(wire).join('')
+        + '</svg>'
+        + `<p class="calc__tag calc__tag--s" style="--y:${(50 / s.h * 100).toFixed(2)}">S = <b></b></p>`
+        + `<p class="calc__tag calc__tag--h" style="--x:${(138 / s.w * 100).toFixed(2)};--y:${(150 / s.h * 100).toFixed(2)}">H = <b>${nf(cfg.insolation, 2)}</b> ч/день</p>`;
+      view = { s, cells: $$('.art__cell', scene), wins: $$('.art__win', scene), dim: $('.calc__dim', scene), tag: $('.calc__tag--s', scene), shown: 0 };
+    };
+    const paintScene = ({ areaPos, area, cover }, wait = 0) => {
+      const { s, cells, wins, dim, tag } = view;
+      const n = Math.max(1, Math.round(areaPos * cells.length));
+      const gap = Math.min(28, 560 / Math.max(Math.abs(n - view.shown), 1));
+      cells.forEach((cell, i) => {
+        const on = i < n;
+        if (cell.classList.contains('is-on') === on) return;
+        cell.style.setProperty('--dl', `${Math.round(wait + (on ? i - view.shown : view.shown - 1 - i) * gap)}ms`);
+        cell.classList.toggle('is-on', on);
+      });
+      view.shown = n;
+      const cols = Math.ceil(n / FIELD.rows);
+      dim.style.setProperty('--w', cols * FIELD.step);
+      tag.style.setProperty('--x', ((190 + cols * FIELD.step / 2) / s.w * 100).toFixed(2));
+      tag.lastElementChild.textContent = `${nf(area)} м²`;
+      // Windows of the house: how much of the consumption the station covers
+      const lit = cover >= .95 ? 3 : cover >= .55 ? 2 : cover >= .15 ? 1 : 0;
+      wins.forEach((w, i) => w.classList.toggle('is-lit', i < lit));
+    };
+    // The current runs in a short burst after every change
+    let liveTimer = null;
+    const runCurrent = (ms = 2400) => {
+      if (reduceMotion.matches) return;
+      scene.classList.add('is-live');
+      clearTimeout(liveTimer);
+      liveTimer = setTimeout(() => scene.classList.remove('is-live'), ms);
+    };
+
+    /* Payback chart: the balance line crosses the horizon in the year the station pays for itself */
+    const chartBox = $('[data-chart]');
+    const CHARTS = {
+      wide: { w: 1400, h: 380, x0: 8, x1: 1392, y0: 252, up: 212, down: 76 },
+      narrow: { w: 600, h: 400, x0: 6, x1: 594, y0: 262, up: 214, down: 84 },
+    };
+    let chart = null;
+    const drawChart = () => {
+      const c = narrow.matches ? CHARTS.narrow : CHARTS.wide;
+      const life = cfg.lifetime;
+      const x = (year) => +(c.x0 + (c.x1 - c.x0) * year / life).toFixed(1);
+      const marks = Array.from({ length: Math.floor(life / 5) + 1 }, (_, i) => i * 5);
+      const bottom = c.y0 + c.down + 12;
+      const rays = [-150, -120, -90, -60, -30].map((deg) => {
+        const a = deg * Math.PI / 180;
+        return `M${(Math.cos(a) * 17).toFixed(1)} ${(Math.sin(a) * 17).toFixed(1)}L${(Math.cos(a) * 25).toFixed(1)} ${(Math.sin(a) * 25).toFixed(1)}`;
+      }).join('');
+      chartBox.innerHTML = `<svg class="pchart__svg" viewBox="0 0 ${c.w} ${c.h}" aria-hidden="true" focusable="false">`
+        + '<defs><pattern id="pchart-hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path class="pchart__hatch" d="M0 0V8"/></pattern>'
+        + '<linearGradient id="pchart-gain" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#10a84e" stop-opacity=".4"/><stop offset="1" stop-color="#10a84e" stop-opacity=".05"/></linearGradient></defs>'
+        + `<path class="pchart__grid" d="${marks.map((y) => `M${x(y)} ${c.y0 - c.up}V${bottom}`).join('')}M${c.x0} ${bottom}H${c.x1}"/>`
+        + '<path class="pchart__debt" fill="url(#pchart-hatch)"/><path class="pchart__gain" fill="url(#pchart-gain)"/>'
+        + `<path class="pchart__axis" d="M${c.x0} ${c.y0}H${c.x1}"/>`
+        + '<path class="pchart__line" pathLength="1"/>'
+        + '<circle class="pchart__dot" r="4.5"/><circle class="pchart__dot pchart__dot--end" r="4.5"/>'
+        + `<g class="pchart__sun"><g class="pchart__sun-in"><path class="pchart__halo" d="M-34 0A34 34 0 0 1 34 0Z"/><path class="pchart__rays" d="${rays}"/><path class="pchart__core" d="M-11 0A11 11 0 0 1 11 0Z"/></g></g>`
+        + '</svg>'
+        + marks.map((y, i) => `<span class="pchart__year" style="--x:${(x(y) / c.w * 100).toFixed(2)};--y:${((bottom + 10) / c.h * 100).toFixed(2)}" aria-hidden="true">${i === marks.length - 1 ? `${y} ${plural(y, ['год', 'года', 'лет'])}` : y}</span>`).join('')
+        + '<p class="pchart__mark" aria-hidden="true"></p>';
+      const [start, end] = $$('.pchart__dot', chartBox);
+      chart = { c, start, end, line: $('.pchart__line', chartBox), debt: $('.pchart__debt', chartBox), gain: $('.pchart__gain', chartBox), sun: $('.pchart__sun', chartBox), mark: $('.pchart__mark', chartBox) };
+    };
+    // r — the payback term as a share of the service life; the line turns around the crossing point
+    const paintChart = (r) => {
+      const { c, start, end, line, debt, gain, sun, mark } = chart;
+      const pays = r < 1;
+      const k = 1 / r - 1; // the balance at the end of the service life, in investments
+      const unit = k > 0 ? Math.min(c.down, c.up / k) : c.down;
+      const y1 = +(c.y0 + unit).toFixed(1);
+      const y2 = +(c.y0 - unit * k).toFixed(1);
+      const xc = +(c.x0 + (c.x1 - c.x0) * Math.min(r, 1)).toFixed(1);
+      line.setAttribute('d', `M${c.x0} ${y1}L${c.x1} ${y2}`);
+      debt.setAttribute('d', pays ? `M${c.x0} ${c.y0}V${y1}L${xc} ${c.y0}Z` : `M${c.x0} ${c.y0}V${y1}L${c.x1} ${y2}V${c.y0}Z`);
+      gain.setAttribute('d', pays ? `M${xc} ${c.y0}L${c.x1} ${y2}V${c.y0}Z` : '');
+      start.setAttribute('cx', c.x0); start.setAttribute('cy', y1);
+      end.setAttribute('cx', c.x1); end.setAttribute('cy', y2);
+      sun.setAttribute('transform', `translate(${xc} ${c.y0})`);
+      sun.classList.toggle('is-off', !pays);
+      mark.classList.toggle('is-off', !pays);
+      mark.style.setProperty('--x', (xc / c.w * 100).toFixed(2));
+      mark.style.setProperty('--y', ((c.y0 - 44) / c.h * 100).toFixed(2));
+      mark.textContent = years(r * cfg.lifetime).join(' ');
+    };
+
+    /* Fields */
+    const state = {};
+    const fields = {};
+    ['consumption', 'tariff', 'area'].forEach((key) => {
+      const box = $(`[data-field="${key}"]`, calc);
+      const f = cfg.fields[key];
+      const num = $('.calc__num', box);
+      const range = $('.calc__range', box);
+      const unit = $('.calc__unit', box).textContent;
+      // Wide ranges are laid on the slider logarithmically: a house and a plant both get room on it
+      const log = f.max / f.min > 50;
+      const span = log ? Math.log(f.max / f.min) : f.max - f.min;
+      const toPos = (v) => (log ? Math.log(v / f.min) : v - f.min) / span;
+      const toValue = (t) => (log ? f.min * Math.exp(t * span) : f.min + t * span);
+      // The slider gives round numbers: the step of the field, or two significant digits
+      const round = (v) => {
+        const m = f.step || Math.pow(10, Math.max(Math.floor(Math.log10(v)) - 1, 0));
+        return Math.round(v / m) * m;
+      };
+      const clamp = (v) => Math.min(Math.max(v, f.min), f.max);
+      const set = (v, from) => {
+        state[key] = clamp(v);
+        const pos = toPos(state[key]);
+        if (from !== 'range') range.value = Math.round(pos * 1000);
+        range.style.setProperty('--fill', `${(pos * 100).toFixed(1)}%`);
+        range.setAttribute('aria-valuetext', `${nf(state[key])} ${unit}`);
+        if (from !== 'num') num.value = nf(state[key]);
+      };
+      fields[key] = { set, pos: () => toPos(state[key]) };
+      $('.calc__hint', box).innerHTML = `<span>от ${nf(f.min)}</span><span>до ${nf(f.max)} ${unit.replace(' за кВт·ч', '')}</span>`;
+
+      range.addEventListener('input', () => { set(round(toValue(range.value / 1000)), 'range'); update(); });
+      // From the keyboard one press is one round step, so every press changes the number
+      range.addEventListener('keydown', (e) => {
+        const dir = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1, PageUp: 10, PageDown: -10 }[e.key];
+        if (!dir) return;
+        e.preventDefault();
+        const v = state[key];
+        const m = f.step || Math.pow(10, Math.max(Math.floor(Math.log10(dir > 0 ? v : v - 1)) - 1, 0));
+        set(Math.round(v / m) * m + dir * m);
+        update();
+      });
+      num.addEventListener('input', () => {
+        const v = parseFloat(num.value.replace(/[^\d.,]/g, '').replace(',', '.'));
+        if (!Number.isFinite(v) || v <= 0) return;
+        set(v, 'num');
+        update();
+      });
+      num.addEventListener('focus', () => num.select());
+      num.addEventListener('blur', () => {
+        const typed = parseFloat(num.value.replace(/[^\d.,]/g, '').replace(',', '.'));
+        // The hint under the field turns red for a moment when the number had to be brought into the range
+        if (Number.isFinite(typed) && typed !== clamp(typed)) {
+          box.classList.add('is-fixed');
+          setTimeout(() => box.classList.remove('is-fixed'), 2400);
+        }
+        num.value = nf(state[key]);
+      });
+      num.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); num.blur(); } });
+      set(f.value);
+    });
+    $('.calc__panel', calc).addEventListener('submit', (e) => e.preventDefault());
+
+    const presets = $$('[data-preset]', calc);
+    presets.forEach((btn) => btn.addEventListener('click', () => {
+      const p = cfg.presets[btn.dataset.preset];
+      if (!p) return;
+      Object.keys(fields).forEach((key) => { if (p[key]) fields[key].set(p[key]); });
+      update();
+    }));
+
+    // The area that gives exactly what the object consumes in a year
+    const fit = $('[data-fit]', calc);
+    const fitArea = () => {
+      const f = cfg.fields.area;
+      const s = state.consumption * 12 / (cfg.insolation * 365 * cfg.kArea);
+      const m = Math.pow(10, Math.max(Math.floor(Math.log10(s)) - 1, 0));
+      return Math.min(Math.max(Math.floor(s / m) * m, f.min), f.max);
+    };
+    $('button', fit).addEventListener('click', () => {
+      fields.area.set(fitArea());
+      update();
+      $('#calc-area', calc).focus({ preventScroll: true });
+    });
+
+    /* The calculation itself */
+    let sayTimer = null;
+    const update = ({ wait = 0 } = {}) => {
+      const S = state.area;
+      const P = S * cfg.kArea;                              // мощность станции, кВт
+      const E = P * cfg.insolation * 365;                   // выработка за год, кВт·ч
+      const need = state.consumption * 12;
+      const saving = Math.min(E, need) * state.tariff;      // в экономию идёт только энергия, которую объект использует сам
+      const invest = P * cfg.costPerKw;
+      const payback = saving > 0 ? invest / saving : Infinity;
+      const profit = saving * cfg.lifetime - invest;
+      const cover = E / need;
+      const pays = payback < cfg.lifetime;
+      const lifeText = `${cfg.lifetime} ${plural(cfg.lifetime, ['год', 'года', 'лет'])}`;
+
+      tween('power', P, (v) => { const [n, u] = power(v); setText('power', n); setText('power-unit', u); });
+      tween('energy', E, (v) => { const [n, u] = energy(v); setText('energy', n); setText('energy-unit', u); });
+      const showPayback = (v) => {
+        const [n, u] = v < 100 ? years(v) : ['100+', 'лет'];
+        setText('payback', n);
+        setText('payback-unit', u);
+      };
+      if (payback < 100) tween('payback', payback, showPayback);
+      else { tweens.delete('payback'); showPayback(payback); }
+      setText('power-formula', `P = ${nf(S)} м² × ${nf(cfg.kArea, 3)}`);
+      const panels = Math.ceil(P * 1000 / cfg.panelWatt);
+      setText('power-note', `≈ ${nf(panels)} ${plural(panels, ['панель', 'панели', 'панелей'])} по ${nf(cfg.panelWatt)} Вт`);
+      setText('energy-formula', `E = ${power(P).join(' ')} × ${nf(cfg.insolation, 2)} ч × 365 дней`);
+      setText('energy-note', cover >= 1 ? 'покрывает всё ваше потребление' : `${Math.max(Math.round(cover * 100), 1)}% вашего потребления`);
+      setText('payback-formula', `${money(invest)} ÷ ${money(saving)} ${cfg.currency} в год`);
+
+      setText('invest', `${money(invest)} ${cfg.currency}`);
+      setText('saving', `${money(saving)} ${cfg.currency}`);
+      setText('profit', `${money(profit)} ${cfg.currency}`);
+      setText('lifetime', lifeText);
+      setText('pb-title', pays ? `Станция окупится за ${years(payback).join(' ')}` : `Станция не окупится за ${lifeText}`);
+      setText('pb-sub', pays ? `и ещё ${years(cfg.lifetime - payback).join(' ')} работает в плюс` : 'уменьшите площадь под панели');
+      out('profit').parentElement.classList.toggle('is-loss', profit < 0);
+      out('pb-hint').hidden = cover <= 1;
+      fit.hidden = cover <= 1.15 || fitArea() >= S;
+      setText('fit', `${nf(fitArea())} м²`);
+
+      paintScene({ areaPos: fields.area.pos(), area: S, cover }, wait);
+      runCurrent();
+      tween('chart', Math.min(payback / cfg.lifetime, 3), paintChart, 520);
+
+      presets.forEach((btn) => {
+        const p = cfg.presets[btn.dataset.preset];
+        btn.setAttribute('aria-pressed', String(Boolean(p) && Object.keys(p).every((key) => state[key] === p[key])));
+      });
+      const brief = `${power(P).join(' ')}, ${nf(S)} м², ${nf(state.consumption)} кВт·ч в месяц`;
+      $$('[data-calc-cta]').forEach((a) => { a.dataset.modalSubject = `Тема: расчёт станции ${brief}`; });
+      chartBox.setAttribute('aria-label', pays
+        ? `График окупаемости: вложения ${money(invest)} ${cfg.currency} возвращаются за ${years(payback).join(' ')}, выгода за ${cfg.lifetime} лет — ${money(profit)} ${cfg.currency}`
+        : `График окупаемости: за ${cfg.lifetime} лет службы вложения ${money(invest)} ${cfg.currency} не возвращаются`);
+      // For a screen reader the result is said once the fields are left alone
+      clearTimeout(sayTimer);
+      sayTimer = setTimeout(() => setText('summary', `Мощность станции ${power(P).join(' ')}, выработка за год ${energy(E).join(' ')}, ${pays ? `срок окупаемости ${years(payback).join(' ')}` : 'станция не окупается'}`), 900);
+    };
+
+    drawScene();
+    drawChart();
+    narrow.addEventListener('change', () => { drawScene(); drawChart(); tweens.delete('chart'); update(); });
+
+    // Switching on, once in view
+    const switchOn = (el, intro) => {
+      if (!('IntersectionObserver' in window) || reduceMotion.matches) { el.classList.add('is-on'); return; }
+      const io = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        io.disconnect();
+        el.classList.add('is-on');
+        if (intro) intro();
+      }, { threshold: 0.3 });
+      io.observe(el);
+    };
+    let started = false;
+    switchOn(scene, () => {
+      started = true;
+      scene.classList.add('is-intro');
+      setTimeout(() => runCurrent(1700), 2800);
+      setTimeout(() => scene.classList.remove('is-intro'), 3400);
+    });
+    switchOn(chartBox);
+    update({ wait: started || reduceMotion.matches ? 0 : 900 });
+    clearTimeout(liveTimer);
+    scene.classList.remove('is-live');
   }
 
   /* ---------- Reveal + counters ---------- */
