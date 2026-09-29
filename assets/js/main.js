@@ -11,7 +11,8 @@
   const icon = (id, cls = 'ic ic--sm') => `<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
 
   /* ---------- Content data ---------- */
-  // Проекты: фото — assets/img/projects/project-N.jpg, логотип клиента — assets/img/projects/logo-N.svg.
+  // Проекты: пока у всех одно фото и один логотип — assets/img/projects/project.webp и logo.png.
+  // Своё фото или логотип проекта можно задать полями photo и logo.
   // Слайд 1 взят из макета, остальные — шаблонные данные для замены.
   const projects = [
     { title: 'ACWA Power Riverside', client: 'ACWA POWER', power: '285 КВт', gen: '354 МВтч', text: 'Компания Solar Nature подписала контракт на установку солнечных панелей мощностью 30 МВт, системы слежения и прокладку кабелей для проекта ACWA POWER мощностью 200 МВт в Риверсайде.' },
@@ -285,12 +286,12 @@
   if (projTrack) {
     projTrack.innerHTML = projects.map((p, i) => `
       <article class="pcard" aria-roledescription="slide" aria-label="${i + 1} из ${projects.length}">
-        <div class="pcard__media ph"><img src="assets/img/projects/project-${i + 1}.jpg" alt="${p.title}" loading="lazy" onerror="this.remove()"></div>
+        <div class="pcard__media ph"><img src="${p.photo || 'assets/img/projects/project.webp'}" alt="${p.title}" loading="lazy" onerror="this.remove()"></div>
         <div class="pcard__body">
           <div class="pcard__top">
             <div class="pcard__stat"><b>${p.power}</b><span>Мощность</span></div>
             <div class="pcard__stat"><b>${p.gen}</b><span>Годовая генерация</span></div>
-            <span class="pcard__logo"><img src="assets/img/projects/logo-${i + 1}.svg" alt="${p.client}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'pcard__logo-text', textContent: this.alt }))"></span>
+            <span class="pcard__logo"><img src="${p.logo || 'assets/img/projects/logo.png'}" alt="${p.client}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'), { className: 'pcard__logo-text', textContent: this.alt }))"></span>
           </div>
           <h3 class="pcard__title">${p.title}</h3>
           <div class="pcard__row">
@@ -317,9 +318,12 @@
   }
 
   /* ---------- News cards (shared by the home slider, the news page and the article page) ---------- */
+  // Фото новостей: assets/img/news/news-N.webp. Пока фото три — демо-новости с 4-й повторяют их по кругу.
+  const NEWS_PHOTOS = 3;
+  const newsImg = (i) => `assets/img/news/news-${(i % NEWS_PHOTOS) + 1}.webp`;
   const newsCard = (n, i) => `
     <article class="ncard">
-      <div class="ncard__media ph"><img src="assets/img/news/news-${(i % news.length) + 1}.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div class="ncard__media ph"><img src="${newsImg(i % news.length)}" alt="" loading="lazy" onerror="this.remove()"></div>
       <div class="ncard__body">
         <time class="ncard__date">${n.date}</time>
         <h3 class="ncard__title"><a href="article.html?id=${(i % news.length) + 1}">${n.title}</a></h3>
@@ -735,7 +739,7 @@
       crumb.title = full;
     }
     $('[data-article-date]').textContent = item.date;
-    $('[data-article-cover]', article)?.setAttribute('src', `assets/img/news/news-${id}.jpg`);
+    $('[data-article-cover]', article)?.setAttribute('src', newsImg(id - 1));
     document.title = `${item.title.replace(/\.$/, '')} — Solar Nature`;
     // Sidebar: 5 other news (the demo list repeats to fill the column like the design)
     const others = news.map((n, i) => ({ n, i })).filter(({ i }) => i !== id - 1);
