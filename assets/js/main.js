@@ -61,6 +61,55 @@
     ['Эффективность', '21.3%'], ['Эффективность', '21.3%'], ['Эффективность', '21.3%'], ['Размеры (L x W x H)', '2278 x 1134 x 35 mm'], ['Эффективность', '21.3%'],
   ];
 
+  // Вакансии: демо-данные для замены. Страница вакансии — vacancy.html?id=<id>.
+  // Закрытую вакансию достаточно убрать из списка: по её старой ссылке откроется сообщение «вакансия закрыта».
+  const depts = { engineering: 'Инженерия', build: 'Монтаж и сервис', sales: 'Продажи', projects: 'Управление проектами' };
+  // «Что мы предлагаем» — общий список для всех вакансий; свой можно задать полем offer
+  const vacancyOffer = [
+    'Официальное трудоустройство с первого рабочего дня',
+    'Проекты разного масштаба: от частных домов до промышленных станций',
+    'Обучение у инженеров компании и производителей оборудования',
+    'Понятные задачи и прямой контакт с руководителем направления',
+  ];
+  const vacancies = [
+    {
+      id: 'pv-design-engineer', title: 'Инженер-проектировщик солнечных электростанций', dept: 'engineering', city: 'Ташкент', type: 'Полная занятость', exp: 'От 3 лет',
+      lead: 'Вы будете проектировать электрическую часть крышных и наземных солнечных станций: от обследования объекта до рабочей документации и сопровождения монтажа.',
+      duties: ['Разрабатывать проектную и рабочую документацию солнечных станций', 'Подбирать панели, инверторы и кабели, рассчитывать выработку станции', 'Готовить однолинейные схемы и планы размещения оборудования', 'Согласовывать технические решения с заказчиком и сетевой компанией', 'Сопровождать монтаж и вносить изменения в проект'],
+      reqs: ['Высшее образование в области электроэнергетики или электроснабжения', 'Опыт проектирования электроустановок или солнечных станций от 3 лет', 'Уверенная работа в AutoCAD, знание PVsyst будет преимуществом', 'Знание ПУЭ и требований к подключению генерации к сети'],
+    },
+    {
+      id: 'scada-engineer', title: 'Инженер SCADA и систем мониторинга', dept: 'engineering', city: 'Ташкент', type: 'Полная занятость', exp: 'От 2 лет',
+      lead: 'Вы будете внедрять системы диспетчеризации и мониторинга на станциях компании и следить, чтобы данные о выработке приходили без пропусков.',
+      duties: ['Настраивать сбор данных с инверторов, счётчиков и метеостанций', 'Разрабатывать мнемосхемы и отчёты в SCADA-системах', 'Подключать объекты к системе мониторинга и проверять качество данных', 'Разбирать аварийные сигналы вместе с сервисной службой'],
+      reqs: ['Техническое образование в области автоматизации или электроэнергетики', 'Опыт работы со SCADA-системами и протоколами Modbus, IEC 60870-5-104', 'Понимание устройства сетей передачи данных', 'Технический английский для работы с документацией'],
+    },
+    {
+      id: 'pv-installer', title: 'Монтажник солнечных электростанций', dept: 'build', city: 'Ташкент и регионы', type: 'Полная, с выездами', exp: 'От 1 года',
+      lead: 'Вы будете собирать станции на кровлях и на земле: монтировать конструкции, устанавливать панели и прокладывать кабельные линии.',
+      duties: ['Монтировать опорные конструкции и крепления на кровле и на грунте', 'Устанавливать и подключать солнечные панели и инверторы', 'Прокладывать кабельные трассы и собирать щиты постоянного тока', 'Соблюдать требования охраны труда при работе на высоте'],
+      reqs: ['Опыт электромонтажных или строительно-монтажных работ от 1 года', 'Умение читать монтажные схемы', 'Группа по электробезопасности не ниже III', 'Готовность к выездам на объекты в регионах'],
+    },
+    {
+      id: 'service-engineer', title: 'Инженер по эксплуатации и сервису', dept: 'build', city: 'Ташкент', type: 'Полная, с выездами', exp: 'От 2 лет',
+      lead: 'Вы будете отвечать за то, чтобы построенные станции работали на расчётную мощность: плановое обслуживание, диагностика и устранение неисправностей.',
+      duties: ['Проводить плановое техническое обслуживание станций по графику', 'Диагностировать неисправности инверторов, панелей и кабельных линий', 'Анализировать данные мониторинга и находить причины потерь выработки', 'Оформлять акты и отчёты для заказчика'],
+      reqs: ['Высшее или среднее специальное электротехническое образование', 'Опыт эксплуатации электроустановок от 2 лет', 'Навыки работы с измерительными приборами и тепловизором', 'Водительское удостоверение категории B'],
+    },
+    {
+      id: 'sales-manager', title: 'Менеджер по продажам солнечных станций', dept: 'sales', city: 'Ташкент', type: 'Полная занятость', exp: 'От 2 лет',
+      lead: 'Вы будете вести корпоративных клиентов от первого обращения до договора: выяснять задачу, готовить с инженерами расчёт и защищать предложение.',
+      duties: ['Вести переговоры с предприятиями и государственными заказчиками', 'Готовить коммерческие предложения вместе с проектным отделом', 'Считать окупаемость станции и объяснять её клиенту', 'Сопровождать сделку до подписания договора и передачи в работу'],
+      reqs: ['Опыт продаж компаниям от 2 лет, желательно технически сложных решений', 'Умение разобраться в расчёте и объяснить его простыми словами', 'Грамотная устная и письменная речь на русском и узбекском языках', 'Опыт работы с CRM-системой'],
+    },
+    {
+      id: 'project-manager', title: 'Руководитель проектов строительства станций', dept: 'projects', city: 'Ташкент', type: 'Полная занятость', exp: 'От 4 лет',
+      lead: 'Вы будете вести строительство станций от договора до ввода в эксплуатацию: сроки, бюджет, подрядчики и связь с заказчиком.',
+      duties: ['Планировать график и бюджет проекта и отвечать за их соблюдение', 'Координировать проектировщиков, снабжение и монтажные бригады', 'Вести переговоры с заказчиком и сетевыми компаниями', 'Организовывать приёмку работ и ввод станции в эксплуатацию'],
+      reqs: ['Опыт управления строительными или энергетическими проектами от 4 лет', 'Понимание этапов строительства электроустановок', 'Навыки работы с графиками и бюджетами проектов', 'Готовность к поездкам на объекты'],
+    },
+  ];
+
   // Клиенты: логотипы — assets/img/clients/<ключ>.png. Пока файла нет, в карточке выводится название.
   const clientsRow1 = [
     ['indorama', 'Indorama'], ['agmk', 'Алмалыкский ГМК'], ['enercon', 'Enercon'], ['soliq', 'Davlat Soliq Qo‘mitasi'],
@@ -79,13 +128,16 @@
     return a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many;
   };
   const goods = (n) => `${n} ${plural(n, ['товар', 'товара', 'товаров'])}`;
+  const jobs = (n) => `${n} ${plural(n, ['вакансия', 'вакансии', 'вакансий'])}`;
 
   /* ---------- Line art ----------
      Technical drawings of the four catalog sections and of the house they power. They make up the station
      scheme on the catalog page and stand in for product photos until those are added.
      All drawings share a scale and stand on the same ground line (y = 270); depth runs up and to the right. */
-  // The panel field of the calculator: modules are counted by columns, each `step` wide
+  // The panel field of the calculator and of the career page: modules are counted by columns, each `step` wide
   const FIELD = { cols: 10, rows: 4, step: 32 };
+  // A point of the field: column and row, fractions allowed
+  const fieldAt = (c, r) => [+(110 + c * FIELD.step + r * 20).toFixed(1), +(232 - r * 37.5).toFixed(1)];
   const ART = (() => {
     const line = (d, cls, p) => `<path class="${cls || 'l1'}" d="${d}" pathLength="1" style="--p:${p}"/>`;
     const dot = (x, y, o, r = 3.2) => `<circle class="art__on art__dot" cx="${x}" cy="${y}" r="${r}" style="--o:${o}"/>`;
@@ -107,7 +159,7 @@
       .map(([x, y], k) => dot(x + r, y, (i * 4 + k) * 45))).join('');
 
     // The field of the calculator: the same tilted table, but every module of it switches on by itself
-    const fp = (c, r) => `${+(110 + c * FIELD.step + r * 20).toFixed(1)} ${+(232 - r * 37.5).toFixed(1)}`;
+    const fp = (c, r) => fieldAt(c, r).join(' ');
     const fieldW = FIELD.cols * FIELD.step;
     const fieldCells = Array.from({ length: FIELD.cols * FIELD.rows }, (_, i) => {
       const c = Math.floor(i / FIELD.rows);
@@ -704,7 +756,7 @@
       card = null;
     });
   };
-  ['.catalog__grid', '#products-grid', '#product-related'].forEach((sel) => trackLight($(sel)));
+  ['.catalog__grid', '#products-grid', '#product-related', '#vacancy-list', '#vacancy-more'].forEach((sel) => trackLight($(sel)));
 
   /* ---------- Solution page (one template for all solutions) ---------- */
   const solutionPage = $('#solution');
@@ -878,6 +930,192 @@
       const k = (n + i) % items.length;
       return productCard({ ...items[k], cat, n: k + 1 }, i);
     }).join('');
+  }
+
+  /* ---------- Vacancy row (career list + other vacancies) ---------- */
+  const vacancyHref = (v) => `vacancy.html?id=${v.id}`;
+  const vacancyRow = (v, i = 0) => `
+    <li class="vrow lit reveal" style="--d:${(Math.min(i, 8) * .05).toFixed(2)}s;--vt:vac-${v.id}" data-dept="${v.dept}">
+      <div class="vrow__main">
+        <p class="vrow__dept">${depts[v.dept]}</p>
+        <h3 class="vrow__title"><a href="${vacancyHref(v)}">${v.title}</a></h3>
+      </div>
+      <dl class="vrow__facts">
+        <div><dt>Город</dt><dd>${v.city}</dd></div>
+        <div><dt>Занятость</dt><dd>${v.type}</dd></div>
+        <div><dt>Опыт</dt><dd>${v.exp}</dd></div>
+      </dl>
+      <span class="vrow__btn" aria-hidden="true"><span class="cbtn__text">Открыть вакансию</span><span class="cbtn__ic">${icon('i-chevron-right', 'ic ic--xs')}</span></span>
+    </li>`;
+
+  /* ---------- Career page: directions and the list ---------- */
+  const vacancyList = $('#vacancy-list');
+  if (vacancyList) {
+    const filter = $('#vac-filter');
+    const countEl = $('#vac-count');
+    const used = Object.keys(depts).filter((key) => vacancies.some((v) => v.dept === key));
+    const chip = (key, name, n) => `<button class="vfilter__btn" type="button" data-dept="${key}" aria-pressed="false">${name}<span>${n}</span></button>`;
+    filter.innerHTML = '<span class="vfilter__glider" aria-hidden="true"></span>'
+      + chip('all', 'Все', vacancies.length)
+      + used.map((key) => chip(key, depts[key], vacancies.filter((v) => v.dept === key).length)).join('');
+    vacancyList.innerHTML = vacancies.map(vacancyRow).join('');
+    const rows = $$('.vrow', vacancyList);
+    const chips = $$('.vfilter__btn', filter);
+
+    // One highlight bar that slides to the chosen direction
+    const glider = $('.vfilter__glider', filter);
+    filter.classList.add('vfilter--glide');
+    const moveGlider = (instant = false) => {
+      const on = chips.find((c) => c.getAttribute('aria-pressed') === 'true');
+      if (!on) return;
+      if (instant) glider.style.transition = 'none';
+      glider.style.transform = `translate(${on.offsetLeft}px, ${on.offsetTop}px)`;
+      glider.style.width = `${on.offsetWidth}px`;
+      glider.style.height = `${on.offsetHeight}px`;
+      if (instant) { void glider.offsetWidth; glider.style.transition = ''; }
+    };
+    const paint = (key, first) => {
+      rows.forEach((row) => {
+        row.hidden = key !== 'all' && row.dataset.dept !== key;
+        // A row that comes back does not wait for its turn again
+        if (!first) { row.classList.add('is-in'); row.style.setProperty('--d', '0s'); }
+      });
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c.dataset.dept === key)));
+      moveGlider(first);
+      countEl.textContent = rows.filter((row) => !row.hidden).length;
+    };
+    let switching = 0;
+    const show = (dept, first = false) => {
+      const key = used.includes(dept) ? dept : 'all';
+      if (first || reduceMotion.matches || !document.startViewTransition) { paint(key, first); return; }
+      // Rows that stay glide to their new places, the rest fade — the same rules as on the products page
+      switching += 1;
+      root.classList.add('is-switching');
+      const transition = document.startViewTransition(() => paint(key));
+      transition.ready.catch(() => {});
+      transition.finished.finally(() => {
+        switching -= 1;
+        if (!switching) root.classList.remove('is-switching');
+      });
+    };
+    show(new URLSearchParams(location.search).get('dept'), true);
+    filter.addEventListener('click', (e) => {
+      const btn = e.target.closest('.vfilter__btn');
+      if (!btn || btn.getAttribute('aria-pressed') === 'true') return;
+      history.replaceState({}, '', btn.dataset.dept === 'all' ? location.pathname : `?dept=${btn.dataset.dept}`);
+      show(btn.dataset.dept);
+    });
+    let gliderRaf;
+    window.addEventListener('resize', () => {
+      cancelAnimationFrame(gliderRaf);
+      gliderRaf = requestAnimationFrame(() => moveGlider(true));
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => moveGlider(true));
+  }
+
+  /* ---------- Career page: the team as a field, free modules are open vacancies ---------- */
+  const team = $('[data-team]');
+  if (team) {
+    const size = FIELD.cols * FIELD.rows;
+    const open = vacancies.slice(0, size);
+    // Free modules are spread evenly over the field
+    const slots = open.map((v, i) => Math.floor((i + .5) * size / open.length));
+    team.innerHTML = `<div class="chero__art">${ART.field({ h: 300 })}<a class="chero__tip" href="#vacancies" tabindex="-1"><span></span><b></b></a></div>`
+      + `<ul class="chero__legend"><li class="chero__key chero__key--team">В команде</li><li class="chero__key chero__key--free">Свободно: ${jobs(open.length)}</li></ul>`;
+    const box = $('.chero__art', team);
+    const tip = $('.chero__tip', team);
+    const cells = $$('.art__cell', team);
+    const centre = (i) => fieldAt(Math.floor(i / FIELD.rows) + .5, (i % FIELD.rows) + .5);
+    cells.forEach((cell, i) => {
+      const k = slots.indexOf(i);
+      if (k < 0) {
+        cell.classList.add('is-team');
+        cell.style.setProperty('--dl', `${900 + i * 22}ms`);
+        return;
+      }
+      const [x, y] = centre(i);
+      cell.classList.add('is-free');
+      cell.dataset.slot = k;
+      cell.style.setProperty('--dl', `${2000 + k * 110}ms`);
+      cell.insertAdjacentHTML('afterend', `<path class="art__plus" d="M${x - 5} ${y}h10M${(x - 2.6).toFixed(1)} ${(y + 4.9).toFixed(1)}l5.2-9.8" style="--dl:${2000 + k * 110}ms"/>`);
+    });
+
+    let hot = null;
+    const showTip = (cell) => {
+      if (hot === cell) return;
+      if (hot) hot.classList.remove('is-hot');
+      hot = cell;
+      hot.classList.add('is-hot');
+      const v = open[Number(cell.dataset.slot)];
+      const [x, y] = centre(cells.indexOf(cell));
+      tip.href = vacancyHref(v);
+      tip.firstElementChild.textContent = depts[v.dept];
+      tip.lastElementChild.textContent = v.title;
+      tip.style.setProperty('--x', (x / 540 * 100).toFixed(2));
+      tip.style.setProperty('--y', ((y - 24) / 300 * 100).toFixed(2));
+      team.classList.add('has-tip');
+    };
+    const hideTip = () => {
+      if (hot) hot.classList.remove('is-hot');
+      hot = null;
+      team.classList.remove('has-tip');
+    };
+    box.addEventListener('pointerover', (e) => {
+      if (e.pointerType === 'touch') return;
+      const cell = e.target.closest('.art__cell.is-free');
+      if (cell) showTip(cell); else hideTip();
+    });
+    box.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') hideTip(); });
+    box.addEventListener('click', (e) => {
+      const cell = e.target.closest('.art__cell.is-free');
+      if (!cell) return;
+      // With a mouse the module itself is the link; under a finger it first shows the label, and the label is the link
+      if (finePointer.matches) location.href = vacancyHref(open[Number(cell.dataset.slot)]);
+      else showTip(cell);
+    });
+    document.addEventListener('click', (e) => { if (hot && !box.contains(e.target)) hideTip(); });
+
+    if ('IntersectionObserver' in window && !reduceMotion.matches) {
+      const io = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        io.disconnect();
+        team.classList.add('is-on');
+      }, { threshold: 0.3 });
+      io.observe(team);
+    } else {
+      team.classList.add('is-on');
+    }
+  }
+
+  /* ---------- Vacancy page (one template for all vacancies) ---------- */
+  const vacancyPage = $('#vacancy');
+  if (vacancyPage) {
+    const id = new URLSearchParams(location.search).get('id');
+    // Without an address the page shows the first vacancy; an unknown address means the vacancy is closed
+    const v = id ? vacancies.find((item) => item.id === id) : vacancies[0];
+    if (v) {
+      const view = { ...v, dept: depts[v.dept] };
+      $$('[data-vac]', vacancyPage).forEach((el) => { el.textContent = view[el.dataset.vac]; });
+      $$('[data-vac-list]', vacancyPage).forEach((ul) => {
+        const list = v[ul.dataset.vacList] || vacancyOffer;
+        ul.innerHTML = list.map((text) => `<li>${text}</li>`).join('');
+      });
+      $('[data-vac-crumb]').textContent = v.title;
+      $('[data-vac-field]', vacancyPage).value = v.title;
+      document.title = `${v.title} — вакансия Solar Nature`;
+    } else {
+      $('[data-vac-open]', vacancyPage).hidden = true;
+      $('[data-vac-closed]', vacancyPage).hidden = false;
+      $('[data-vac-crumb]').textContent = 'Вакансия закрыта';
+      $('[data-vac-field]', vacancyPage).value = 'Отклик без вакансии';
+      $('[data-vac-apply-title]', vacancyPage).textContent = 'Отправить резюме';
+      $('.apply__submit .btn__label', vacancyPage).textContent = 'Отправить резюме';
+      $('[data-vac-apply-text]', vacancyPage).textContent = 'Оставьте контакты и прикрепите резюме — вернёмся, когда появится задача для вас.';
+      document.title = 'Вакансия закрыта — Solar Nature';
+    }
+    const others = vacancies.filter((item) => item !== v).slice(0, 3);
+    $('#vacancy-more').innerHTML = others.map(vacancyRow).join('');
+    $('[data-vac-more]', vacancyPage).hidden = !others.length;
   }
 
   /* ---------- Calculator page ---------- */
@@ -1268,14 +1506,27 @@
 
   /* ---------- Forms ---------- */
   const PHONE_RE = /^\+?[\d\s()-]{9,18}$/;
+  const MAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  // Резюме: какие файлы принимает форма отклика
+  const FILE_RE = /\.(pdf|docx?|rtf)$/i;
+  const FILE_MAX = 10 * 1024 * 1024;
+  const fileError = (input) => {
+    const file = input.files[0];
+    if (!file) return input.required ? 'Прикрепите резюме' : '';
+    if (!FILE_RE.test(file.name)) return 'Подойдёт файл PDF, DOC, DOCX или RTF';
+    return file.size > FILE_MAX ? 'Файл больше 10 МБ — сожмите его и прикрепите снова' : '';
+  };
+  const empty = { tel: 'Укажите номер телефона', email: 'Укажите электронную почту' };
   const validateField = (input) => {
     const field = input.closest('.field');
     if (!field) return true;
     const err = field.querySelector('.field__error');
     const v = input.value.trim();
     let msg = '';
-    if (input.required && !v) msg = input.type === 'tel' ? 'Укажите номер телефона' : 'Укажите ваше имя';
+    if (input.type === 'file') msg = fileError(input);
+    else if (input.required && !v) msg = empty[input.type] || 'Укажите ваше имя';
     else if (input.type === 'tel' && v && !PHONE_RE.test(v)) msg = 'Номер в формате +998 90 123-45-67';
+    else if (input.type === 'email' && v && !MAIL_RE.test(v)) msg = 'Почта в формате name@example.com';
     field.classList.toggle('has-error', Boolean(msg));
     err.textContent = msg;
     if (msg) {
@@ -1293,6 +1544,7 @@
     const status = $('.form-status', form);
     const submit = $('[type="submit"]', form);
     const label = $('.btn__label', submit);
+    const idle = label.textContent;
 
     inputs.forEach((input) => {
       input.addEventListener('blur', () => { if (input.value || input.closest('.has-error')) validateField(input); });
@@ -1312,10 +1564,54 @@
       await new Promise((r) => setTimeout(r, 900));
 
       submit.removeAttribute('aria-busy');
-      label.textContent = 'Отправить';
+      label.textContent = idle;
       form.reset();
       status.innerHTML = `${icon('i-check')} Спасибо! Мы свяжемся с вами в течение рабочего дня.`;
       setTimeout(() => { status.textContent = ''; }, 6000);
+      form.dispatchEvent(new CustomEvent('form:sent'));
+    });
+  });
+
+  /* ---------- Application form: résumé and the answer after sending ---------- */
+  const fileSize = (bytes) => (bytes < 1048576 ? `${Math.max(Math.round(bytes / 1024), 1)} КБ` : `${(bytes / 1048576).toFixed(1).replace('.', ',')} МБ`);
+  $$('[data-drop]').forEach((drop) => {
+    const input = $('input[type="file"]', drop);
+    const name = $('[data-file-name]', drop);
+    const hint = $('[data-file-hint]', drop);
+    const clear = $('[data-file-clear]', drop);
+    const idle = [name.textContent, hint.textContent];
+    const paint = () => {
+      const file = input.files[0];
+      drop.classList.toggle('has-file', Boolean(file));
+      name.textContent = file ? file.name : idle[0];
+      hint.textContent = file ? fileSize(file.size) : idle[1];
+      clear.hidden = !file;
+      validateField(input);
+    };
+    input.addEventListener('change', paint);
+    clear.addEventListener('click', () => { input.value = ''; paint(); input.focus(); });
+    // A file can also be dropped onto the field
+    ['dragenter', 'dragover'].forEach((type) => drop.addEventListener(type, (e) => { e.preventDefault(); drop.classList.add('is-over'); }));
+    drop.addEventListener('dragleave', (e) => { if (!drop.contains(e.relatedTarget)) drop.classList.remove('is-over'); });
+    drop.addEventListener('drop', (e) => {
+      e.preventDefault();
+      drop.classList.remove('is-over');
+      const file = e.dataTransfer.files[0];
+      if (!file) return;
+      const one = new DataTransfer();
+      one.items.add(file);
+      input.files = one.files;
+      paint();
+    });
+    input.form.addEventListener('reset', () => setTimeout(paint));
+  });
+  $$('[data-apply]').forEach((form) => {
+    const done = $('.apply-done', form.parentElement);
+    form.addEventListener('form:sent', () => {
+      form.hidden = true;
+      form.parentElement.classList.add('is-sent');
+      done.hidden = false;
+      done.focus({ preventScroll: true });
     });
   });
 

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Solar Nature — солнечные электростанции под ключ в Узбекистане</title>
-  <meta name="description" content="Проектирование, поставка, монтаж и обслуживание солнечных электростанций для бизнеса и частных домов в Узбекистане.">
+  <title>Карьера и вакансии — Solar Nature</title>
+  <meta name="description" content="Вакансии Solar Nature: работа в проектировании, монтаже, сервисе и продажах солнечных электростанций в Узбекистане. Откликнуться можно на странице вакансии.">
   <meta name="theme-color" content="#0a0d0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,7 @@
 <!-- ================= HEADER ================= -->
 <header class="header" id="header">
   <div class="container container--wide header__inner">
-    <a class="logo" href="#top" aria-label="Solar Nature — на главную">
+    <a class="logo" href="index.html" aria-label="Solar Nature — на главную">
       <svg class="logo__mark" aria-hidden="true"><use href="#i-logo"/></svg>
       <svg class="logo__word" aria-hidden="true"><use href="#i-logo-word"/></svg>
     </a>
@@ -93,7 +93,7 @@
             <li><a href="service.html?s=grid">Документация для подключения к электросети</a></li>
           </ul>
         </li>
-        <li class="nav__item"><a class="nav__link" href="#invest">Для инвесторов</a></li>
+        <li class="nav__item"><a class="nav__link" href="index.html#invest">Для инвесторов</a></li>
         <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
         <li class="nav__item nav__item--drop">
           <button class="nav__link" type="button" aria-expanded="false" aria-label="Язык сайта: русский">RU <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
@@ -122,333 +122,135 @@
 
 <main id="main">
 
-<!-- ================= HERO ================= -->
-<section class="hero" id="top" aria-roledescription="carousel" aria-label="Главные направления">
-  <!-- Фоны слайдов: пока у всех assets/img/hero.webp — для своих слайдов замените путь -->
-  <div class="hero__slides" aria-hidden="true">
-    <div class="hero__slide is-active" style="background-image: url('assets/img/hero.webp')"></div>
-    <div class="hero__slide" style="background-image: url('assets/img/hero.webp')"></div>
-    <div class="hero__slide" style="background-image: url('assets/img/hero.webp')"></div>
-    <div class="hero__slide" style="background-image: url('assets/img/hero.webp')"></div>
-  </div>
-  <div class="hero__shade" aria-hidden="true"></div>
-
-  <div class="hero__inner">
-    <p class="hero__eyebrow">Солнечная энергетика</p>
-    <div class="hero__head">
-      <h1 class="hero__title">Солнечные <br>электростанции под <br>ключ в&nbsp;Узбекистане</h1>
-      <span class="hero__counter" aria-live="polite"><span id="hero-cur">01</span><i>/</i><span id="hero-total">04</span></span>
-    </div>
-
-    <div class="hero__foot">
-      <ul class="hero__stats">
-        <li class="hstat">
-          <span class="hstat__num" data-count="2014" data-plain>2014</span>
-          <span class="hstat__label">На рынке с 2014</span>
-        </li>
-        <li class="hstat">
-          <span class="hstat__num"><span data-count="100">100</span>+</span>
-          <span class="hstat__label">Специалистов</span>
-        </li>
-        <li class="hstat">
-          <span class="hstat__num"><span data-count="10">10</span><small>регионов</small></span>
-          <span class="hstat__label">Охват проектов</span>
-        </li>
-      </ul>
-
-      <div class="hero__arrows">
-        <button class="hero__arrow" type="button" data-hero="prev" aria-label="Предыдущий слайд"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
-        <button class="hero__arrow" type="button" data-hero="next" aria-label="Следующий слайд"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+<!-- ================= PAGE HERO ================= -->
+<section class="phero phero--career" aria-labelledby="page-title">
+  <div class="phero__inner">
+    <nav class="crumbs" aria-label="Хлебные крошки">
+      <ol>
+        <li><a href="index.html">Главная</a></li>
+        <li><span aria-current="page">Карьера</span></li>
+      </ol>
+    </nav>
+    <div class="chero">
+      <div class="chero__text">
+        <p class="phero__eyebrow">Карьера</p>
+        <h1 class="phero__title" id="page-title">Найдите своё место <br>в команде Solar Nature</h1>
+        <p class="chero__lead">С 2014 года мы проектируем, строим и обслуживаем солнечные электростанции по всему Узбекистану. На чертеже — наша команда: светящиеся модули заняты, свободные ждут вас.</p>
+        <a class="pbtn pbtn--white chero__btn" href="#vacancies">Смотреть вакансии <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-down"/></svg></a>
       </div>
+      <!-- Чертёж команды рисует скрипт (assets/js/main.js, блок «Career page»): свободные модули — открытые вакансии -->
+      <div class="chero__team" data-team aria-hidden="true"></div>
     </div>
   </div>
 </section>
 
-<!-- ================= ABOUT ================= -->
-<section class="about" id="about" aria-labelledby="about-title">
-  <div class="about__wrap">
-    <p class="about__eyebrow reveal">Новая энергетика</p>
-    <h2 class="about__title reveal" id="about-title">Надежный партнер в создании <br><span>эффективных энергетических решений</span></h2>
-
-    <div class="about__grid">
-      <!-- Фото: assets/img/about-1.webp и about-2.webp (1226×652) -->
-      <div class="about__media">
-        <figure class="about__img ph reveal"><img src="assets/img/about-1.webp" alt="Солнечная панель крупным планом" width="1226" height="652" loading="lazy" onerror="this.remove()"></figure>
-        <figure class="about__img ph reveal" style="--d:.08s"><img src="assets/img/about-2.webp" alt="Частный дом с солнечными панелями на крыше" width="1226" height="652" loading="lazy" onerror="this.remove()"></figure>
+<!-- ================= VACANCIES ================= -->
+<section class="vac" id="vacancies" aria-labelledby="vac-title">
+  <div class="vac__wrap">
+    <div class="vac__head">
+      <div>
+        <p class="vac__eyebrow reveal">Вакансии</p>
+        <h2 class="vac__title reveal" id="vac-title">Открытые вакансии <span id="vac-count"></span></h2>
       </div>
+      <!-- Направления и сам список собирает скрипт из массива vacancies (assets/js/main.js) -->
+      <div class="vfilter reveal" id="vac-filter" role="group" aria-label="Направление работы"></div>
+    </div>
+    <ul class="vac__list" id="vacancy-list"></ul>
+    <noscript><p class="vac__empty">Список вакансий открывается со включённым JavaScript. Резюме можно отправить на <a href="mailto:info@solarnature.uz">info@solarnature.uz</a>.</p></noscript>
+  </div>
+</section>
 
-      <div class="about__body">
-        <dl class="about__stats">
-          <div class="astat reveal">
-            <dt class="astat__num"><span data-count="10">10</span>+<small>лет</small></dt>
-            <dd class="astat__label">Рынок солнечной энергетики</dd>
-          </div>
-          <div class="astat reveal" style="--d:.06s">
-            <dt class="astat__num"><span data-count="100">100</span>+<small>проектов</small></dt>
-            <dd class="astat__label">Реализованные объекты под ключ</dd>
-          </div>
-          <div class="astat reveal" style="--d:.12s">
-            <dt class="astat__num"><span data-count="1">1</span><small>МВт+ мощности</small></dt>
-            <dd class="astat__label">Общий объем установок</dd>
-          </div>
-          <div class="astat reveal" style="--d:.18s">
-            <dt class="astat__num"><small class="astat__pre">до</small><span data-count="30">30</span>%<small>экономии</small></dt>
-            <dd class="astat__label">Снижение затрат клиентов</dd>
-          </div>
-        </dl>
-
-        <div class="about__text reveal">
-          <p><strong>Solar Nature реализует солнечные электростанции под ключ</strong> для коммерческих и промышленных объектов. Мы помогаем бизнесу снижать затраты на электроэнергию и переходить на более эффективные модели энергопотребления.</p>
-          <p class="about__text-muted">Благодаря комплексному подходу мы предлагаем решения, адаптированные под задачи клиента — от локальных установок до масштабных проектов.</p>
-        </div>
-
-        <div class="about__actions reveal">
-          <a class="abtn abtn--dark" href="#contacts">Онлайн-калькулятор</a>
-          <a class="abtn abtn--line" href="about.html">Подробнее о нас <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
-        </div>
+<!-- ================= HIRING STEPS ================= -->
+<section class="hire" aria-labelledby="hire-title">
+  <div class="hire__wrap">
+    <div class="flow__head">
+      <div>
+        <p class="flow__eyebrow reveal">Как мы нанимаем</p>
+        <h2 class="flow__title reveal" id="hire-title">От отклика до первого <br><span>рабочего дня — четыре шага</span></h2>
       </div>
+      <p class="flow__lead reveal">Мы отвечаем на каждый отклик. Если вакансия вам не подошла, сохраним резюме и вернёмся, когда появится близкая задача.</p>
     </div>
+    <ol class="hire__list reveal">
+      <li class="hire__item" style="--n:0">
+        <span class="hire__dot" aria-hidden="true"></span>
+        <p class="hire__step">Шаг 1</p>
+        <h3 class="hire__title">Отклик</h3>
+        <p class="hire__text">Оставьте заявку на странице вакансии и прикрепите резюме.</p>
+      </li>
+      <li class="hire__item" style="--n:1">
+        <span class="hire__dot" aria-hidden="true"></span>
+        <p class="hire__step">Шаг 2</p>
+        <h3 class="hire__title">Знакомство</h3>
+        <p class="hire__text">Позвоним, расскажем о задачах и ответим на ваши вопросы.</p>
+      </li>
+      <li class="hire__item" style="--n:2">
+        <span class="hire__dot" aria-hidden="true"></span>
+        <p class="hire__step">Шаг 3</p>
+        <h3 class="hire__title">Интервью</h3>
+        <p class="hire__text">Встреча с руководителем направления. Инженерам предложим техническую задачу.</p>
+      </li>
+      <li class="hire__item" style="--n:3">
+        <span class="hire__dot" aria-hidden="true"></span>
+        <p class="hire__step">Шаг 4</p>
+        <h3 class="hire__title">Предложение</h3>
+        <p class="hire__text">Согласуем условия и дату выхода на работу.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
-<!-- ================= INVEST ================= -->
-<section class="invest" id="invest" aria-labelledby="invest-title">
-  <!-- Фон: assets/img/invest-bg.webp (солнечные панели) -->
-  <img class="invest__bg" src="assets/img/invest-bg.webp" alt="" loading="lazy" onerror="this.remove()">
-  <div class="invest__shade" aria-hidden="true"></div>
-
-  <div class="invest__wrap">
-    <p class="invest__eyebrow reveal">Решения для инвесторов</p>
-    <h2 class="invest__title reveal" id="invest-title">Эффективные инвестиции <br>в солнечную энергетику</h2>
-
-    <div class="invest__grid">
-      <article class="icard icard--main reveal">
-        <!-- Фото в кружках: assets/img/invest-1.png … invest-3.png (круглые, 234×234) -->
-        <div class="icard__avatars" aria-hidden="true">
-          <span class="icard__avatar ph ph--sm"><img src="assets/img/invest-1.png" alt="" loading="lazy" onerror="this.remove()"></span>
-          <span class="icard__avatar ph ph--sm"><img src="assets/img/invest-2.png" alt="" loading="lazy" onerror="this.remove()"></span>
-          <span class="icard__avatar ph ph--sm"><img src="assets/img/invest-3.png" alt="" loading="lazy" onerror="this.remove()"></span>
-        </div>
-        <div class="icard__content">
-          <h3 class="icard__title">Инвестируйте в проекты с прозрачной экономикой</h3>
-          <p class="icard__text">Каждый проект проходит этап анализа, проектирования и реализации с учетом финансовых показателей и рисков. Мы обеспечиваем контроль на всех этапах и формируем понятную модель доходности для инвестора.</p>
-        </div>
-      </article>
-
-      <article class="icard reveal" style="--d:.08s">
-        <span class="icard__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="M12 12 19.5 4.5M16.5 4.5h3v3"/></svg>
-        </span>
-        <div class="icard__content">
-          <h3 class="icard__title">Прозрачная экономика проектов</h3>
-          <p class="icard__text">Каждый проект рассчитывается с учётом доходности, сроков окупаемости и рисков</p>
-        </div>
-      </article>
-
-      <article class="icard reveal" style="--d:.16s">
-        <span class="icard__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M4 13.5h16V20H4z" fill="currentColor"/><path d="M9.5 16.5h5" stroke="#fff"/><path d="M12 11V4M9.5 6.5 12 4l2.5 2.5M6 11V7.5M4.5 9 6 7.5 7.5 9M18 11V7.5M16.5 9 18 7.5 19.5 9"/></svg>
-        </span>
-        <div class="icard__content">
-          <h3 class="icard__title">Полное сопровождение инвестиций</h3>
-          <p class="icard__text">Берём на себя проектирование, запуск и обслуживание без участия инвестора</p>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ================= SERVICES ================= -->
-<section class="services" id="services" aria-labelledby="services-title">
-  <div class="services__wrap">
-    <p class="about__eyebrow services__eyebrow reveal">Инженерные услуги</p>
-    <h2 class="about__title services__title reveal" id="services-title">Услуги по внедрению <br><span>и обслуживанию солнечных систем</span></h2>
-
-    <!-- Фото карточек: assets/img/services-1.png, services-2…4.webp -->
-    <div class="services__grid">
-      <a class="svc reveal" href="#contacts">
-        <span class="svc__media ph ph--dark" aria-hidden="true"><img src="assets/img/services-1.png" alt="" loading="lazy" onerror="this.remove()"></span>
-        <span class="svc__body">
-          <span class="svc__text">
-            <span class="svc__label">Сервис и диагностика</span>
-            <span class="svc__title">Техническое обслуживание</span>
-          </span>
-          <span class="svc__btn" aria-hidden="true"><svg class="ic ic--xs"><use href="#i-chevron-right"/></svg></span>
-        </span>
-      </a>
-      <a class="svc svc--wide reveal" href="#contacts" style="--d:.08s">
-        <span class="svc__media ph ph--dark" aria-hidden="true"><img src="assets/img/services-2.webp" alt="" loading="lazy" onerror="this.remove()"></span>
-        <span class="svc__body">
-          <span class="svc__text">
-            <span class="svc__label">Монтаж и запуск</span>
-            <span class="svc__title">Установка солнечных панелей</span>
-          </span>
-          <span class="svc__btn" aria-hidden="true"><svg class="ic ic--xs"><use href="#i-chevron-right"/></svg></span>
-        </span>
-      </a>
-      <a class="svc svc--wide reveal" href="#contacts">
-        <span class="svc__media ph ph--dark" aria-hidden="true"><img src="assets/img/services-3.webp" alt="" loading="lazy" onerror="this.remove()"></span>
-        <span class="svc__body">
-          <span class="svc__text">
-            <span class="svc__label">Поддержание эффективности</span>
-            <span class="svc__title">Очистка солнечных панелей</span>
-          </span>
-          <span class="svc__btn" aria-hidden="true"><svg class="ic ic--xs"><use href="#i-chevron-right"/></svg></span>
-        </span>
-      </a>
-      <a class="svc reveal" href="#contacts" style="--d:.08s">
-        <span class="svc__media ph ph--dark" aria-hidden="true"><img src="assets/img/services-4.webp" alt="" loading="lazy" onerror="this.remove()"></span>
-        <span class="svc__body">
-          <span class="svc__text">
-            <span class="svc__label">Восстановление систем</span>
-            <span class="svc__title">Ремонтные услуги</span>
-          </span>
-          <span class="svc__btn" aria-hidden="true"><svg class="ic ic--xs"><use href="#i-chevron-right"/></svg></span>
-        </span>
-      </a>
-    </div>
-
-    <a class="abtn abtn--line services__all reveal" href="#services">Смотреть все услуги <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
-  </div>
-</section>
-
-<!-- ================= CONSULT ================= -->
-<section class="consult" aria-labelledby="consult-title">
+<!-- ================= OPEN APPLICATION ================= -->
+<section class="consult consult--apply" id="apply" aria-labelledby="open-title">
   <div class="consult__wrap">
     <div class="consult__box reveal">
       <!-- Фон: assets/img/consult-bg.webp (2000×557) -->
       <img class="consult__bg" src="assets/img/consult-bg.webp" alt="" loading="lazy" onerror="this.remove()">
 
-      <span class="consult__icon" aria-hidden="true">
-        <svg viewBox="0 0 32 24"><path d="M1 2.2V22a1.5 1.5 0 0 0 1.5 1.5h27A1.5 1.5 0 0 0 31 22V2.2L16 13.4Z"/><path d="M2.2.5h27.6L16 10.8Z"/></svg>
-      </span>
+      <p class="consult__eyebrow">Нет подходящей вакансии?</p>
+      <h2 class="consult__title" id="open-title">Отправьте резюме — вернёмся, <br>когда появится задача для вас</h2>
 
-      <p class="consult__eyebrow">Свяжитесь с нами</p>
-      <h2 class="consult__title" id="consult-title">Получите бесплатную <br>консультацию эксперта</h2>
-
-      <form class="consult__form js-form" novalidate>
-        <div class="field cfield">
-          <label class="sr-only" for="c-name">Ваше имя</label>
-          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя" required>
+      <form class="apply apply--wide js-form" novalidate data-apply>
+        <input type="hidden" name="vacancy" value="Отклик без вакансии">
+        <div class="field cfield apply__name">
+          <label class="sr-only" for="o-name">Ваше имя</label>
+          <input id="o-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя" required>
           <span class="field__error" role="alert"></span>
         </div>
-        <div class="field cfield">
-          <label class="sr-only" for="c-phone">Номер телефона</label>
-          <input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Номер телефона" required>
+        <div class="field cfield apply__phone">
+          <label class="sr-only" for="o-phone">Номер телефона</label>
+          <input id="o-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Номер телефона" required>
           <span class="field__error" role="alert"></span>
         </div>
-        <div class="field cfield">
-          <label class="sr-only" for="c-comment">Комментарий</label>
-          <input id="c-comment" name="comment" type="text" placeholder="Комментарий">
+        <div class="field cfield apply__mail">
+          <label class="sr-only" for="o-mail">Электронная почта</label>
+          <input id="o-mail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Электронная почта">
           <span class="field__error" role="alert"></span>
         </div>
-        <button class="consult__submit" type="submit"><span class="btn__label">Отправить</span></button>
-        <p class="form-status consult__status" role="status" aria-live="polite"></p>
+        <div class="field cfield apply__file" data-drop>
+          <input class="sr-only" id="o-file" name="resume" type="file" accept=".pdf,.doc,.docx,.rtf">
+          <label class="apply__drop" for="o-file">
+            <svg class="apply__doc" viewBox="0 0 40 48" aria-hidden="true"><path d="M6 2h19l11 11v31a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Z" pathLength="1"/><path d="M25 2v9a2 2 0 0 0 2 2h9" pathLength="1"/><path class="apply__doc-lines" d="M11 22h18M11 29h18M11 36h11" pathLength="1"/><path class="apply__doc-check" d="M12 30l6 6 11-12" pathLength="1"/></svg>
+            <span class="apply__drop-text"><b data-file-name>Прикрепить резюме</b><span data-file-hint>PDF, DOC или DOCX, до 10 МБ</span></span>
+          </label>
+          <button class="apply__clear" type="button" data-file-clear aria-label="Убрать файл" hidden><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M7 7 21 21M21 7 7 21"/></svg></button>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield apply__msg">
+          <label class="sr-only" for="o-msg">О себе</label>
+          <textarea id="o-msg" name="message" placeholder="О себе: чем занимались и что хотите делать"></textarea>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <button class="consult__submit apply__submit" type="submit"><span class="btn__label">Отправить резюме</span></button>
+        <p class="apply__note">Отправляя резюме, вы соглашаетесь с <a href="#">политикой конфиденциальности</a>.</p>
+        <p class="form-status apply__status" role="status" aria-live="polite"></p>
       </form>
-    </div>
-  </div>
-</section>
 
-<!-- ================= WHY ================= -->
-<section class="why" id="why" aria-labelledby="why-title">
-  <!-- Фото: assets/img/why.webp (солнечные панели на чёрном фоне) -->
-  <div class="why__media ph ph--dark" aria-hidden="true"><img src="assets/img/why.webp" alt="" loading="lazy" onerror="this.remove()"></div>
-  <div class="why__glow" aria-hidden="true"></div>
-
-  <div class="why__wrap">
-    <div class="why__content">
-      <p class="why__eyebrow reveal">Профессиональная экспертиза</p>
-      <h2 class="why__title reveal" id="why-title">Почему наши партнеры <br>выбирают Solar Nature</h2>
-      <p class="why__lead reveal">Мы подходим к каждому проекту как к инженерной системе: считаем эффективность, подбираем решения под задачи клиента и отвечаем за результат на всех этапах</p>
-
-      <ol class="why__list">
-        <li class="wcard reveal">
-          <h3 class="wcard__title"><span class="wcard__num">01</span>Инженерный подход</h3>
-          <p class="wcard__text">Проектируем системы с учетом нагрузки, генерации и реальной окупаемости</p>
-        </li>
-        <li class="wcard reveal" style="--d:0.08s">
-          <h3 class="wcard__title"><span class="wcard__num">02</span>Решения под ключ</h3>
-          <p class="wcard__text">Берём на себя весь цикл: от расчета до запуска и обслуживания</p>
-        </li>
-        <li class="wcard reveal" style="--d:0.16s">
-          <h3 class="wcard__title"><span class="wcard__num">03</span>Контроль результата</h3>
-          <p class="wcard__text">Отслеживаем работу системы и обеспечиваем стабильную генерацию энергии</p>
-        </li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- ================= PARTNERS ================= -->
-<section class="clients" aria-labelledby="partners-title">
-  <div class="clients__wrap">
-    <p class="clients__eyebrow reveal">Наши клиенты</p>
-    <h2 class="clients__title reveal" id="partners-title">Нам доверяют ведущие <br><span>компании рынка</span></h2>
-  </div>
-  <!-- Логотипы: assets/img/clients/<ключ>.png (цветные, на прозрачном фоне) -->
-  <div class="marquee" data-marquee>
-    <ul class="marquee__track" id="partners-1"></ul>
-  </div>
-  <div class="marquee marquee--reverse" data-marquee>
-    <ul class="marquee__track" id="partners-2"></ul>
-  </div>
-</section>
-
-<!-- ================= PROJECTS ================= -->
-<section class="projects" id="projects" aria-labelledby="projects-title">
-  <!-- Фон: assets/img/projects-bg.webp (аэрофото станции) -->
-  <div class="projects__bg ph ph--dark" aria-hidden="true"><img src="assets/img/projects-bg.webp" alt="" loading="lazy" onerror="this.remove()"></div>
-  <span class="projects__line" aria-hidden="true"></span>
-
-  <div class="projects__wrap">
-    <div class="projects__intro">
-      <p class="projects__eyebrow reveal">Наши проекты</p>
-      <h2 class="projects__title reveal" id="projects-title">Реализованные проекты <br>в солнечной энергетике</h2>
-      <div class="projects__text reveal">
-        <p>Мы реализуем проекты различного масштаба — от коммерческих объектов до промышленных решений, обеспечивая эффективность и надежность на каждом этапе.</p>
-        <p>Каждый проект разрабатывается с учетом особенностей объекта, энергопотребления и финансовых показателей, что позволяет достигать стабильной генерации энергии и прогнозируемых результатов для бизнеса.</p>
-      </div>
-      <div class="projects__actions reveal">
-        <a class="pbtn pbtn--white" href="#contacts">Получить консультацию</a>
-        <a class="pbtn pbtn--line" href="#projects">Все проекты <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+      <div class="apply-done" tabindex="-1" hidden>
+        <svg class="apply-done__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" pathLength="1"/><path d="M20 33l8.5 8.5L45 25" pathLength="1"/></svg>
+        <h3 class="apply-done__title">Резюме отправлено</h3>
+        <p class="apply-done__text">Спасибо! Мы сохранили резюме и свяжемся с вами, когда появится подходящая задача.</p>
       </div>
     </div>
-
-    <div class="pslider reveal" aria-roledescription="carousel" aria-label="Реализованные проекты">
-      <div class="pslider__viewport">
-        <div class="pslider__track" id="projects-track"></div>
-      </div>
-      <div class="pslider__foot">
-        <div class="pslider__arrows">
-          <button class="pslider__arrow" type="button" data-proj="prev" aria-label="Предыдущий проект"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
-          <button class="pslider__arrow" type="button" data-proj="next" aria-label="Следующий проект"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
-        </div>
-        <span class="pslider__counter" aria-live="polite"><span id="proj-cur">01</span><i>/</i><span id="proj-total">08</span></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= NEWS ================= -->
-<section class="news" id="news" aria-labelledby="news-title">
-  <div class="news__wrap">
-    <div class="news__head">
-      <div>
-        <p class="news__eyebrow reveal">Новости</p>
-        <h2 class="news__title reveal" id="news-title">Актуальные новости <br><span>и события компании</span></h2>
-      </div>
-      <div class="news__arrows reveal">
-        <button class="news__arrow" type="button" data-news="prev" aria-label="Предыдущие новости"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
-        <button class="news__arrow" type="button" data-news="next" aria-label="Следующие новости"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
-      </div>
-    </div>
-
-    <!-- Фото новостей: assets/img/news/news-1.webp … -->
-    <div class="news__viewport reveal">
-      <div class="news__track" id="news-track"></div>
-    </div>
-
-    <a class="news__all reveal" href="news.html">Смотреть все публикации <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
   </div>
 </section>
 
@@ -544,12 +346,12 @@
           <ul>
             <li><a href="about.html">О компании</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="#invest">Для инвесторов</a></li>
-            <li><a href="#projects">Наши проекты</a></li>
-            <li><a href="#partners-title">Партнеры</a></li>
+            <li><a href="index.html#invest">Для инвесторов</a></li>
+            <li><a href="index.html#projects">Наши проекты</a></li>
+            <li><a href="index.html#partners-title">Партнеры</a></li>
             <li><a href="calculator.html">Калькулятор</a></li>
             <li><a href="news.html">Новости</a></li>
-            <li><a href="career.html">Карьера</a></li>
+            <li><a href="career.html" aria-current="page">Карьера</a></li>
             <li><a href="contacts.html">Контакты</a></li>
           </ul>
         </div>
