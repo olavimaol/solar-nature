@@ -153,9 +153,10 @@
         </div>
         <div class="sabout__actions reveal">
           <a class="abtn abtn--dark" href="#contacts" data-modal="lead">Обсудить проект</a>
-          <a class="abtn abtn--line" href="#projects-gallery">Наши проекты <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+          <a class="abtn abtn--line" href="#projects">Наши проекты <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
         </div>
       </div>
+      <!-- Фото миссии: assets/img/about/mission-1.jpg и mission-2.jpg (813×360); пока это копии фото со страниц сервисов -->
       <div class="sabout__media">
         <figure class="sabout__img ph reveal"><img src="assets/img/about/mission-1.jpg" alt="" loading="lazy" onerror="this.remove()"></figure>
         <figure class="sabout__img ph reveal" style="--d:.08s"><img src="assets/img/about/mission-2.jpg" alt="" loading="lazy" onerror="this.remove()"></figure>
@@ -226,38 +227,37 @@
   </div>
 </section>
 
-<!-- ================= PROJECTS GALLERY ================= -->
-<section class="agal" id="projects-gallery" aria-labelledby="agal-title">
-  <div class="sabout__wrap">
-    <div class="news__head">
-      <div>
-        <p class="news__eyebrow reveal">Наши проекты</p>
-        <h2 class="news__title reveal" id="agal-title">Реализованные проекты <br><span>в фотографиях</span></h2>
+<!-- ================= PROJECTS ================= -->
+<section class="projects" id="projects" aria-labelledby="projects-title">
+  <!-- Фон: assets/img/projects-bg.webp (аэрофото станции) -->
+  <div class="projects__bg ph ph--dark" aria-hidden="true"><img src="assets/img/projects-bg.webp" alt="" loading="lazy" onerror="this.remove()"></div>
+  <span class="projects__line" aria-hidden="true"></span>
+
+  <div class="projects__wrap">
+    <div class="projects__intro">
+      <p class="projects__eyebrow reveal">Наши проекты</p>
+      <h2 class="projects__title reveal" id="projects-title">Реализованные проекты <br>в солнечной энергетике</h2>
+      <div class="projects__text reveal">
+        <p>Мы реализуем проекты различного масштаба — от коммерческих объектов до промышленных решений, обеспечивая эффективность и надежность на каждом этапе.</p>
+        <p>Каждый проект разрабатывается с учетом особенностей объекта, энергопотребления и финансовых показателей, что позволяет достигать стабильной генерации энергии и прогнозируемых результатов для бизнеса.</p>
       </div>
-      <a class="abtn abtn--line reveal" href="projects.html">Все проекты <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+      <div class="projects__actions reveal">
+        <a class="pbtn pbtn--white" href="#contacts">Получить консультацию</a>
+        <a class="pbtn pbtn--line" href="projects.html">Все проекты <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+      </div>
     </div>
-    <!-- Фото проектов: assets/img/about/project-1.jpg … project-5.jpg -->
-    <div class="agal__grid">
-      <figure class="agal__item agal__item--lg ph ph--dark reveal">
-        <img src="assets/img/about/project-1.jpg" alt="Промышленная СЭС, Ташкентская область" loading="lazy" onerror="this.remove()">
-        <figcaption class="agal__cap"><span class="agal__power">520 кВт</span><span class="agal__name">Промышленная СЭС, Ташкентская область</span></figcaption>
-      </figure>
-      <figure class="agal__item ph ph--dark reveal" style="--d:0.05s">
-        <img src="assets/img/about/project-2.jpg" alt="Агрокомплекс, Навоийская область" loading="lazy" onerror="this.remove()">
-        <figcaption class="agal__cap"><span class="agal__power">410 кВт</span><span class="agal__name">Агрокомплекс, Навоийская область</span></figcaption>
-      </figure>
-      <figure class="agal__item ph ph--dark reveal" style="--d:0.1s">
-        <img src="assets/img/about/project-3.jpg" alt="Торговый центр, Самарканд" loading="lazy" onerror="this.remove()">
-        <figcaption class="agal__cap"><span class="agal__power">180 кВт</span><span class="agal__name">Торговый центр, Самарканд</span></figcaption>
-      </figure>
-      <figure class="agal__item ph ph--dark reveal" style="--d:0.15s">
-        <img src="assets/img/about/project-4.jpg" alt="Логистический комплекс, Ташкент" loading="lazy" onerror="this.remove()">
-        <figcaption class="agal__cap"><span class="agal__power">740 кВт</span><span class="agal__name">Логистический комплекс, Ташкент</span></figcaption>
-      </figure>
-      <figure class="agal__item ph ph--dark reveal" style="--d:0.2s">
-        <img src="assets/img/about/project-5.jpg" alt="Текстильная фабрика, Фергана" loading="lazy" onerror="this.remove()">
-        <figcaption class="agal__cap"><span class="agal__power">350 кВт</span><span class="agal__name">Текстильная фабрика, Фергана</span></figcaption>
-      </figure>
+
+    <div class="pslider reveal" aria-roledescription="carousel" aria-label="Реализованные проекты">
+      <div class="pslider__viewport">
+        <div class="pslider__track" id="projects-track"></div>
+      </div>
+      <div class="pslider__foot">
+        <div class="pslider__arrows">
+          <button class="pslider__arrow" type="button" data-proj="prev" aria-label="Предыдущий проект"><svg class="ic" aria-hidden="true"><use href="#i-chevron-left"/></svg></button>
+          <button class="pslider__arrow" type="button" data-proj="next" aria-label="Следующий проект"><svg class="ic" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+        </div>
+        <span class="pslider__counter" aria-live="polite"><span id="proj-cur">01</span><i>/</i><span id="proj-total">08</span></span>
+      </div>
     </div>
   </div>
 </section>

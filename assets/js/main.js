@@ -14,17 +14,17 @@
   // Проекты: пока у всех одно фото и один логотип — assets/img/projects/project.webp и logo.png.
   // Своё фото или логотип проекта можно задать полями photo и logo.
   // Слайд 1 взят из макета, остальные — шаблонные данные для замены.
-  // Для страницы проектов: kw — мощность числом (по ней работает фильтр), type — industrial или commercial,
-  // at — долгота и широта объекта для карты, demo — временное фото, пока у проекта нет своего (photo).
+  // Для страницы проектов: kw — мощность числом (по ней работает фильтр; если поля нет, число берётся из power),
+  // type — industrial или commercial, demo — временное фото, пока у проекта нет своего (photo).
   const projects = [
-    { kw: 285, type: 'industrial', at: [69.78, 41.2], demo: 'assets/img/projects/project.webp', title: 'ACWA Power Riverside', client: 'ACWA POWER', power: '285 КВт', gen: '354 МВтч', text: 'Компания Solar Nature подписала контракт на установку солнечных панелей мощностью 30 МВт, системы слежения и прокладку кабелей для проекта ACWA POWER мощностью 200 МВт в Риверсайде.' },
-    { kw: 520, type: 'industrial', at: [69.23, 40.24], demo: 'assets/img/solutions/ground-hero.jpg', title: 'Промышленная СЭС, Ташкентская область', client: 'Клиент', power: '520 КВт', gen: '690 МВтч', text: 'Наземная станция для производственного предприятия: проектирование, поставка оборудования, монтаж и подключение к сети.' },
-    { kw: 410, type: 'industrial', at: [65.38, 40.1], demo: 'assets/img/solutions/legal-about-1.jpg', title: 'Агрокомплекс, Навоийская область', client: 'Клиент', power: '410 КВт', gen: '545 МВтч', text: 'Солнечная электростанция для тепличного хозяйства с системой мониторинга генерации в реальном времени.' },
-    { kw: 180, type: 'commercial', at: [66.96, 39.65], demo: 'assets/img/solutions/feasibility-hero.jpg', title: 'Торговый центр, Самарканд', client: 'Клиент', power: '180 КВт', gen: '236 МВтч', text: 'Кровельная станция, покрывающая до 35% дневного потребления торгового центра.' },
-    { kw: 740, type: 'commercial', at: [69.2, 41.36], demo: 'assets/img/services/assets-about-1.jpg', title: 'Логистический комплекс, Ташкент', client: 'Клиент', power: '740 КВт', gen: '980 МВтч', text: 'Монтаж панелей на кровле складов площадью 12 000 м² без остановки работы комплекса.' },
-    { kw: 350, type: 'industrial', at: [71.78, 40.38], demo: 'assets/img/solutions/bess-about-1.jpg', title: 'Текстильная фабрика, Фергана', client: 'Клиент', power: '350 КВт', gen: '460 МВтч', text: 'Сетевая станция с системой накопления энергии для стабильной работы оборудования в пиковые часы.' },
-    { kw: 120, type: 'commercial', at: [64.42, 39.77], demo: 'assets/img/solutions/diesel-hero.jpg', title: 'Бизнес-центр, Бухара', client: 'Клиент', power: '120 КВт', gen: '158 МВтч', text: 'Фасадные и кровельные панели, интегрированные в архитектуру здания.' },
-    { kw: 60, type: 'commercial', at: [60.36, 41.38], demo: 'assets/img/solutions/ppa-hero.jpg', title: 'Гостиница, Хива', client: 'Клиент', power: '60 КВт', gen: '79 МВтч', text: 'Гибридная станция с аккумуляторами: гостиница работает без перебоев при отключениях сети.' },
+    { kw: 285, type: 'industrial', demo: 'assets/img/projects/project.webp', title: 'ACWA Power Riverside', client: 'ACWA POWER', power: '285 КВт', gen: '354 МВтч', text: 'Компания Solar Nature подписала контракт на установку солнечных панелей мощностью 30 МВт, системы слежения и прокладку кабелей для проекта ACWA POWER мощностью 200 МВт в Риверсайде.' },
+    { kw: 520, type: 'industrial', demo: 'assets/img/solutions/ground-hero.jpg', title: 'Промышленная СЭС, Ташкентская область', client: 'Клиент', power: '520 КВт', gen: '690 МВтч', text: 'Наземная станция для производственного предприятия: проектирование, поставка оборудования, монтаж и подключение к сети.' },
+    { kw: 410, type: 'industrial', demo: 'assets/img/solutions/legal-about-1.jpg', title: 'Агрокомплекс, Навоийская область', client: 'Клиент', power: '410 КВт', gen: '545 МВтч', text: 'Солнечная электростанция для тепличного хозяйства с системой мониторинга генерации в реальном времени.' },
+    { kw: 180, type: 'commercial', demo: 'assets/img/solutions/feasibility-hero.jpg', title: 'Торговый центр, Самарканд', client: 'Клиент', power: '180 КВт', gen: '236 МВтч', text: 'Кровельная станция, покрывающая до 35% дневного потребления торгового центра.' },
+    { kw: 740, type: 'commercial', demo: 'assets/img/services/assets-about-1.jpg', title: 'Логистический комплекс, Ташкент', client: 'Клиент', power: '740 КВт', gen: '980 МВтч', text: 'Монтаж панелей на кровле складов площадью 12 000 м² без остановки работы комплекса.' },
+    { kw: 350, type: 'industrial', demo: 'assets/img/solutions/bess-about-1.jpg', title: 'Текстильная фабрика, Фергана', client: 'Клиент', power: '350 КВт', gen: '460 МВтч', text: 'Сетевая станция с системой накопления энергии для стабильной работы оборудования в пиковые часы.' },
+    { kw: 120, type: 'commercial', demo: 'assets/img/solutions/diesel-hero.jpg', title: 'Бизнес-центр, Бухара', client: 'Клиент', power: '120 КВт', gen: '158 МВтч', text: 'Фасадные и кровельные панели, интегрированные в архитектуру здания.' },
+    { kw: 60, type: 'commercial', demo: 'assets/img/solutions/ppa-hero.jpg', title: 'Гостиница, Хива', client: 'Клиент', power: '60 КВт', gen: '79 МВтч', text: 'Гибридная станция с аккумуляторами: гостиница работает без перебоев при отключениях сети.' },
   ];
 
   // Новости: первые три взяты из макета, остальные — шаблонные для замены.
@@ -111,6 +111,9 @@
       reqs: ['Опыт управления строительными или энергетическими проектами от 4 лет', 'Понимание этапов строительства электроустановок', 'Навыки работы с графиками и бюджетами проектов', 'Готовность к поездкам на объекты'],
     },
   ];
+
+  // Its power as a number: the kw field, or the figure from the power caption («285 КВт» → 285)
+  const kwOf = (p) => (Number.isFinite(p.kw) ? p.kw : parseFloat(String(p.power || '').replace(/\s/g, '').replace(',', '.')) || 0);
 
   // Клиенты: логотипы — assets/img/clients/<ключ>.png. Пока файла нет, в карточке выводится название.
   const clientsRow1 = [
@@ -991,18 +994,14 @@
       big: ['500+ кВт', (kw) => kw > 500],
     };
     const photoOf = (p) => p.photo || p.demo || 'assets/img/projects/project.webp';
-    const goTo = (el) => {
-      const y = el.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 24;
-      window.scrollTo({ top: y, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-    };
 
     folio.innerHTML = projects.map((p, i) => `
       <li class="prow" id="project-${i + 1}">
         <h3 class="prow__head">
           <button class="prow__toggle" type="button" aria-expanded="false" aria-controls="project-${i + 1}-more">
-            <span class="prow__kw"><b>${num(p.kw)}</b> кВт</span>
+            <span class="prow__kw"><b>${num(kwOf(p))}</b> кВт</span>
             <span class="prow__title">${p.title}</span>
-            <span class="prow__type">${TYPES[p.type]}</span>
+            <span class="prow__type">${TYPES[p.type] || ''}</span>
             <span class="prow__plus" aria-hidden="true"></span>
           </button>
         </h3>
@@ -1012,9 +1011,9 @@
             <div class="prow__body">
               <p class="prow__text">${p.text}</p>
               <dl class="prow__stats">
-                <div><dt>Мощность</dt><dd>${num(p.kw)} кВт</dd></div>
-                <div><dt>Годовая генерация</dt><dd>${p.gen.replace('МВтч', 'МВт·ч')}</dd></div>
-                <div><dt>Тип объекта</dt><dd>${TYPES[p.type]}</dd></div>
+                <div><dt>Мощность</dt><dd>${num(kwOf(p))} кВт</dd></div>
+                ${p.gen ? `<div><dt>Годовая генерация</dt><dd>${p.gen.replace('МВтч', 'МВт·ч')}</dd></div>` : ''}
+                ${TYPES[p.type] ? `<div><dt>Тип объекта</dt><dd>${TYPES[p.type]}</dd></div>` : ''}
               </dl>
               <a class="abtn abtn--dark" href="#contacts" data-modal="lead" data-modal-subject="Тема: проект, похожий на «${p.title}»">Обсудить похожий проект ${icon('i-chevron-right', 'ic ic--xs')}</a>
             </div>
@@ -1032,9 +1031,8 @@
       if (btn) setOpen(btn.closest('.prow'), btn.getAttribute('aria-expanded') !== 'true');
     });
 
-    /* Map: the country is laid out in dots, a wave runs over it from Tashkent and the objects light up */
+    /* Map: the country is laid out in dots, and a wave runs over it from Tashkent */
     const map = $('[data-map]');
-    let points = [];
     if (map) {
       // Упрощённая граница Узбекистана: долгота, широта
       const BORDER = [[66.52, 37.36], [66.55, 37.97], [65.22, 38.4], [64.17, 38.89], [63.52, 39.36], [62.37, 40.05], [61.88, 41.08], [61.55, 41.27], [60.47, 41.22], [60.08, 41.43], [59.98, 42.22], [58.63, 42.75], [57.79, 42.17], [56.93, 41.83], [57.1, 41.32], [55.97, 41.31], [55.93, 45], [58.5, 45.59], [58.69, 45.5], [60.24, 44.78], [61.06, 44.41], [62.01, 43.5], [63.19, 43.65], [64.9, 43.73], [66.1, 43], [66.02, 41.99], [66.51, 41.99], [66.71, 41.17], [67.99, 41.14], [68.26, 40.66], [68.63, 40.67], [69.07, 41.38], [70.39, 42.08], [70.96, 42.27], [71.26, 42.17], [70.42, 41.52], [71.16, 41.14], [71.87, 41.39], [73.06, 40.87], [71.77, 40.15], [71.01, 40.24], [70.6, 40.22], [70.46, 40.5], [70.67, 40.96], [69.33, 40.73], [69.01, 40.09], [68.54, 39.53], [67.7, 39.58], [67.44, 39.14], [68.18, 38.9], [68.39, 38.16], [67.83, 37.14], [67.08, 37.36]];
@@ -1067,29 +1065,15 @@
         }
       }
       map.style.aspectRatio = `${W} / ${H}`;
-      map.insertAdjacentHTML('beforeend', `<svg class="pmap__svg" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false">${dots}</svg>`
-        + projects.map((p, i) => {
-          const [x, y] = at(p.at);
-          const size = Math.round(10 + Math.sqrt(p.kw / 800) * 11);
-          return `<button class="mpoint${x / W > .6 ? ' mpoint--left' : ''}" type="button" data-i="${i}" style="--x:${(x / W * 100).toFixed(2)}%;--y:${(y / H * 100).toFixed(2)}%;--size:${size}px;--d:${(Math.hypot(x - ox, y - oy) / far).toFixed(3)};--k:${i}" aria-label="${p.title}, ${num(p.kw)} кВт">`
-            + `<span class="mpoint__dot"></span><span class="mpoint__tip" aria-hidden="true"><b>${p.title}</b><span>${TYPES[p.type]}, ${num(p.kw)} кВт</span></span></button>`;
-        }).join(''));
-      points = $$('.mpoint', map);
-      map.addEventListener('click', (e) => {
-        const point = e.target.closest('.mpoint');
-        if (!point) return;
-        const row = rows[Number(point.dataset.i)];
-        setOpen(row, true);
-        goTo(row);
-        $('.prow__toggle', row).focus({ preventScroll: true });
-      });
-      // The points breathe only while the map is on screen
+      map.insertAdjacentHTML('beforeend', `<svg class="pmap__svg" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false">${dots}</svg>`);
+      // The wave runs once the map is on screen
       if ('IntersectionObserver' in window && !reduceMotion.matches) {
-        new IntersectionObserver((entries) => {
-          const seen = entries[entries.length - 1].isIntersecting;
-          if (seen) map.classList.add('is-on');
-          map.classList.toggle('is-live', seen);
-        }, { threshold: 0.25 }).observe(map);
+        const io = new IntersectionObserver((entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          io.disconnect();
+          map.classList.add('is-on');
+        }, { threshold: 0.25 });
+        io.observe(map);
       } else {
         map.classList.add('is-on');
       }
@@ -1108,7 +1092,7 @@
       power: RANGES[query.get('power')] ? query.get('power') : 'all',
       type: TYPES[query.get('type')] ? query.get('type') : 'all',
     };
-    const fits = (p) => (chosen.power === 'all' || RANGES[chosen.power][1](p.kw)) && (chosen.type === 'all' || p.type === chosen.type);
+    const fits = (p) => (chosen.power === 'all' || RANGES[chosen.power][1](kwOf(p))) && (chosen.type === 'all' || p.type === chosen.type);
     const applyFilter = (first = false) => {
       let n = 0;
       let sum = 0;
@@ -1116,11 +1100,10 @@
         const ok = fits(projects[i]);
         if (!ok) setOpen(row, false);
         row.hidden = !ok;
-        if (points[i]) points[i].classList.toggle('is-off', !ok);
         if (!ok) return;
         row.style.setProperty('--n', n);
         n += 1;
-        sum += projects[i].kw;
+        sum += kwOf(projects[i]);
       });
       chips.forEach((c) => c.setAttribute('aria-pressed', String(chosen[c.dataset.group] === c.dataset.key)));
       const word = plural(n, ['проект', 'проекта', 'проектов']);
