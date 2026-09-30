@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Контакты — Solar Nature</title>
-  <meta name="description" content="Контакты Solar Nature: телефон +998 78 113-65-00, info@solarnature.uz, адрес в Ташкенте и форма обратной связи.">
+  <title>Проекты — Solar Nature</title>
+  <meta name="description" content="Реализованные проекты Solar Nature: промышленные и коммерческие солнечные электростанции в Узбекистане. Фильтр по мощности и типу объекта.">
   <meta name="theme-color" content="#0a0d0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +94,7 @@
           </ul>
         </li>
         <li class="nav__item"><a class="nav__link" href="investors.html">Для инвесторов</a></li>
-        <li class="nav__item"><a class="nav__link" href="contacts.html" aria-current="page">Контакты</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
         <li class="nav__item nav__item--drop">
           <button class="nav__link" type="button" aria-expanded="false" aria-label="Язык сайта: русский">RU <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
           <ul class="drop drop--sm">
@@ -123,16 +123,90 @@
 <main id="main">
 
 <!-- ================= PAGE HERO ================= -->
-<section class="phero phero--black" aria-labelledby="page-title">
+<section class="phero phero--folio" aria-labelledby="page-title">
   <div class="phero__inner">
     <nav class="crumbs" aria-label="Хлебные крошки">
       <ol>
         <li><a href="index.html">Главная</a></li>
-        <li><span aria-current="page">Контакты</span></li>
+        <li><span aria-current="page">Проекты</span></li>
       </ol>
     </nav>
-    <p class="phero__eyebrow">Свяжитесь с нами</p>
-    <h1 class="phero__title" id="page-title">Наши контакты</h1>
+    <div class="fhero">
+      <div class="fhero__text">
+        <p class="phero__eyebrow">Наши проекты</p>
+        <h1 class="phero__title" id="page-title">Реализованные проекты <br>в солнечной энергетике</h1>
+        <p class="fhero__lead">Мы реализуем проекты различного масштаба — от коммерческих объектов до промышленных решений, обеспечивая эффективность и надежность на каждом этапе.</p>
+      </div>
+      <!-- Карту из точек и объекты на ней рисует скрипт (assets/js/main.js, блок «Projects page»).
+           Контур страны условный: он собран из точек по упрощённой границе -->
+      <div class="pmap" data-map>
+        <p class="pmap__note">География проектов</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PORTFOLIO ================= -->
+<section class="folio" id="portfolio" aria-labelledby="folio-title">
+  <div class="folio__wrap">
+    <div class="folio__bar">
+      <div>
+        <p class="folio__eyebrow reveal">Портфолио</p>
+        <h2 class="folio__title reveal" id="folio-title">Все проекты</h2>
+      </div>
+      <!-- Фильтры по мощности и типу объекта; кнопки собирает скрипт -->
+      <div class="pfilter reveal" id="folio-filter"></div>
+    </div>
+
+    <p class="folio__count" aria-live="polite">
+      <span class="sr-only" id="folio-say"></span>
+      <span aria-hidden="true">В списке <b class="odo" data-odo="count"></b> <span id="folio-word">проектов</span><span class="folio__sum"> общей мощностью <b class="odo" data-odo="sum"></b> кВт</span></span>
+    </p>
+
+    <!-- Список собирает скрипт из массива projects (assets/js/main.js) -->
+    <ul class="folio__list" id="portfolio-list"></ul>
+    <div class="folio__empty" id="folio-empty" hidden>
+      <p>Проектов с такими параметрами пока нет.</p>
+      <button class="abtn abtn--line" type="button" data-folio-reset>Показать все проекты</button>
+    </div>
+    <noscript><p class="folio__empty">Список проектов открывается со включённым JavaScript.</p></noscript>
+  </div>
+</section>
+
+<!-- ================= CONSULT ================= -->
+<section class="consult" aria-labelledby="consult-title">
+  <div class="consult__wrap">
+    <div class="consult__box reveal">
+      <!-- Фон: assets/img/consult-bg.webp (2000×557) -->
+      <img class="consult__bg" src="assets/img/consult-bg.webp" alt="" loading="lazy" onerror="this.remove()">
+
+      <span class="consult__icon" aria-hidden="true">
+        <svg viewBox="0 0 32 24"><path d="M1 2.2V22a1.5 1.5 0 0 0 1.5 1.5h27A1.5 1.5 0 0 0 31 22V2.2L16 13.4Z"/><path d="M2.2.5h27.6L16 10.8Z"/></svg>
+      </span>
+
+      <p class="consult__eyebrow">Свяжитесь с нами</p>
+      <h2 class="consult__title" id="consult-title">Получите бесплатную <br>консультацию эксперта</h2>
+
+      <form class="consult__form js-form" novalidate>
+        <div class="field cfield">
+          <label class="sr-only" for="c-name">Ваше имя</label>
+          <input id="c-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield">
+          <label class="sr-only" for="c-phone">Номер телефона</label>
+          <input id="c-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Номер телефона" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield">
+          <label class="sr-only" for="c-comment">Комментарий</label>
+          <input id="c-comment" name="comment" type="text" placeholder="Комментарий">
+          <span class="field__error" role="alert"></span>
+        </div>
+        <button class="consult__submit" type="submit"><span class="btn__label">Отправить</span></button>
+        <p class="form-status consult__status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
   </div>
 </section>
 
@@ -229,7 +303,7 @@
             <li><a href="about.html">О компании</a></li>
             <li><a href="catalog.html">Каталог</a></li>
             <li><a href="investors.html">Для инвесторов</a></li>
-            <li><a href="projects.html">Наши проекты</a></li>
+            <li><a href="projects.html" aria-current="page">Наши проекты</a></li>
             <li><a href="index.html#partners-title">Партнеры</a></li>
             <li><a href="calculator.html">Калькулятор</a></li>
             <li><a href="news.html">Новости</a></li>

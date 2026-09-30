@@ -93,7 +93,7 @@
             <li><a href="service.html?s=grid">Документация для подключения к электросети</a></li>
           </ul>
         </li>
-        <li class="nav__item"><a class="nav__link" href="index.html#invest">Для инвесторов</a></li>
+        <li class="nav__item"><a class="nav__link" href="investors.html">Для инвесторов</a></li>
         <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
         <li class="nav__item nav__item--drop">
           <button class="nav__link" type="button" aria-expanded="false" aria-label="Язык сайта: русский">RU <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
@@ -135,11 +135,11 @@
       <div class="chero__text">
         <p class="phero__eyebrow">Карьера</p>
         <h1 class="phero__title" id="page-title">Найдите своё место <br>в команде Solar Nature</h1>
-        <p class="chero__lead">С 2014 года мы проектируем, строим и обслуживаем солнечные электростанции по всему Узбекистану. На чертеже — наша команда: светящиеся модули заняты, свободные ждут вас.</p>
+        <p class="chero__lead">С 2014 года мы проектируем, строим и обслуживаем солнечные электростанции по всему Узбекистану. Приглашаем в команду инженеров, монтажников и менеджеров проектов.</p>
         <a class="pbtn pbtn--white chero__btn" href="#vacancies">Смотреть вакансии <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-down"/></svg></a>
       </div>
-      <!-- Чертёж команды рисует скрипт (assets/js/main.js, блок «Career page»): свободные модули — открытые вакансии -->
-      <div class="chero__team" data-team aria-hidden="true"></div>
+      <!-- Чертёж панели рисует скрипт (assets/js/main.js, блоки «Line art» и «Career page») -->
+      <div class="chero__panel" data-panel aria-hidden="true"></div>
     </div>
   </div>
 </section>
@@ -346,8 +346,8 @@
           <ul>
             <li><a href="about.html">О компании</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="index.html#invest">Для инвесторов</a></li>
-            <li><a href="index.html#projects">Наши проекты</a></li>
+            <li><a href="investors.html">Для инвесторов</a></li>
+            <li><a href="projects.html">Наши проекты</a></li>
             <li><a href="index.html#partners-title">Партнеры</a></li>
             <li><a href="calculator.html">Калькулятор</a></li>
             <li><a href="news.html">Новости</a></li>
@@ -402,8 +402,8 @@
 
 <!-- ================= LEAD MODAL ================= -->
 <dialog class="lead-modal" id="lead-modal" aria-labelledby="lead-modal-title">
-  <!-- Фон окна: assets/img/modal-bg.jpg (рекомендуемо 1620×1050) -->
-  <img class="lead-modal__bg" src="assets/img/modal-bg.jpg" alt="" loading="lazy" onerror="this.remove()">
+  <!-- Фон окна — как у формы обратной связи: градиент и сетка assets/img/contact-grid.png -->
+  <img class="lead-modal__bg" src="assets/img/contact-grid.png" alt="" loading="lazy" onerror="this.remove()">
   <button class="lead-modal__close" type="button" data-modal-close aria-label="Закрыть окно">
     <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M2 2 26 26M26 2 2 26"/></svg>
   </button>

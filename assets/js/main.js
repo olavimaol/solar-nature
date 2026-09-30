@@ -14,15 +14,17 @@
   // Проекты: пока у всех одно фото и один логотип — assets/img/projects/project.webp и logo.png.
   // Своё фото или логотип проекта можно задать полями photo и logo.
   // Слайд 1 взят из макета, остальные — шаблонные данные для замены.
+  // Для страницы проектов: kw — мощность числом (по ней работает фильтр), type — industrial или commercial,
+  // at — долгота и широта объекта для карты, demo — временное фото, пока у проекта нет своего (photo).
   const projects = [
-    { title: 'ACWA Power Riverside', client: 'ACWA POWER', power: '285 КВт', gen: '354 МВтч', text: 'Компания Solar Nature подписала контракт на установку солнечных панелей мощностью 30 МВт, системы слежения и прокладку кабелей для проекта ACWA POWER мощностью 200 МВт в Риверсайде.' },
-    { title: 'Промышленная СЭС, Ташкентская область', client: 'Клиент', power: '520 КВт', gen: '690 МВтч', text: 'Наземная станция для производственного предприятия: проектирование, поставка оборудования, монтаж и подключение к сети.' },
-    { title: 'Агрокомплекс, Навоийская область', client: 'Клиент', power: '410 КВт', gen: '545 МВтч', text: 'Солнечная электростанция для тепличного хозяйства с системой мониторинга генерации в реальном времени.' },
-    { title: 'Торговый центр, Самарканд', client: 'Клиент', power: '180 КВт', gen: '236 МВтч', text: 'Кровельная станция, покрывающая до 35% дневного потребления торгового центра.' },
-    { title: 'Логистический комплекс, Ташкент', client: 'Клиент', power: '740 КВт', gen: '980 МВтч', text: 'Монтаж панелей на кровле складов площадью 12 000 м² без остановки работы комплекса.' },
-    { title: 'Текстильная фабрика, Фергана', client: 'Клиент', power: '350 КВт', gen: '460 МВтч', text: 'Сетевая станция с системой накопления энергии для стабильной работы оборудования в пиковые часы.' },
-    { title: 'Бизнес-центр, Бухара', client: 'Клиент', power: '120 КВт', gen: '158 МВтч', text: 'Фасадные и кровельные панели, интегрированные в архитектуру здания.' },
-    { title: 'Частная резиденция, Ташкентская область', client: 'Клиент', power: '25 КВт', gen: '33 МВтч', text: 'Гибридная система с аккумуляторами для автономного энергоснабжения загородного дома.' },
+    { kw: 285, type: 'industrial', at: [69.78, 41.2], demo: 'assets/img/projects/project.webp', title: 'ACWA Power Riverside', client: 'ACWA POWER', power: '285 КВт', gen: '354 МВтч', text: 'Компания Solar Nature подписала контракт на установку солнечных панелей мощностью 30 МВт, системы слежения и прокладку кабелей для проекта ACWA POWER мощностью 200 МВт в Риверсайде.' },
+    { kw: 520, type: 'industrial', at: [69.23, 40.24], demo: 'assets/img/solutions/ground-hero.jpg', title: 'Промышленная СЭС, Ташкентская область', client: 'Клиент', power: '520 КВт', gen: '690 МВтч', text: 'Наземная станция для производственного предприятия: проектирование, поставка оборудования, монтаж и подключение к сети.' },
+    { kw: 410, type: 'industrial', at: [65.38, 40.1], demo: 'assets/img/solutions/legal-about-1.jpg', title: 'Агрокомплекс, Навоийская область', client: 'Клиент', power: '410 КВт', gen: '545 МВтч', text: 'Солнечная электростанция для тепличного хозяйства с системой мониторинга генерации в реальном времени.' },
+    { kw: 180, type: 'commercial', at: [66.96, 39.65], demo: 'assets/img/solutions/feasibility-hero.jpg', title: 'Торговый центр, Самарканд', client: 'Клиент', power: '180 КВт', gen: '236 МВтч', text: 'Кровельная станция, покрывающая до 35% дневного потребления торгового центра.' },
+    { kw: 740, type: 'commercial', at: [69.2, 41.36], demo: 'assets/img/services/assets-about-1.jpg', title: 'Логистический комплекс, Ташкент', client: 'Клиент', power: '740 КВт', gen: '980 МВтч', text: 'Монтаж панелей на кровле складов площадью 12 000 м² без остановки работы комплекса.' },
+    { kw: 350, type: 'industrial', at: [71.78, 40.38], demo: 'assets/img/solutions/bess-about-1.jpg', title: 'Текстильная фабрика, Фергана', client: 'Клиент', power: '350 КВт', gen: '460 МВтч', text: 'Сетевая станция с системой накопления энергии для стабильной работы оборудования в пиковые часы.' },
+    { kw: 120, type: 'commercial', at: [64.42, 39.77], demo: 'assets/img/solutions/diesel-hero.jpg', title: 'Бизнес-центр, Бухара', client: 'Клиент', power: '120 КВт', gen: '158 МВтч', text: 'Фасадные и кровельные панели, интегрированные в архитектуру здания.' },
+    { kw: 60, type: 'commercial', at: [60.36, 41.38], demo: 'assets/img/solutions/ppa-hero.jpg', title: 'Гостиница, Хива', client: 'Клиент', power: '60 КВт', gen: '79 МВтч', text: 'Гибридная станция с аккумуляторами: гостиница работает без перебоев при отключениях сети.' },
   ];
 
   // Новости: первые три взяты из макета, остальные — шаблонные для замены.
@@ -128,7 +130,6 @@
     return a >= 2 && a <= 4 && (b < 12 || b > 14) ? few : many;
   };
   const goods = (n) => `${n} ${plural(n, ['товар', 'товара', 'товаров'])}`;
-  const jobs = (n) => `${n} ${plural(n, ['вакансия', 'вакансии', 'вакансий'])}`;
 
   /* ---------- Line art ----------
      Technical drawings of the four catalog sections and of the house they power. They make up the station
@@ -318,6 +319,19 @@
     const openDrop = dropItems.find((i) => i.classList.contains('is-open'));
     if (openDrop) { closeDrops(); toggleOf(openDrop).focus(); return; }
     if (nav.classList.contains('is-open')) { setMenu(false); burger.focus(); }
+  });
+
+  /* ---------- Back from another page ---------- */
+  // A page restored from the back/forward cache keeps its open menus and the focus on the link that was clicked.
+  // After a click or a tap they are dropped; a keyboard user gets the focus back where it was
+  let lastInput = 'pointer';
+  document.addEventListener('pointerdown', () => { lastInput = 'pointer'; }, true);
+  document.addEventListener('keydown', () => { lastInput = 'key'; }, true);
+  window.addEventListener('pageshow', (e) => {
+    if (!e.persisted) return;
+    closeDrops();
+    setMenu(false);
+    if (lastInput === 'pointer' && document.activeElement && document.activeElement !== document.body) document.activeElement.blur();
   });
 
   /* ---------- Hero slider ---------- */
@@ -836,6 +850,10 @@
     $$('[data-srv]').forEach((el) => { if (srv[el.dataset.srv]) el.textContent = srv[el.dataset.srv]; });
     $$('[data-srv-html]').forEach((el) => { if (srv[el.dataset.srvHtml]) el.innerHTML = srv[el.dataset.srvHtml]; });
     $$('[data-srv-img]').forEach((img) => { img.src = `assets/img/services/${key}-${img.dataset.srvImg}.jpg`; });
+    // Широкое фото: своё у сервиса, если оно есть в ownWide, иначе общее wide.webp
+    const ownWide = ['assets', 'audit', 'training', 'monitoring', 'scada', 'digital', 'design', 'grid'];
+    const wide = $('[data-srv-wide]');
+    if (wide && ownWide.includes(key)) wide.src = `assets/img/services/${key}-wide.jpg`;
     document.title = `${srv.name} — Solar Nature`;
     $$(`.drop a[href="service.html?s=${key}"]`).forEach((a) => a.setAttribute('aria-current', 'page'));
   }
@@ -932,6 +950,366 @@
     }).join('');
   }
 
+  /* ---------- Rolling number ----------
+     Every digit is a column 0…9 that rolls to its place, like on a meter. */
+  const num = (n) => Math.round(n).toLocaleString('ru-RU').replace(/\s/g, ' ');
+  const rollTo = (el, value, plain = false) => {
+    const text = plain ? String(Math.round(value)) : num(value);
+    if (el.dataset.now === text) return;
+    const old = [...(el.dataset.now || '')].reverse();
+    el.dataset.now = text;
+    const strip = '0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9';
+    const cols = [...text].reverse().map((ch, i) => (/\d/.test(ch)
+      ? `<span class="odo__col" style="--from:${/\d/.test(old[i] || '') ? old[i] : 0};--to:${ch};--i:${i}"><span class="odo__strip">${strip}</span></span>`
+      : '<span class="odo__gap"></span>')).reverse().join('');
+    el.classList.remove('is-rolled');
+    el.innerHTML = `<span class="sr-only">${text}</span><span class="odo__cols" aria-hidden="true">${cols}</span>`;
+    void el.offsetWidth; // the columns stand at the old digits for a moment, then roll
+    el.classList.add('is-rolled');
+  };
+  // Numbers that roll once, when they come into view
+  $$('[data-odo-to]').forEach((el) => {
+    const plain = el.hasAttribute('data-odo-plain');
+    const show = () => rollTo(el, Number(el.dataset.odoTo), plain);
+    if (!('IntersectionObserver' in window)) { show(); return; }
+    const io = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      io.disconnect();
+      show();
+    }, { threshold: 0.6 });
+    io.observe(el);
+  });
+
+  /* ---------- Projects page: map, filters and the list ---------- */
+  const folio = $('#portfolio-list');
+  if (folio) {
+    // Фильтры страницы проектов: тип объекта и диапазон мощности, кВт
+    const TYPES = { industrial: 'Промышленный', commercial: 'Коммерческий' };
+    const RANGES = {
+      small: ['до 100 кВт', (kw) => kw < 100],
+      mid: ['100–500 кВт', (kw) => kw >= 100 && kw <= 500],
+      big: ['500+ кВт', (kw) => kw > 500],
+    };
+    const photoOf = (p) => p.photo || p.demo || 'assets/img/projects/project.webp';
+    const goTo = (el) => {
+      const y = el.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 24;
+      window.scrollTo({ top: y, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+    };
+
+    folio.innerHTML = projects.map((p, i) => `
+      <li class="prow" id="project-${i + 1}">
+        <h3 class="prow__head">
+          <button class="prow__toggle" type="button" aria-expanded="false" aria-controls="project-${i + 1}-more">
+            <span class="prow__kw"><b>${num(p.kw)}</b> кВт</span>
+            <span class="prow__title">${p.title}</span>
+            <span class="prow__type">${TYPES[p.type]}</span>
+            <span class="prow__plus" aria-hidden="true"></span>
+          </button>
+        </h3>
+        <div class="prow__more" id="project-${i + 1}-more" inert>
+          <div class="prow__inner">
+            <figure class="prow__photo ph"><img src="${photoOf(p)}" alt="${p.title}" loading="lazy" onerror="this.remove()"></figure>
+            <div class="prow__body">
+              <p class="prow__text">${p.text}</p>
+              <dl class="prow__stats">
+                <div><dt>Мощность</dt><dd>${num(p.kw)} кВт</dd></div>
+                <div><dt>Годовая генерация</dt><dd>${p.gen.replace('МВтч', 'МВт·ч')}</dd></div>
+                <div><dt>Тип объекта</dt><dd>${TYPES[p.type]}</dd></div>
+              </dl>
+              <a class="abtn abtn--dark" href="#contacts" data-modal="lead" data-modal-subject="Тема: проект, похожий на «${p.title}»">Обсудить похожий проект ${icon('i-chevron-right', 'ic ic--xs')}</a>
+            </div>
+          </div>
+        </div>
+      </li>`).join('');
+    const rows = $$('.prow', folio);
+    const setOpen = (row, open) => {
+      row.classList.toggle('is-open', open);
+      $('.prow__toggle', row).setAttribute('aria-expanded', String(open));
+      $('.prow__more', row).toggleAttribute('inert', !open);
+    };
+    folio.addEventListener('click', (e) => {
+      const btn = e.target.closest('.prow__toggle');
+      if (btn) setOpen(btn.closest('.prow'), btn.getAttribute('aria-expanded') !== 'true');
+    });
+
+    /* Map: the country is laid out in dots, a wave runs over it from Tashkent and the objects light up */
+    const map = $('[data-map]');
+    let points = [];
+    if (map) {
+      // Упрощённая граница Узбекистана: долгота, широта
+      const BORDER = [[66.52, 37.36], [66.55, 37.97], [65.22, 38.4], [64.17, 38.89], [63.52, 39.36], [62.37, 40.05], [61.88, 41.08], [61.55, 41.27], [60.47, 41.22], [60.08, 41.43], [59.98, 42.22], [58.63, 42.75], [57.79, 42.17], [56.93, 41.83], [57.1, 41.32], [55.97, 41.31], [55.93, 45], [58.5, 45.59], [58.69, 45.5], [60.24, 44.78], [61.06, 44.41], [62.01, 43.5], [63.19, 43.65], [64.9, 43.73], [66.1, 43], [66.02, 41.99], [66.51, 41.99], [66.71, 41.17], [67.99, 41.14], [68.26, 40.66], [68.63, 40.67], [69.07, 41.38], [70.39, 42.08], [70.96, 42.27], [71.26, 42.17], [70.42, 41.52], [71.16, 41.14], [71.87, 41.39], [73.06, 40.87], [71.77, 40.15], [71.01, 40.24], [70.6, 40.22], [70.46, 40.5], [70.67, 40.96], [69.33, 40.73], [69.01, 40.09], [68.54, 39.53], [67.7, 39.58], [67.44, 39.14], [68.18, 38.9], [68.39, 38.16], [67.83, 37.14], [67.08, 37.36]];
+      const LON = 55.6;
+      const LAT = 45.9;
+      const SCALE = 60;
+      const SQUEEZE = Math.cos(41.5 * Math.PI / 180); // a degree of longitude is shorter than a degree of latitude here
+      const at = ([lon, lat]) => [(lon - LON) * SQUEEZE * SCALE, (LAT - lat) * SCALE];
+      const W = Math.ceil((73.4 - LON) * SQUEEZE * SCALE);
+      const H = Math.ceil((LAT - 36.9) * SCALE);
+      const poly = BORDER.map(at);
+      const inside = (x, y) => {
+        let hit = false;
+        for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+          const [xi, yi] = poly[i];
+          const [xj, yj] = poly[j];
+          if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) hit = !hit;
+        }
+        return hit;
+      };
+      const STEP = 12;
+      const [ox, oy] = at([69.24, 41.31]);
+      const far = Math.hypot(ox, H - oy);
+      let dots = '';
+      for (let row = 0; row * STEP * .866 < H; row += 1) {
+        for (let col = 0; col * STEP < W; col += 1) {
+          const x = col * STEP + (row % 2 ? STEP / 2 : 0);
+          const y = row * STEP * .866;
+          if (inside(x, y)) dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.2" style="--d:${(Math.hypot(x - ox, y - oy) / far).toFixed(3)}"/>`;
+        }
+      }
+      map.style.aspectRatio = `${W} / ${H}`;
+      map.insertAdjacentHTML('beforeend', `<svg class="pmap__svg" viewBox="0 0 ${W} ${H}" aria-hidden="true" focusable="false">${dots}</svg>`
+        + projects.map((p, i) => {
+          const [x, y] = at(p.at);
+          const size = Math.round(10 + Math.sqrt(p.kw / 800) * 11);
+          return `<button class="mpoint${x / W > .6 ? ' mpoint--left' : ''}" type="button" data-i="${i}" style="--x:${(x / W * 100).toFixed(2)}%;--y:${(y / H * 100).toFixed(2)}%;--size:${size}px;--d:${(Math.hypot(x - ox, y - oy) / far).toFixed(3)};--k:${i}" aria-label="${p.title}, ${num(p.kw)} кВт">`
+            + `<span class="mpoint__dot"></span><span class="mpoint__tip" aria-hidden="true"><b>${p.title}</b><span>${TYPES[p.type]}, ${num(p.kw)} кВт</span></span></button>`;
+        }).join(''));
+      points = $$('.mpoint', map);
+      map.addEventListener('click', (e) => {
+        const point = e.target.closest('.mpoint');
+        if (!point) return;
+        const row = rows[Number(point.dataset.i)];
+        setOpen(row, true);
+        goTo(row);
+        $('.prow__toggle', row).focus({ preventScroll: true });
+      });
+      // The points breathe only while the map is on screen
+      if ('IntersectionObserver' in window && !reduceMotion.matches) {
+        new IntersectionObserver((entries) => {
+          const seen = entries[entries.length - 1].isIntersecting;
+          if (seen) map.classList.add('is-on');
+          map.classList.toggle('is-live', seen);
+        }, { threshold: 0.25 }).observe(map);
+      } else {
+        map.classList.add('is-on');
+      }
+    }
+
+    /* Filters */
+    const filterBox = $('#folio-filter');
+    const countEl = $('[data-odo="count"]');
+    const sumEl = $('[data-odo="sum"]');
+    const chip = (group, key, name) => `<button class="pchip" type="button" data-group="${group}" data-key="${key}" aria-pressed="false">${name}</button>`;
+    filterBox.innerHTML = `<div class="pfilter__group" role="group" aria-labelledby="pf-power"><p class="pfilter__name" id="pf-power">Мощность</p><div class="pfilter__chips">${chip('power', 'all', 'Любая')}${Object.entries(RANGES).map(([key, [name]]) => chip('power', key, name)).join('')}</div></div>`
+      + `<div class="pfilter__group" role="group" aria-labelledby="pf-type"><p class="pfilter__name" id="pf-type">Тип объекта</p><div class="pfilter__chips">${chip('type', 'all', 'Любой')}${Object.entries(TYPES).map(([key, name]) => chip('type', key, name)).join('')}</div></div>`;
+    const chips = $$('.pchip', filterBox);
+    const query = new URLSearchParams(location.search);
+    const chosen = {
+      power: RANGES[query.get('power')] ? query.get('power') : 'all',
+      type: TYPES[query.get('type')] ? query.get('type') : 'all',
+    };
+    const fits = (p) => (chosen.power === 'all' || RANGES[chosen.power][1](p.kw)) && (chosen.type === 'all' || p.type === chosen.type);
+    const applyFilter = (first = false) => {
+      let n = 0;
+      let sum = 0;
+      rows.forEach((row, i) => {
+        const ok = fits(projects[i]);
+        if (!ok) setOpen(row, false);
+        row.hidden = !ok;
+        if (points[i]) points[i].classList.toggle('is-off', !ok);
+        if (!ok) return;
+        row.style.setProperty('--n', n);
+        n += 1;
+        sum += projects[i].kw;
+      });
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(chosen[c.dataset.group] === c.dataset.key)));
+      const word = plural(n, ['проект', 'проекта', 'проектов']);
+      rollTo(countEl, n);
+      rollTo(sumEl, sum);
+      $('#folio-word').textContent = word;
+      $('#folio-say').textContent = n ? `${n} ${word} общей мощностью ${num(sum)} кВт` : 'Проектов с такими параметрами нет';
+      $('.folio__sum').hidden = !n;
+      $('#folio-empty').hidden = n > 0;
+      if (first) return;
+      // The rows that are left come in again, one after another
+      folio.classList.remove('is-filtered');
+      void folio.offsetWidth;
+      folio.classList.add('is-filtered');
+      const next = new URLSearchParams();
+      Object.entries(chosen).forEach(([key, value]) => { if (value !== 'all') next.set(key, value); });
+      history.replaceState({}, '', next.toString() ? `?${next}` : location.pathname);
+    };
+    filterBox.addEventListener('click', (e) => {
+      const c = e.target.closest('.pchip');
+      if (!c || c.getAttribute('aria-pressed') === 'true') return;
+      chosen[c.dataset.group] = c.dataset.key;
+      applyFilter();
+    });
+    $('[data-folio-reset]').addEventListener('click', () => {
+      chosen.power = 'all';
+      chosen.type = 'all';
+      applyFilter();
+    });
+    applyFilter(true);
+  }
+
+  /* ---------- Investors page: orbits ---------- */
+  // The three formats go round the sun; a format under the pointer stops the motion and leads to its offer
+  const orbit = $('[data-orbit]');
+  if (orbit) {
+    const BODIES = [
+      { key: 'epc', name: 'EPC', note: 'Станция под ключ', rx: 215, period: 40, start: .06 },
+      { key: 'ppa', name: 'PPA', note: 'Продажа энергии', rx: 330, period: 64, start: .47 },
+      { key: 'bess', name: 'BESS', note: 'Накопление энергии', rx: 445, period: 96, start: .78 },
+    ];
+    const W = 1000;
+    const H = 660;
+    const TILT = .4;
+    const TURN = -16;
+    const rad = TURN * Math.PI / 180;
+    const ring = (rx) => {
+      const x = Math.cos(rad) * rx;
+      const y = Math.sin(rad) * rx;
+      const a = `A${rx} ${rx * TILT} ${TURN} 1 1`;
+      return `M${(W / 2 + x).toFixed(1)} ${(H / 2 + y).toFixed(1)}${a} ${(W / 2 - x).toFixed(1)} ${(H / 2 - y).toFixed(1)}${a} ${(W / 2 + x).toFixed(1)} ${(H / 2 + y).toFixed(1)}`;
+    };
+    orbit.innerHTML = `<svg class="orbit__svg" viewBox="0 0 ${W} ${H}" focusable="false">`
+      + BODIES.map((b, i) => `<path class="orbit__ring" d="${ring(b.rx)}" pathLength="1" style="--i:${i}"/>`
+        + [.2, .12, .05].map((len, k) => `<path class="orbit__trail orbit__trail--${k + 1}" data-body="${i}" data-len="${len}" d="${ring(b.rx)}" pathLength="1" stroke-dasharray="${len} ${1 - len}"/>`).join('')).join('')
+      + '</svg>'
+      + '<span class="orbit__sun"><svg class="orbit__mark" viewBox="0 0 39 39"><use href="#i-logo"/></svg></span>'
+      + BODIES.map((b, i) => `<a class="orbit__body" href="#offer-${b.key}" tabindex="-1" data-body="${i}" style="--i:${i}"><span class="orbit__ball"></span><span class="orbit__tag"><b>${b.name}</b><span>${b.note}</span></span></a>`).join('');
+    const rings = $$('.orbit__ring', orbit);
+    const lengths = rings.map((r) => r.getTotalLength());
+    const bodies = $$('.orbit__body', orbit);
+    const trails = $$('.orbit__trail', orbit);
+    let size = [orbit.clientWidth, orbit.clientHeight];
+    let clock = 0;
+    const place = () => {
+      BODIES.forEach((b, i) => {
+        const f = (b.start + clock / b.period) % 1;
+        const pt = rings[i].getPointAtLength(lengths[i] * f);
+        const depth = (pt.y - H / 2) / (b.rx * TILT * 1.2); // −1 far, 1 near
+        const near = Math.min(Math.max((depth + 1) / 2, 0), 1);
+        const el = bodies[i];
+        el.style.transform = `translate(${(pt.x / W * size[0]).toFixed(1)}px, ${(pt.y / H * size[1]).toFixed(1)}px) scale(${(.74 + near * .26).toFixed(3)})`;
+        el.style.opacity = (.5 + near * .5).toFixed(2);
+        el.classList.toggle('is-left', pt.x > W * .7);
+        trails.forEach((trail) => {
+          if (Number(trail.dataset.body) === i) trail.style.strokeDashoffset = (Number(trail.dataset.len) - f).toFixed(4);
+        });
+      });
+    };
+    let raf = 0;
+    let last = 0;
+    let live = false;
+    let hold = false;
+    const frame = (now) => {
+      raf = 0;
+      if (!live || document.hidden) return;
+      if (!hold) clock += Math.min(now - last, 64) / 1000;
+      last = now;
+      place();
+      raf = requestAnimationFrame(frame);
+    };
+    const run = () => {
+      if (raf || !live || document.hidden || reduceMotion.matches) return;
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    };
+    const measure = () => { size = [orbit.clientWidth, orbit.clientHeight]; place(); };
+    if ('ResizeObserver' in window) new ResizeObserver(measure).observe(orbit); else window.addEventListener('resize', measure);
+    measure();
+    orbit.addEventListener('pointerover', (e) => {
+      const el = e.target.closest('.orbit__body');
+      hold = Boolean(el) && e.pointerType !== 'touch';
+      bodies.forEach((b) => b.classList.toggle('is-hot', b === el && hold));
+    });
+    orbit.addEventListener('pointerleave', () => {
+      hold = false;
+      bodies.forEach((b) => b.classList.remove('is-hot'));
+    });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        live = entries[entries.length - 1].isIntersecting;
+        if (live) orbit.classList.add('is-on');
+        orbit.classList.toggle('is-live', live);
+        run();
+      }, { threshold: 0.2 }).observe(orbit);
+    } else {
+      orbit.classList.add('is-on');
+    }
+    document.addEventListener('visibilitychange', run);
+  }
+
+  /* ---------- Investors page: the statement lights up word by word while it is scrolled ---------- */
+  const say = $('[data-say]');
+  if (say && !reduceMotion.matches) {
+    const split = (node) => [...node.childNodes].forEach((child) => {
+      if (child.nodeType !== 3) { split(child); return; }
+      const parts = document.createDocumentFragment();
+      child.textContent.split(/(\s+)/).forEach((part) => {
+        if (!part.trim()) { parts.append(part); return; }
+        const word = document.createElement('span');
+        word.className = 'say__w';
+        word.textContent = part;
+        parts.append(word);
+      });
+      child.replaceWith(parts);
+    });
+    split(say);
+    say.classList.add('is-split');
+    const words = $$('.say__w', say);
+    let lit = -1;
+    let raf = 0;
+    const paint = () => {
+      raf = 0;
+      const box = say.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const done = Math.min(Math.max((vh * .85 - box.top) / (box.height + vh * .4), 0), 1);
+      const n = Math.round(done * words.length);
+      if (n === lit) return;
+      lit = n;
+      words.forEach((word, i) => word.classList.toggle('is-lit', i < n));
+    };
+    const ask = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask);
+    paint();
+  }
+
+  /* ---------- Investors page: offers lie down in a stack ---------- */
+  const stack = $('[data-stack]');
+  if (stack) {
+    const cards = $$('.offer', stack);
+    const roomy = window.matchMedia('(min-width: 1101px) and (min-height: 720px)');
+    let raf = 0;
+    const paint = () => {
+      raf = 0;
+      cards.forEach((card, i) => {
+        const box = card.firstElementChild;
+        const next = cards[i + 1];
+        let under = 0; // how far the next card has covered this one
+        if (next && roomy.matches && !reduceMotion.matches) {
+          const a = card.getBoundingClientRect();
+          under = Math.min(Math.max(1 - (next.getBoundingClientRect().top - a.top) / a.height, 0), 1);
+        }
+        box.style.setProperty('--s', (1 - under * .05).toFixed(4));
+        box.style.setProperty('--b', (1 - under * .55).toFixed(3));
+      });
+    };
+    const ask = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask);
+    paint();
+    // The button of an offer chooses its format in the form
+    stack.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-format]');
+      const radio = btn && $(`#invest-form input[name="format"][value="${btn.dataset.format}"]`);
+      if (radio) radio.checked = true;
+    });
+  }
+
   /* ---------- Vacancy row (career list + other vacancies) ---------- */
   const vacancyHref = (v) => `vacancy.html?id=${v.id}`;
   const vacancyRow = (v, i = 0) => `
@@ -1013,77 +1391,66 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => moveGlider(true));
   }
 
-  /* ---------- Career page: the team as a field, free modules are open vacancies ---------- */
-  const team = $('[data-team]');
-  if (team) {
-    const size = FIELD.cols * FIELD.rows;
-    const open = vacancies.slice(0, size);
-    // Free modules are spread evenly over the field
-    const slots = open.map((v, i) => Math.floor((i + .5) * size / open.length));
-    team.innerHTML = `<div class="chero__art">${ART.field({ h: 300 })}<a class="chero__tip" href="#vacancies" tabindex="-1"><span></span><b></b></a></div>`
-      + `<ul class="chero__legend"><li class="chero__key chero__key--team">В команде</li><li class="chero__key chero__key--free">Свободно: ${jobs(open.length)}</li></ul>`;
-    const box = $('.chero__art', team);
-    const tip = $('.chero__tip', team);
-    const cells = $$('.art__cell', team);
-    const centre = (i) => fieldAt(Math.floor(i / FIELD.rows) + .5, (i % FIELD.rows) + .5);
+  /* ---------- Career page: the panel field in the hero ----------
+     The modules light up one after another; then a few of them open with a plus — here and there, at random. */
+  const panel = $('[data-panel]');
+  if (panel) {
+    const OPEN = 5; // how many modules show a plus at the same time
+    panel.innerHTML = ART.field({ h: 300 });
+    const cells = $$('.art__cell', panel);
     cells.forEach((cell, i) => {
-      const k = slots.indexOf(i);
-      if (k < 0) {
-        cell.classList.add('is-team');
-        cell.style.setProperty('--dl', `${900 + i * 22}ms`);
-        return;
+      const [x, y] = fieldAt(Math.floor(i / FIELD.rows) + .5, (i % FIELD.rows) + .5);
+      cell.style.setProperty('--dl', `${900 + i * 22}ms`);
+      cell.insertAdjacentHTML('afterend', `<path class="art__plus" d="M${x - 5} ${y}h10M${(x - 2.6).toFixed(1)} ${(y + 4.9).toFixed(1)}l5.2-9.8"/>`);
+    });
+
+    const open = [];
+    // The next module is picked at random, away from the open ones, so the pluses do not gather in one corner
+    const pick = () => {
+      const taken = open.map((cell) => cells.indexOf(cell));
+      const apart = (i) => taken.every((k) => Math.abs(k - i) !== FIELD.rows && !(Math.abs(k - i) === 1 && Math.floor(k / FIELD.rows) === Math.floor(i / FIELD.rows)));
+      const rest = cells.filter((cell) => !open.includes(cell) && !cell.classList.contains('is-back'));
+      const pool = rest.filter((cell) => apart(cells.indexOf(cell)));
+      const from = pool.length ? pool : rest;
+      return from[Math.floor(Math.random() * from.length)];
+    };
+    const swap = () => {
+      if (open.length >= OPEN) {
+        const back = open.shift();
+        back.classList.remove('is-free');
+        back.classList.add('is-back');
+        setTimeout(() => back.classList.remove('is-back'), 1000);
       }
-      const [x, y] = centre(i);
-      cell.classList.add('is-free');
-      cell.dataset.slot = k;
-      cell.style.setProperty('--dl', `${2000 + k * 110}ms`);
-      cell.insertAdjacentHTML('afterend', `<path class="art__plus" d="M${x - 5} ${y}h10M${(x - 2.6).toFixed(1)} ${(y + 4.9).toFixed(1)}l5.2-9.8" style="--dl:${2000 + k * 110}ms"/>`);
-    });
-
-    let hot = null;
-    const showTip = (cell) => {
-      if (hot === cell) return;
-      if (hot) hot.classList.remove('is-hot');
-      hot = cell;
-      hot.classList.add('is-hot');
-      const v = open[Number(cell.dataset.slot)];
-      const [x, y] = centre(cells.indexOf(cell));
-      tip.href = vacancyHref(v);
-      tip.firstElementChild.textContent = depts[v.dept];
-      tip.lastElementChild.textContent = v.title;
-      tip.style.setProperty('--x', (x / 540 * 100).toFixed(2));
-      tip.style.setProperty('--y', ((y - 24) / 300 * 100).toFixed(2));
-      team.classList.add('has-tip');
+      const next = pick();
+      next.style.setProperty('--dl', '0s');
+      next.classList.add('is-free');
+      open.push(next);
     };
-    const hideTip = () => {
-      if (hot) hot.classList.remove('is-hot');
-      hot = null;
-      team.classList.remove('has-tip');
-    };
-    box.addEventListener('pointerover', (e) => {
-      if (e.pointerType === 'touch') return;
-      const cell = e.target.closest('.art__cell.is-free');
-      if (cell) showTip(cell); else hideTip();
-    });
-    box.addEventListener('pointerleave', (e) => { if (e.pointerType !== 'touch') hideTip(); });
-    box.addEventListener('click', (e) => {
-      const cell = e.target.closest('.art__cell.is-free');
-      if (!cell) return;
-      // With a mouse the module itself is the link; under a finger it first shows the label, and the label is the link
-      if (finePointer.matches) location.href = vacancyHref(open[Number(cell.dataset.slot)]);
-      else showTip(cell);
-    });
-    document.addEventListener('click', (e) => { if (hot && !box.contains(e.target)) hideTip(); });
 
-    if ('IntersectionObserver' in window && !reduceMotion.matches) {
-      const io = new IntersectionObserver((entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        io.disconnect();
-        team.classList.add('is-on');
-      }, { threshold: 0.3 });
-      io.observe(team);
+    if (reduceMotion.matches || !('IntersectionObserver' in window)) {
+      // No motion: the pluses stand where chance has put them
+      panel.classList.add('is-on');
+      while (open.length < OPEN) swap();
     } else {
-      team.classList.add('is-on');
+      let timer = null;
+      let seen = false;
+      let live = false;
+      const tick = () => {
+        timer = null;
+        if (!live || document.hidden) return;
+        swap();
+        timer = setTimeout(tick, open.length < OPEN ? 280 : 1300 + Math.random() * 1500);
+      };
+      const wake = (wait) => { if (!timer && live && !document.hidden) timer = setTimeout(tick, wait); };
+      // The pluses move only while the panel is on screen and the tab is open
+      new IntersectionObserver((entries) => {
+        live = entries[entries.length - 1].isIntersecting;
+        if (!live) return;
+        panel.classList.add('is-on');
+        wake(seen ? 600 : 2500);
+        seen = true;
+      }, { threshold: 0.3 }).observe(panel);
+      document.addEventListener('visibilitychange', () => wake(600));
     }
   }
 
@@ -1356,10 +1723,13 @@
     $('.calc__panel', calc).addEventListener('submit', (e) => e.preventDefault());
 
     const presets = $$('[data-preset]', calc);
+    // The type of object is a starting point: it stays chosen when the fields are changed by hand
+    const choosePreset = (btn) => presets.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
     presets.forEach((btn) => btn.addEventListener('click', () => {
       const p = cfg.presets[btn.dataset.preset];
       if (!p) return;
       Object.keys(fields).forEach((key) => { if (p[key]) fields[key].set(p[key]); });
+      choosePreset(btn);
       update();
     }));
 
@@ -1416,17 +1786,13 @@
       setText('pb-sub', pays ? `и ещё ${years(cfg.lifetime - payback).join(' ')} работает в плюс` : 'уменьшите площадь под панели');
       out('profit').parentElement.classList.toggle('is-loss', profit < 0);
       out('pb-hint').hidden = cover <= 1;
-      fit.hidden = cover <= 1.15 || fitArea() >= S;
+      fit.classList.toggle('is-shown', cover > 1.15 && fitArea() < S);
       setText('fit', `${nf(fitArea())} м²`);
 
       paintScene({ areaPos: fields.area.pos(), area: S, cover }, wait);
       runCurrent();
       tween('chart', Math.min(payback / cfg.lifetime, 3), paintChart, 520);
 
-      presets.forEach((btn) => {
-        const p = cfg.presets[btn.dataset.preset];
-        btn.setAttribute('aria-pressed', String(Boolean(p) && Object.keys(p).every((key) => state[key] === p[key])));
-      });
       const brief = `${power(P).join(' ')}, ${nf(S)} м², ${nf(state.consumption)} кВт·ч в месяц`;
       $$('[data-calc-cta]').forEach((a) => { a.dataset.modalSubject = `Тема: расчёт станции ${brief}`; });
       chartBox.setAttribute('aria-label', pays

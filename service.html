@@ -93,7 +93,7 @@
             <li><a href="service.html?s=grid">Документация для подключения к электросети</a></li>
           </ul>
         </li>
-        <li class="nav__item"><a class="nav__link" href="index.html#invest">Для инвесторов</a></li>
+        <li class="nav__item"><a class="nav__link" href="investors.html">Для инвесторов</a></li>
         <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
         <li class="nav__item nav__item--drop">
           <button class="nav__link" type="button" aria-expanded="false" aria-label="Язык сайта: русский">RU <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
@@ -132,7 +132,7 @@
     <p class="shero__lead" data-srv="heroLead">Обеспечиваем стабильную и эффективную работу солнечных электростанций благодаря регулярному техническому обслуживанию, диагностике и оперативному устранению неисправностей.</p>
     <div class="shero__actions">
       <a class="pbtn pbtn--white shero__btn" href="#contacts" data-modal="lead">Получить консультацию</a>
-      <a class="pbtn pbtn--line shero__btn" href="index.html#projects">Наши проекты</a>
+      <a class="pbtn pbtn--line shero__btn" href="projects.html">Наши проекты</a>
     </div>
   </div>
 </section>
@@ -190,8 +190,8 @@
         <p class="bcard__text">Быстро реагируем на любые отклонения и восстанавливаем работоспособность оборудования.</p>
       </article>
     </div>
-    <!-- Фото: общее для всех сервисов — assets/img/services/wide.webp -->
-    <figure class="reliable__img ph reveal"><img src="assets/img/services/wide.webp" alt="" loading="lazy" onerror="this.remove()"></figure>
+    <!-- Фото: общее для всех сервисов — assets/img/services/wide.webp; своё фото сервиса — <сервис>-wide.jpg, его добавляет скрипт -->
+    <figure class="reliable__img ph reveal"><img src="assets/img/services/wide.webp" alt="" loading="lazy" data-srv-wide onerror="this.remove()"></figure>
   </div>
 </section>
 
@@ -403,8 +403,8 @@
           <ul>
             <li><a href="about.html">О компании</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="index.html#invest">Для инвесторов</a></li>
-            <li><a href="index.html#projects">Наши проекты</a></li>
+            <li><a href="investors.html">Для инвесторов</a></li>
+            <li><a href="projects.html">Наши проекты</a></li>
             <li><a href="index.html#partners-title">Партнеры</a></li>
             <li><a href="calculator.html">Калькулятор</a></li>
             <li><a href="news.html">Новости</a></li>
@@ -459,8 +459,8 @@
 
 <!-- ================= LEAD MODAL ================= -->
 <dialog class="lead-modal" id="lead-modal" aria-labelledby="lead-modal-title">
-  <!-- Фон окна: assets/img/modal-bg.jpg (рекомендуемо 1620×1050) -->
-  <img class="lead-modal__bg" src="assets/img/modal-bg.jpg" alt="" loading="lazy" onerror="this.remove()">
+  <!-- Фон окна — как у формы обратной связи: градиент и сетка assets/img/contact-grid.png -->
+  <img class="lead-modal__bg" src="assets/img/contact-grid.png" alt="" loading="lazy" onerror="this.remove()">
   <button class="lead-modal__close" type="button" data-modal-close aria-label="Закрыть окно">
     <svg viewBox="0 0 28 28" aria-hidden="true"><path d="M2 2 26 26M26 2 2 26"/></svg>
   </button>

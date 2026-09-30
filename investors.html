@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Контакты — Solar Nature</title>
-  <meta name="description" content="Контакты Solar Nature: телефон +998 78 113-65-00, info@solarnature.uz, адрес в Ташкенте и форма обратной связи.">
+  <title>Инвесторам — Solar Nature</title>
+  <meta name="description" content="Инвестиции в солнечную энергетику Узбекистана с Solar Nature: форматы EPC, PPA и BESS, прозрачная экономика проектов и полное сопровождение. Оставьте заявку.">
   <meta name="theme-color" content="#0a0d0b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,8 +93,8 @@
             <li><a href="service.html?s=grid">Документация для подключения к электросети</a></li>
           </ul>
         </li>
-        <li class="nav__item"><a class="nav__link" href="investors.html">Для инвесторов</a></li>
-        <li class="nav__item"><a class="nav__link" href="contacts.html" aria-current="page">Контакты</a></li>
+        <li class="nav__item"><a class="nav__link" href="investors.html" aria-current="page">Для инвесторов</a></li>
+        <li class="nav__item"><a class="nav__link" href="contacts.html">Контакты</a></li>
         <li class="nav__item nav__item--drop">
           <button class="nav__link" type="button" aria-expanded="false" aria-label="Язык сайта: русский">RU <svg class="caret" aria-hidden="true"><use href="#i-caret"/></svg></button>
           <ul class="drop drop--sm">
@@ -123,16 +123,177 @@
 <main id="main">
 
 <!-- ================= PAGE HERO ================= -->
-<section class="phero phero--black" aria-labelledby="page-title">
+<section class="phero phero--invest" aria-labelledby="page-title">
   <div class="phero__inner">
     <nav class="crumbs" aria-label="Хлебные крошки">
       <ol>
         <li><a href="index.html">Главная</a></li>
-        <li><span aria-current="page">Контакты</span></li>
+        <li><span aria-current="page">Для инвесторов</span></li>
       </ol>
     </nav>
-    <p class="phero__eyebrow">Свяжитесь с нами</p>
-    <h1 class="phero__title" id="page-title">Наши контакты</h1>
+    <div class="ihero">
+      <div class="ihero__text">
+        <p class="phero__eyebrow">Решения для инвесторов</p>
+        <h1 class="phero__title" id="page-title">Эффективные инвестиции <br>в солнечную энергетику</h1>
+        <p class="ihero__lead">Каждый проект проходит этап анализа, проектирования и реализации с учетом финансовых показателей и рисков. Мы обеспечиваем контроль на всех этапах и формируем понятную модель доходности для инвестора.</p>
+        <div class="ihero__actions">
+          <a class="pbtn pbtn--white" href="#invest-form">Оставить заявку</a>
+          <a class="pbtn pbtn--line" href="#offers">Форматы участия <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-down"/></svg></a>
+        </div>
+      </div>
+      <!-- Орбиты рисует скрипт (assets/js/main.js, блок «Investors page»): форматы участия вращаются вокруг солнца -->
+      <div class="orbit" data-orbit aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATEMENT ================= -->
+<section class="say" aria-label="Наш подход">
+  <div class="say__wrap">
+    <!-- Слова загораются по мере прокрутки -->
+    <p class="say__text" data-say>Солнечная станция — это актив, который каждый день производит энергию. Мы считаем её экономику до начала строительства, строим под ключ и обслуживаем весь срок службы. <em>Инвестор видит выработку и доход в цифрах.</em></p>
+    <dl class="say__facts">
+      <div class="say__fact">
+        <dt><b class="odo" data-odo-to="2014" data-odo-plain>2014</b></dt>
+        <dd>На рынке с 2014</dd>
+      </div>
+      <div class="say__fact">
+        <dt><b class="odo" data-odo-to="100">100</b>+</dt>
+        <dd>Специалистов</dd>
+      </div>
+      <div class="say__fact">
+        <dt><b class="odo" data-odo-to="10">10</b> <small>регионов</small></dt>
+        <dd>Охват проектов</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+<!-- ================= OFFERS ================= -->
+<!-- Тексты предложений — черновик, условия уточняются у заказчика -->
+<section class="offers" id="offers" aria-labelledby="offers-title">
+  <div class="offers__wrap">
+    <div class="flow__head">
+      <div>
+        <p class="flow__eyebrow reveal">Форматы участия</p>
+        <h2 class="flow__title reveal" id="offers-title">Три формата инвестиций <br><span>в солнечную энергетику</span></h2>
+      </div>
+      <p class="flow__lead reveal">Выберите формат под свою задачу: владеть станцией, получать доход от продажи энергии или вложиться в накопление. В каждом случае проектирование, строительство и обслуживание остаются на нас.</p>
+    </div>
+
+    <ul class="offers__list" data-stack>
+      <li class="offer" id="offer-epc" style="--i:0">
+        <article class="offer__box">
+          <p class="offer__mark" aria-hidden="true">EPC</p>
+          <div class="offer__main">
+            <p class="offer__kind">EPC — строительство под ключ</p>
+            <h3 class="offer__title">Станция в вашей собственности</h3>
+            <p class="offer__text">Вы финансируете строительство, мы проектируем станцию, поставляем оборудование, монтируем и подключаем её к сети. Готовая станция остаётся вашим активом.</p>
+            <a class="pbtn pbtn--white offer__btn" href="#invest-form" data-format="EPC">Оставить заявку</a>
+          </div>
+          <dl class="offer__facts">
+            <div><dt>Роль инвестора</dt><dd>Владелец станции</dd></div>
+            <div><dt>Что делаем мы</dt><dd>Проект, поставка, монтаж, пуск</dd></div>
+            <div><dt>Срок службы станции</dt><dd>25 лет</dd></div>
+          </dl>
+        </article>
+      </li>
+      <li class="offer" id="offer-ppa" style="--i:1">
+        <article class="offer__box">
+          <p class="offer__mark" aria-hidden="true">PPA</p>
+          <div class="offer__main">
+            <p class="offer__kind">PPA — договор купли-продажи энергии</p>
+            <h3 class="offer__title">Доход от продажи электроэнергии</h3>
+            <p class="offer__text">Станция строится на площадке предприятия, которое покупает её энергию по долгосрочному договору. Доход инвестора привязан к выработке станции.</p>
+            <a class="pbtn pbtn--white offer__btn" href="#invest-form" data-format="PPA">Оставить заявку</a>
+          </div>
+          <dl class="offer__facts">
+            <div><dt>Роль инвестора</dt><dd>Владелец и продавец энергии</dd></div>
+            <div><dt>Покупатель</dt><dd>Предприятие с постоянным потреблением</dd></div>
+            <div><dt>Договор</dt><dd>Долгосрочный</dd></div>
+          </dl>
+        </article>
+      </li>
+      <li class="offer" id="offer-bess" style="--i:2">
+        <article class="offer__box">
+          <p class="offer__mark" aria-hidden="true">BESS</p>
+          <div class="offer__main">
+            <p class="offer__kind">BESS — системы накопления энергии</p>
+            <h3 class="offer__title">Энергия тогда, когда она нужна</h3>
+            <p class="offer__text">Накопитель сохраняет излишки дневной выработки и отдаёт их вечером и в часы пиковой нагрузки. Работает как отдельный проект и как часть станции.</p>
+            <a class="pbtn pbtn--white offer__btn" href="#invest-form" data-format="BESS">Оставить заявку</a>
+          </div>
+          <dl class="offer__facts">
+            <div><dt>Роль инвестора</dt><dd>Владелец накопителя</dd></div>
+            <div><dt>Задача</dt><dd>Сглаживание пиков и резерв</dd></div>
+            <div><dt>Сочетается</dt><dd>С EPC и PPA</dd></div>
+          </dl>
+        </article>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= INVESTOR FORM ================= -->
+<section class="iform" id="invest-form" aria-labelledby="iform-title">
+  <div class="iform__wrap">
+    <div class="iform__info">
+      <p class="iform__eyebrow reveal">Заявка инвестора</p>
+      <h2 class="iform__title reveal" id="iform-title">Расскажите о задаче — <br><span>подготовим предложение</span></h2>
+      <p class="iform__text reveal">Оставьте контакты и выберите формат, который вам интересен. Мы свяжемся с вами, уточним детали и пришлём расчёт по подходящим проектам.</p>
+    </div>
+
+    <div class="apply-card iform__card reveal" style="--d:.08s">
+      <!-- Сетка поверх градиента формы: assets/img/contact-grid.png -->
+      <img class="contact__bg" src="assets/img/contact-grid.png" alt="" loading="lazy" onerror="this.remove()">
+      <h3 class="apply-card__title">Заявка инвестора</h3>
+
+      <form class="apply apply--invest js-form" novalidate data-apply>
+        <input type="hidden" name="subject" value="Заявка инвестора">
+        <div class="field cfield apply__name">
+          <label class="sr-only" for="i-name">Ваше имя</label>
+          <input id="i-name" name="name" type="text" autocomplete="name" placeholder="Ваше имя" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield apply__company">
+          <label class="sr-only" for="i-company">Компания</label>
+          <input id="i-company" name="company" type="text" autocomplete="organization" placeholder="Компания">
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield apply__phone">
+          <label class="sr-only" for="i-phone">Номер телефона</label>
+          <input id="i-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Номер телефона" required>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <div class="field cfield apply__mail">
+          <label class="sr-only" for="i-mail">Электронная почта</label>
+          <input id="i-mail" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Электронная почта">
+          <span class="field__error" role="alert"></span>
+        </div>
+        <fieldset class="fchips">
+          <legend>Формат участия</legend>
+          <label class="fchip"><input class="sr-only" type="radio" name="format" value="EPC"><span>EPC</span></label>
+          <label class="fchip"><input class="sr-only" type="radio" name="format" value="PPA"><span>PPA</span></label>
+          <label class="fchip"><input class="sr-only" type="radio" name="format" value="BESS"><span>BESS</span></label>
+          <label class="fchip"><input class="sr-only" type="radio" name="format" value="Пока не решил"><span>Пока не решил</span></label>
+        </fieldset>
+        <div class="field cfield apply__msg">
+          <label class="sr-only" for="i-msg">Комментарий</label>
+          <textarea id="i-msg" name="message" placeholder="Комментарий: объём инвестиций, регион, сроки"></textarea>
+          <span class="field__error" role="alert"></span>
+        </div>
+        <button class="consult__submit apply__submit" type="submit"><span class="btn__label">Отправить заявку</span></button>
+        <p class="apply__note">Отправляя заявку, вы соглашаетесь с <a href="#">политикой конфиденциальности</a>.</p>
+        <p class="form-status apply__status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="apply-done" tabindex="-1" hidden>
+        <svg class="apply-done__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="29" pathLength="1"/><path d="M20 33l8.5 8.5L45 25" pathLength="1"/></svg>
+        <h3 class="apply-done__title">Заявка отправлена</h3>
+        <p class="apply-done__text">Спасибо! Мы свяжемся с вами, уточним детали и подготовим предложение.</p>
+        <a class="pbtn pbtn--line" href="projects.html">Посмотреть проекты <svg class="ic ic--xs" aria-hidden="true"><use href="#i-chevron-right"/></svg></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -228,7 +389,7 @@
           <ul>
             <li><a href="about.html">О компании</a></li>
             <li><a href="catalog.html">Каталог</a></li>
-            <li><a href="investors.html">Для инвесторов</a></li>
+            <li><a href="investors.html" aria-current="page">Для инвесторов</a></li>
             <li><a href="projects.html">Наши проекты</a></li>
             <li><a href="index.html#partners-title">Партнеры</a></li>
             <li><a href="calculator.html">Калькулятор</a></li>
