@@ -317,6 +317,14 @@
     });
   });
   document.addEventListener('click', (e) => { if (!e.target.closest('.nav__item--drop')) closeDrops(); });
+  // On a wide screen the menus also open on hover: a menu opened by a click closes as soon as the pointer
+  // goes to another item, so two menus are never open at once
+  const hoverMenus = window.matchMedia('(hover: hover) and (min-width: 1101px)');
+  dropItems.forEach((item) => {
+    item.addEventListener('pointerenter', (e) => {
+      if (e.pointerType === 'mouse' && hoverMenus.matches) closeDrops(item);
+    });
+  });
   document.addEventListener('keydown', (e) => {
     if (e.key !== 'Escape') return;
     const openDrop = dropItems.find((i) => i.classList.contains('is-open'));
@@ -1293,6 +1301,152 @@
     });
   }
 
+  /* ---------- FAQ page ---------- */
+  const faqSearch = $('#faq-search');
+  if (faqSearch) {
+    const items = $$('.qa');
+    const groups = $$('[data-topic]');
+    const links = $$('.qnav__link');
+    const found = $('#faq-found');
+    const empty = $('#faq-empty');
+    const clear = $('.qsearch__clear');
+    const norm = (t) => t.toLowerCase().replace(/ё/g, 'е');
+    // The texts as they were written, to put back after a search has marked words in them
+    const parts = items.map((qa) => [$('.qa__text', qa), $('.qa__a p', qa)]);
+    const originals = parts.map((pair) => pair.map((el) => el.innerHTML));
+    const counts = links.map((a) => $('.qnav__n', a));
+
+    // Wraps every found word of a text in <mark>, leaving the links and the rest of the markup alone
+    const mark = (el, words) => {
+      const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walk.nextNode()) nodes.push(walk.currentNode);
+      nodes.forEach((node) => {
+        const text = node.textContent;
+        const low = norm(text);
+        const hits = [];
+        words.forEach((w) => {
+          let i = low.indexOf(w);
+          while (i > -1) { hits.push([i, i + w.length]); i = low.indexOf(w, i + w.length); }
+        });
+        if (!hits.length) return;
+        hits.sort((x, y) => x[0] - y[0]);
+        const frag = document.createDocumentFragment();
+        let at = 0;
+        hits.forEach(([from, to]) => {
+          if (from < at) return;
+          frag.append(text.slice(at, from));
+          const m = document.createElement('mark');
+          m.textContent = text.slice(from, to);
+          frag.append(m);
+          at = to;
+        });
+        frag.append(text.slice(at));
+        node.replaceWith(frag);
+      });
+    };
+
+    const search = () => {
+      // A word is looked for by its stem, so «сеть» also finds «сети» and «сетью»
+      const stem = (w) => {
+        const cut = w.replace(/(ами|ями|ого|его|ому|ему|ами|ов|ев|ей|ой|ий|ый|ая|яя|ое|ее|ые|ие|ую|юю|ах|ях|ам|ям|ом|ем|а|я|о|е|ы|и|у|ю|ь|й)$/, '');
+        return cut.length >= 3 ? cut : w;
+      };
+      const words = norm(faqSearch.value).split(/[\s,.?!]+/).filter((w) => w.length > 1).map(stem);
+      clear.hidden = !faqSearch.value;
+      let total = 0;
+      items.forEach((qa, i) => {
+        parts[i].forEach((el, k) => { el.innerHTML = originals[i][k]; });
+        const text = norm(qa.textContent);
+        const ok = words.every((w) => text.includes(w));
+        qa.hidden = !ok;
+        if (!words.length) return;
+        if (!ok) return;
+        total += 1;
+        parts[i].forEach((el) => mark(el, words));
+        // An answer that holds the words opens by itself
+        qa.open = words.some((w) => norm(parts[i][1].textContent).includes(w));
+      });
+      groups.forEach((g, i) => {
+        const shown = $$('.qa', g).filter((qa) => !qa.hidden).length;
+        g.hidden = !shown;
+        counts[i].textContent = shown;
+        links[i].parentElement.classList.toggle('is-off', !shown);
+      });
+      empty.hidden = !words.length || total > 0;
+      found.textContent = words.length ? (total ? `Найдено: ${total} ${plural(total, ['вопрос', 'вопроса', 'вопросов'])}` : 'Ничего не найдено') : '';
+      spy();
+    };
+    faqSearch.addEventListener('input', search);
+    faqSearch.addEventListener('keydown', (e) => { if (e.key === 'Escape' && faqSearch.value) { faqSearch.value = ''; search(); } });
+    clear.addEventListener('click', () => { faqSearch.value = ''; search(); faqSearch.focus(); });
+    $('#faq-empty a').addEventListener('click', () => {
+      const field = $('#c-comment');
+      if (field && faqSearch.value) field.value = faqSearch.value;
+    });
+
+    /* The field prints a few real questions as hints, once, and stops as soon as it is touched */
+    const HINTS = ['Сколько стоит станция?', 'Подойдёт ли моя крыша?', 'Что будет при отключении сети?'];
+    const idle = faqSearch.placeholder;
+    let typing = !reduceMotion.matches;
+    const stopTyping = () => { typing = false; faqSearch.placeholder = idle; };
+    faqSearch.addEventListener('focus', stopTyping);
+    faqSearch.addEventListener('input', stopTyping);
+    (async () => {
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+      await wait(900);
+      for (const hint of HINTS) {
+        for (let i = 1; i <= hint.length && typing; i += 1) { faqSearch.placeholder = `${hint.slice(0, i)}|`; await wait(55); }
+        if (!typing) return;
+        faqSearch.placeholder = hint;
+        await wait(1300);
+        for (let i = hint.length; i >= 0 && typing; i -= 2) { faqSearch.placeholder = `${hint.slice(0, i)}|`; await wait(22); }
+      }
+      if (typing) stopTyping();
+    })();
+
+    /* Topics: the one being read is marked, and a line fills as the questions are read through */
+    const main = $('.faq__main');
+    const nav = $('.qnav');
+    const fill = $('.qnav__fill');
+    let raf = 0;
+    function spy() {
+      raf = 0;
+      const line = window.innerHeight * .35;
+      let current = null;
+      groups.forEach((g) => { if (!g.hidden && g.getBoundingClientRect().top < line) current = g; });
+      if (!current) current = groups.find((g) => !g.hidden) || null;
+      links.forEach((a) => {
+        const on = current && a.dataset.for === current.id;
+        const was = a.classList.contains('is-active');
+        a.classList.toggle('is-active', Boolean(on));
+        if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+        // On a narrow screen the topics are a strip that scrolls sideways: keep the current one in view
+        if (on && !was && nav.scrollWidth > nav.clientWidth) nav.scrollTo({ left: a.parentElement.offsetLeft - 16, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+      });
+      const box = main.getBoundingClientRect();
+      const done = Math.min(Math.max((line - box.top) / Math.max(box.height - window.innerHeight * .3, 1), 0), 1);
+      fill.style.transform = `scaleY(${done.toFixed(3)})`;
+    }
+    const ask = () => { if (!raf) raf = requestAnimationFrame(spy); };
+    window.addEventListener('scroll', ask, { passive: true });
+    window.addEventListener('resize', ask);
+    spy();
+
+    /* A link to a question (faq.html#q5) opens it */
+    const openFromHash = () => {
+      const qa = /^#q\d+$/.test(location.hash) && $(location.hash);
+      if (!qa || !qa.classList.contains('qa')) return;
+      qa.open = true;
+      requestAnimationFrame(() => {
+        const y = qa.getBoundingClientRect().top + window.scrollY - header.offsetHeight - 24;
+        window.scrollTo({ top: y, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+      });
+    };
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
+  }
+
   /* ---------- Vacancy row (career list + other vacancies) ---------- */
   const vacancyHref = (v) => `vacancy.html?id=${v.id}`;
   const vacancyRow = (v, i = 0) => `
@@ -1873,6 +2027,7 @@
     const v = input.value.trim();
     let msg = '';
     if (input.type === 'file') msg = fileError(input);
+    else if (input.type === 'checkbox') msg = input.required && !input.checked ? 'Подтвердите согласие на обработку данных' : '';
     else if (input.required && !v) msg = empty[input.type] || 'Укажите ваше имя';
     else if (input.type === 'tel' && v && !PHONE_RE.test(v)) msg = 'Номер в формате +998 90 123-45-67';
     else if (input.type === 'email' && v && !MAIL_RE.test(v)) msg = 'Почта в формате name@example.com';
@@ -1888,8 +2043,23 @@
     return !msg;
   };
 
+  /* Consent to the processing of personal data: every form gets its own checkbox.
+     Forms that had a line «Отправляя …, вы соглашаетесь …» get the checkbox in its place */
+  const PRIVACY = '#'; // TODO: адрес страницы политики конфиденциальности
+  $$('.js-form').forEach((form, n) => {
+    const id = `consent-${n + 1}`;
+    const box = document.createElement('div');
+    box.className = 'field consent';
+    box.innerHTML = `<input class="consent__box" id="${id}" name="consent" type="checkbox" value="yes" required>`
+      + `<label class="consent__label" for="${id}">Я согласен на обработку персональных данных в соответствии с <a href="${PRIVACY}">политикой конфиденциальности</a></label>`
+      + '<span class="field__error" role="alert"></span>';
+    const note = $('.apply__note', form);
+    if (note) { box.classList.add('apply__note'); note.replaceWith(box); return; }
+    $('[type="submit"]', form).after(box);
+  });
+
   $$('.js-form').forEach((form) => {
-    const inputs = $$('input:not([type="hidden"]), textarea', form);
+    const inputs = $$('input:not([type="hidden"]):not([type="radio"]), textarea', form);
     const status = $('.form-status', form);
     const submit = $('[type="submit"]', form);
     const label = $('.btn__label', submit);
@@ -1897,7 +2067,7 @@
 
     inputs.forEach((input) => {
       input.addEventListener('blur', () => { if (input.value || input.closest('.has-error')) validateField(input); });
-      input.addEventListener('input', () => { if (input.closest('.has-error')) validateField(input); });
+      input.addEventListener(input.type === 'checkbox' ? 'change' : 'input', () => { if (input.closest('.has-error')) validateField(input); });
     });
 
     form.addEventListener('submit', async (e) => {
@@ -2010,6 +2180,35 @@
     new MutationObserver(() => {
       if ($('.lead-modal__status', modal).textContent.trim()) setTimeout(closeModal, 2200);
     }).observe($('.lead-modal__status', modal), { childList: true });
+  }
+
+  /* ---------- Cookie banner ----------
+     Shown until a choice is made. «Только необходимые» is the default of the privacy-preserving kind: analytics
+     (GA4 / GTM, when they are connected) must start only when window.solarCookies() returns 'all' */
+  const COOKIE_KEY = 'sn-cookies';
+  const readChoice = () => { try { return localStorage.getItem(COOKIE_KEY); } catch (e) { return null; } };
+  window.solarCookies = readChoice;
+  if (!readChoice()) {
+    const bar = document.createElement('section');
+    bar.className = 'cookie';
+    bar.setAttribute('aria-label', 'Файлы cookie');
+    bar.innerHTML = '<p class="cookie__text">Мы используем файлы cookie, чтобы сайт работал, и — с вашего согласия — чтобы понимать, как им пользуются. '
+      + `<a href="${PRIVACY}">Подробнее</a></p>`
+      + '<div class="cookie__actions"><button class="cookie__btn cookie__btn--all" type="button" data-cookie="all">Принять все</button>'
+      + '<button class="cookie__btn" type="button" data-cookie="necessary">Только необходимые</button></div>';
+    document.body.append(bar);
+    requestAnimationFrame(() => requestAnimationFrame(() => bar.classList.add('is-shown')));
+    root.classList.add('has-cookie');
+    bar.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-cookie]');
+      if (!btn) return;
+      try { localStorage.setItem(COOKIE_KEY, btn.dataset.cookie); } catch (err) { /* private mode: the choice lasts until the page is left */ }
+      window.solarCookies = () => btn.dataset.cookie;
+      document.dispatchEvent(new CustomEvent('cookies:chosen', { detail: btn.dataset.cookie }));
+      bar.classList.remove('is-shown');
+      root.classList.remove('has-cookie');
+      setTimeout(() => bar.remove(), reduceMotion.matches ? 0 : 400);
+    });
   }
 
   /* ---------- Misc ---------- */
